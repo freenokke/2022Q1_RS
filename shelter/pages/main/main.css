@@ -1,20 +1,117 @@
 @font-face {
   font-family: "ArialRegular";
-  src: url("../../../assets/fonts/arial/arial-regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+  src: url("../../assets/fonts/arial/arial-regular.ttf") format("truetype");
 }
 @font-face {
   font-family: "ArialItalic";
-  src: url("../../../assets/fonts/arial/arial-italic.ttf");
+  font-weight: 400;
+  font-style: italic;
+  src: url("../../assets/fonts/arial/arial-italic.ttf") format("truetype");
 }
 @font-face {
   font-family: "GeorgiaRegular";
-  src: url("../../../assets/fonts/arial/georgia-regular.ttf");
+  font-weight: 400;
+  font-style: normal;
+  src: url("../../assets/fonts/georgia/georgia-regular.ttf") format("truetype");
 }
 @font-face {
   font-family: "GeorgiaBold";
-  src: url("../../../assets/fonts/arial/georgia-bold.ttf");
+  font-weight: 700;
+  font-style: normal;
+  src: url("../../assets/fonts/georgia/georgia-bold.ttf") format("truetype");
 }
 @font-face {
   font-family: "GeorgiaItalic";
-  src: url("../../../assets/fonts/arial/georgia-italic.ttf");
+  font-weight: 400;
+  font-style: italic;
+  src: url("../../assets/fonts/georgia/georgia-italic.ttf") format("truetype");
+}
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 1280px;
+  background: url(../../assets/images/gradient.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20;
+  font-family: "ArialRegular";
+  font-size: 15px;
+  line-height: 160%;
+}
+
+.title {
+  font-family: "GeorgiaRegular";
+  font-size: 35px;
+  line-height: 130%;
+  color: #545454;
+}
+
+.container-main {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header-container {
+  padding: 60px 0px;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+.header-title__main {
+  color: #F1CDB3;
+  letter-spacing: 0.06em;
+  font-family: "GeorgiaRegular";
+  font-size: 32px;
+  line-height: 110%;
+  margin: 0;
+}
+.header-title__subtitle {
+  color: #FFFFFF;
+  letter-spacing: 0.1em;
+  font-size: 13px;
+  margin-left: 4px;
+  margin: 0;
+}
+.header-menu {
+  flex-basis: 39.55%;
+  display: flex;
+  align-items: center;
+}
+.header-menu__list {
+  width: 100%;
+  display: flex;
+  margin: 0;
+  padding: 0;
+}
+.header-menu__item {
+  list-style: none;
+  margin-right: 35px;
+}
+.header-menu__item a {
+  text-decoration: none;
+  color: #CDCDCD;
+}
+.header-menu__item a:visited {
+  text-decoration: none;
+  color: #CDCDCD;
+}
+.header-menu__item:first-child {
+  border-bottom: 3px solid #FAFAFA;
+}
+.header-menu__item:first-child a {
+  color: #FAFAFA;
+}
+.header-menu__item:hover a {
+  color: #FAFAFA;
+  transition: all 0.3s;
+}
+.header-menu__item:last-child {
+  margin-right: 0px;
 }

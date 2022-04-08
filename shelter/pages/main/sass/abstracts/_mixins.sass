@@ -1,0 +1,20 @@
+//for typography
+
+@mixin textFont($font: "ArialRegular", $size: 15px, $line-h: 160%)
+    font-family: $font
+    font-size: $size
+    line-height: $line-h
+
+@mixin titleFont($font: "GeorgiaRegular", $size: 35px, $line-h: 130%)
+    font-family: $font
+    font-size: $size
+    line-height: $line-h
+
+@mixin link($col)
+    text-decoration: none
+    color: $col
+    &:visited
+        text-decoration: none
+        color: $col
+        
+    

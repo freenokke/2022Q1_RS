@@ -1,0 +1,45 @@
+.header-container 
+    padding: 60px 0px
+.header 
+    display: flex
+    justify-content: space-between 
+    &-title
+        &__main
+            color: #F1CDB3
+            letter-spacing: 0.06em
+            @include titleFont($size:32px,$line-h: 110%)
+            margin: 0
+        &__subtitle
+            color: #FFFFFF
+            letter-spacing: 0.1em
+            font-size: 13px
+            margin-left: 4px
+            margin: 0
+    &-menu
+        flex-basis: 39.55%
+        display: flex
+        align-items: center
+        &__list
+            width: 100%
+            display: flex
+            margin: 0
+            padding: 0
+        &__item
+            a
+                @include link(#CDCDCD)
+            &:first-child
+                border-bottom: 3px solid #FAFAFA
+            &:first-child a
+                color: #FAFAFA
+            &:hover a
+                color: #FAFAFA
+                transition: all 0.3s
+            list-style: none
+            margin-right: 35px
+            &:last-child
+                margin-right: 0px
+                
+
+            
+        
+
