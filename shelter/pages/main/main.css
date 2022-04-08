@@ -115,3 +115,50 @@ body {
 .header-menu__item:last-child {
   margin-right: 0px;
 }
+
+.not-only {
+  display: flex;
+}
+.not-only__image img {
+  display: block;
+}
+.not-only .info-block {
+  display: flex;
+  flex-direction: column;
+  padding: 163px 0px 0px 0px;
+}
+.not-only .info-block__title {
+  font-family: "GeorgiaRegular";
+  font-size: 44px;
+  line-height: 130%;
+  margin: 0;
+  max-width: 310px;
+  margin-bottom: 42px;
+  color: #FFFFFF;
+}
+.not-only .info-block__text {
+  color: #CDCDCD;
+  margin: 0;
+  margin-bottom: 42px;
+  max-width: 460px;
+}
+.not-only .info-block__button {
+  padding: 15px 45px;
+  border-radius: 100px;
+  background: #F1CDB3;
+  font-family: "GeorgiaRegular";
+  font-size: 17px;
+  line-height: 130%;
+  max-width: 207px;
+  text-decoration: none;
+  color: #292929;
+  letter-spacing: 0.059em;
+  transition: background 0.3s;
+}
+.not-only .info-block__button:visited {
+  text-decoration: none;
+  color: #292929;
+}
+.not-only .info-block__button:hover {
+  background: #FDDCC4;
+}

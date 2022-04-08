@@ -1,0 +1,33 @@
+.not-only
+    display: flex
+    &__image img
+        display: block
+    .info-block
+        display: flex
+        flex-direction: column
+        padding: 163px 0px 0px 0px
+        &__title
+            @include titleFont($size:44px,$line-h: 130%)
+            margin: 0
+            max-width: 310px
+            margin-bottom: 42px
+            color: $color-section_primary
+        &__text
+            color: #CDCDCD
+            margin: 0
+            margin-bottom: 42px
+            max-width: 460px
+        &__button
+            padding: 15px 45px
+            border-radius: 100px
+            background: #F1CDB3
+            @include textFont("GeorgiaRegular", 17px, 130%)
+            max-width: 207px
+            @include link(#292929)
+            letter-spacing: 0.059em
+            transition: background 0.3s
+            &:hover
+                background: #FDDCC4
+
+
+
