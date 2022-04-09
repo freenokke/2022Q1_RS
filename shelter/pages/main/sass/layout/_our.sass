@@ -1,0 +1,92 @@
+#our
+    background-color: $color-section_darken 
+.our
+    &-container
+        padding-top: 6.67%
+        padding-bottom: 8.33%
+        display: flex
+        flex-direction: column
+        align-items: center
+    &-title
+        letter-spacing: 0.06em
+        max-width: 482px
+        text-align: center
+        margin: 0
+        margin-bottom: 60px
+    &-slider
+        &.slider
+            display: flex
+            flex-direction: row
+            align-items: center
+            justify-content: space-between
+            width: 100%
+            margin-bottom: 5%
+        .slider
+            &-cards
+                display: flex
+                flex: 1 1 auto
+                max-width: 990px
+                justify-content: space-between
+            &-card
+                &:hover
+                    background: #FFFFFF
+                &:hover .slider-card__button
+                    background: #FDDCC4
+                display: flex
+                flex-direction: column
+                align-items: center
+                cursor: pointer
+                transition: background 0.3s
+                &__image
+                    margin-bottom: 30px
+                    img
+                        display: block
+                &__text
+                    @include titleFont($size: 20px, $line-h: 23px)
+                    letter-spacing: 0.06em
+                    color: $color-title
+                    margin-bottom: 30px
+                &__button
+                    outline: none
+                    border: 2px solid #F1CDB3
+                    cursor: pointer
+                    padding: 13px 45px
+                    border-radius: 100px
+                    background: transparent
+                    @include textFont("GeorgiaRegular", 17px, 130%)
+                    @include link(#292929)
+                    letter-spacing: 0.06em
+                    transition: background 0.3s
+                    margin-bottom: 30px  
+            &-handle
+                button
+                    width: 52px
+                    height: 52px
+                    border-radius: 50%
+                    border: 2px solid #F1CDB3
+                    cursor: pointer
+                    background-color: transparent
+                    transition: background 0.3s
+                    &:hover
+                        background-color: #FDDCC4
+                .next
+                    background-image: url(../../assets/icons/our/arrow-right.svg)
+                    background-repeat: no-repeat
+                    background-position: center center
+                .prev
+                    background-image: url(../../assets/icons/our/arrow-left.svg)
+                    background-repeat: no-repeat
+                    background-position: center center
+    &-button
+        max-width: 261px
+        display: block
+        padding: 15px 45px
+        border-radius: 100px
+        background: #F1CDB3
+        @include textFont("GeorgiaRegular", 17px, 130%)
+        @include link(#292929)
+        letter-spacing: 0.058em
+        transition: background 0.3s
+        &:hover
+            background: #FDDCC4   
+
