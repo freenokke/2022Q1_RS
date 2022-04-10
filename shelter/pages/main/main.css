@@ -64,6 +64,26 @@ body {
   margin: 0 auto;
 }
 
+.header3 {
+  font-family: "GeorgiaRegular";
+  font-size: 35px;
+  line-height: 130%;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #545454;
+  margin: 0;
+}
+
+.header4 {
+  font-family: "GeorgiaRegular";
+  font-size: 20px;
+  line-height: 115%;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #545454;
+  margin: 0;
+}
+
 .header-container {
   padding: 60px 0px;
 }
@@ -326,4 +346,40 @@ body {
 }
 .our-button:hover {
   background: #FDDCC4;
+}
+
+#help {
+  background-color: #FFFFFF;
+}
+
+.help-container {
+  padding-top: 6.67%;
+  padding-bottom: 8.33%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.help-title {
+  max-width: 308px;
+  text-align: center;
+  margin-bottom: 5%;
+  letter-spacing: 0.059em;
+}
+.help-list {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: 55px;
+  -moz-column-gap: 120px;
+       column-gap: 120px;
+  justify-content: center;
+}
+.help-list__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 30px;
+}
+
+.item__image img {
+  display: block;
 }
