@@ -1,0 +1,53 @@
+.donation
+    background-color: $color-section_darken
+    color: $color-title
+    &-container
+        padding-top: 6.67%
+        padding-bottom: 8.33%
+    &-content
+        display: flex
+        justify-content: center
+        column-gap: 30px
+        align-items: flex-start
+        &__image
+            flex-basis: 42.08%
+            img
+                display: block
+        &__info
+            flex-basis: 31.67%
+            &.donation-info
+                display: flex
+                flex-direction: column
+                row-gap:20px
+            .donation-info
+                &__title
+                    max-width: 300px
+                &__subtitle
+                    margin: 0
+                    color: #545454
+                    line-height: 110%
+                &__text
+                    @include textFont("ArialItalic", 12px, 150%)
+                    color: #B2B2B2
+                    margin: 0
+                &__payment
+                    &:hover
+                        background-color: #FDDCC4
+                    display: flex
+                    background-color: #F1CDB3
+                    padding: 10px 15px
+                    align-items: center
+                    column-gap: 15px
+                    max-width: 349px
+                    border-radius: 9px
+                    @include titleFont($size: 20px, $line-h: 115%)
+                    letter-spacing: 0.058em
+                    transition: background 0.3s
+                    .payment-field
+                        &__card
+                            img
+                                display: block
+                        &__number
+                            a
+                                @include link($color-title)
+                            

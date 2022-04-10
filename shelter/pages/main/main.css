@@ -84,6 +84,10 @@ body {
   margin: 0;
 }
 
+img, svg {
+  display: block;
+}
+
 .header-container {
   padding: 60px 0px;
 }
@@ -457,4 +461,100 @@ body {
 .donation-content__info .donation-info__payment .payment-field__number a:visited {
   text-decoration: none;
   color: #545454;
+}
+
+#footer {
+  font-family: "GeorgiaRegular";
+  font-size: 20px;
+  line-height: 115%;
+  font-weight: 400;
+  letter-spacing: 0.06em;
+  color: #F1CDB3;
+}
+
+.footer-container {
+  padding-top: 3.33%;
+}
+.footer-content {
+  display: flex;
+  align-content: flex-start;
+  justify-content: space-between;
+}
+.footer-content__contacts {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  max-width: 278px;
+}
+.footer-content__contacts a {
+  text-decoration: none;
+  color: #F1CDB3;
+}
+.footer-content__contacts a:visited {
+  text-decoration: none;
+  color: #F1CDB3;
+}
+.footer-content__contacts .contacts-info__title {
+  font-family: "GeorgiaRegular";
+  font-size: 35px;
+  line-height: 130%;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+.footer-content__contacts .contacts-info__mail {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+.footer-content__contacts .contacts-info__mail p {
+  margin: 0;
+}
+.footer-content__contacts .contacts-info__phone {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+.footer-content__contacts .contacts-info__phone p {
+  margin: 0;
+}
+.footer-content__coordinates {
+  display: flex;
+  flex-direction: column;
+  row-gap: 40px;
+  max-width: 302px;
+}
+.footer-content__coordinates a {
+  text-decoration: none;
+  color: #F1CDB3;
+}
+.footer-content__coordinates a:visited {
+  text-decoration: none;
+  color: #F1CDB3;
+}
+.footer-content__coordinates .coordinates-info__title {
+  font-family: "GeorgiaRegular";
+  font-size: 35px;
+  line-height: 130%;
+  font-weight: 400;
+  color: #FFFFFF;
+}
+.footer-content__coordinates .coordinates-info__address-1 {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+.footer-content__coordinates .coordinates-info__address-1 p {
+  margin: 0;
+}
+.footer-content__coordinates .coordinates-info__address-2 {
+  display: flex;
+  align-items: center;
+  -moz-column-gap: 20px;
+       column-gap: 20px;
+}
+.footer-content__coordinates .coordinates-info__address-2 p {
+  margin: 0;
 }

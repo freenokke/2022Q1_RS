@@ -1,0 +1,57 @@
+#footer
+    @include titleFont($size: 20px, $line-h: 115%)
+    letter-spacing: 0.06em
+    color: #F1CDB3
+.footer
+    &-container
+        padding-top: 3.33%
+    &-content
+        display: flex
+        align-content: flex-start
+        justify-content: space-between
+        &__contacts
+            display: flex
+            flex-direction: column
+            row-gap: 40px
+            max-width: 278px
+            a
+                @include link(#F1CDB3)
+            .contacts-info
+                &__title
+                    @include titleFont
+                    color: #FFFFFF
+                &__mail
+                    display: flex
+                    align-items: center
+                    column-gap: 20px
+                    p
+                        margin: 0
+                &__phone
+                    display: flex
+                    align-items: center
+                    column-gap: 20px
+                    p
+                        margin: 0
+        &__coordinates
+            display: flex
+            flex-direction: column
+            row-gap: 40px
+            max-width: 302px
+            a
+                @include link(#F1CDB3)
+            .coordinates-info
+                &__title
+                    @include titleFont
+                    color: #FFFFFF
+                &__address-1
+                    display: flex
+                    align-items: center
+                    column-gap: 20px
+                    p
+                        margin: 0
+                &__address-2
+                    display: flex
+                    align-items: center
+                    column-gap: 20px
+                    p 
+                        margin: 0
