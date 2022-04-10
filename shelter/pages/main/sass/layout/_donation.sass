@@ -8,7 +8,7 @@
         display: flex
         justify-content: center
         column-gap: 30px
-        align-items: flex-start
+        align-items: center
         &__image
             flex-basis: 42.08%
             img
@@ -25,7 +25,8 @@
                 &__subtitle
                     margin: 0
                     color: #545454
-                    line-height: 110%
+                    @include titleFont("GeorgiaRegular", 15px, 110%)
+                    letter-spacing: 0.06em
                 &__text
                     @include textFont("ArialItalic", 12px, 150%)
                     color: #B2B2B2

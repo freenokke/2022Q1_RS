@@ -89,12 +89,13 @@ img, svg {
 }
 
 .header-container {
-  padding: 60px 0px;
+  padding: 60px 0px 56px 0px;
 }
 
 .header {
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 .header-title__main {
   color: #F1CDB3;
@@ -104,22 +105,22 @@ img, svg {
   line-height: 110%;
   font-weight: 400;
   margin: 0;
+  margin-bottom: 4px;
 }
 .header-title__subtitle {
   color: #FFFFFF;
   letter-spacing: 0.1em;
   font-size: 13px;
-  margin-left: 4px;
   margin: 0;
+  margin-left: 4px;
 }
 .header-menu {
   flex-basis: 39.55%;
-  display: flex;
-  align-items: center;
 }
 .header-menu__list {
   width: 100%;
   display: flex;
+  justify-content: flex-end;
   margin: 0;
   padding: 0;
 }
@@ -151,6 +152,8 @@ img, svg {
 
 .not-only__container {
   display: flex;
+  -moz-column-gap: 42px;
+       column-gap: 42px;
 }
 .not-only__image img {
   display: block;
@@ -364,7 +367,7 @@ img, svg {
   align-items: center;
 }
 .help-title {
-  max-width: 308px;
+  max-width: 310px;
   text-align: center;
   margin-bottom: 5%;
   letter-spacing: 0.059em;
@@ -401,7 +404,7 @@ img, svg {
   justify-content: center;
   -moz-column-gap: 30px;
        column-gap: 30px;
-  align-items: flex-start;
+  align-items: center;
 }
 .donation-content__image {
   flex-basis: 42.08%;
@@ -423,7 +426,11 @@ img, svg {
 .donation-content__info .donation-info__subtitle {
   margin: 0;
   color: #545454;
+  font-family: "GeorgiaRegular";
+  font-size: 15px;
   line-height: 110%;
+  font-weight: 400;
+  letter-spacing: 0.06em;
 }
 .donation-content__info .donation-info__text {
   font-family: "ArialItalic";
@@ -481,9 +488,10 @@ img, svg {
   justify-content: space-between;
 }
 .footer-content__contacts {
+  padding-top: 16px;
   display: flex;
   flex-direction: column;
-  row-gap: 40px;
+  row-gap: 39px;
   max-width: 278px;
 }
 .footer-content__contacts a {
@@ -500,6 +508,7 @@ img, svg {
   line-height: 130%;
   font-weight: 400;
   color: #FFFFFF;
+  letter-spacing: 0.059em;
 }
 .footer-content__contacts .contacts-info__mail {
   display: flex;
@@ -520,9 +529,10 @@ img, svg {
   margin: 0;
 }
 .footer-content__coordinates {
+  padding-top: 16px;
   display: flex;
   flex-direction: column;
-  row-gap: 40px;
+  row-gap: 32px;
   max-width: 302px;
 }
 .footer-content__coordinates a {
@@ -539,6 +549,7 @@ img, svg {
   line-height: 130%;
   font-weight: 400;
   color: #FFFFFF;
+  letter-spacing: 0.06em;
 }
 .footer-content__coordinates .coordinates-info__address-1 {
   display: flex;
