@@ -1,0 +1,61 @@
+.friends
+    background-color: $color-section_darken
+    .friends
+        &-container
+            padding-top: 6.67%
+            padding-bottom: 8.33%
+            display: flex
+            flex-direction: column
+            align-items: center
+        &-title
+            letter-spacing: 0.06em
+            max-width: 482px
+            text-align: center
+            margin: 0
+            margin-bottom: 41px
+.friends
+    &-cards
+        display: flex
+        flex-wrap: wrap
+        column-gap: 40px
+        row-gap: 30px
+        justify-content: space-between
+        padding: 15px 0px 
+        margin-bottom: 45px
+    &-card
+        &:hover
+            background: #FFFFFF
+        &:hover .friends-card__button
+            background: #FDDCC4
+        display: flex
+        // max-width: 270px
+        flex-direction: column
+        align-items: center
+        cursor: pointer
+        max-width: 270px
+        transition: background 0.3s
+        &__image
+            margin-bottom: 30px
+            height: 62.07%
+            img
+                display: block
+                width: 100%
+                height: 100%
+                object-fit: cover
+        &__text
+            @include titleFont($size: 20px, $line-h: 23px)
+            letter-spacing: 0.06em
+            color: $color-title
+            margin-bottom: 30px
+        &__button
+            outline: none
+            border: 2px solid #F1CDB3
+            cursor: pointer
+            padding: 13px 45px
+            border-radius: 100px
+            background: transparent
+            @include textFont("GeorgiaRegular", 17px, 130%)
+            @include link(#292929)
+            letter-spacing: 0.06em
+            transition: background 0.3s
+            margin-bottom: 30px

@@ -1,0 +1,42 @@
+.pagination
+    @include titleFont("GeorgiaRegular", 20px, 115%)
+    &-handle
+        display: flex
+        max-width: 340px
+        justify-content: space-between
+        align-items: center
+        width: 100%
+        column-gap: 20px
+        &__handler
+                width: 52px
+                height: 52px
+                border-radius: 50%
+                cursor: pointer
+                background-color: transparent
+                transition: background 0.3s
+                color: #292929
+                &:hover
+                    background-color: #FDDCC4
+                &.start
+                    border: 2px solid #CDCDCD
+                    color: #CDCDCD
+                &.prev
+                    border: 2px solid #CDCDCD
+                    color: #CDCDCD
+                &.current
+                    background-color: #F1CDB3
+                    display: flex
+                    justify-content: center
+                    align-items: center
+                    
+                &.next
+                    border: 2px solid #F1CDB3
+                    letter-spacing: 0.06em
+                &.end
+                    border: 2px solid #F1CDB3
+                    letter-spacing: 0.06em
+                &_inactive
+                    &:hover
+                        background-color: transparent
+                    cursor: default
+                    

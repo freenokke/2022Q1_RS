@@ -1,0 +1,31 @@
+header
+    background-color: $color-section_primary
+    position: sticky
+    top: 0 
+.header
+    &-container
+        padding: 30px 0px
+    &_white
+        .header-title
+            &__main
+                color: #545454
+            &__subtitle
+                color: #292929
+            @include link(inherit)
+        .header-menu
+            .header-menu__item 
+                a
+                    color: #545454
+                    &:visited
+                        color: #545454
+                &:first-child
+                    border-bottom: none
+                &:nth-child(2)
+                    border-bottom: 3px solid #F1CDB3
+                &:nth-child(2)  a
+                    color: #292929
+                &:first-child a
+                    color: #545454
+                &:hover a
+                    color: #292929
+                    transition: all 0.3s
