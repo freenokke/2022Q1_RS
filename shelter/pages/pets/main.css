@@ -137,7 +137,7 @@ img, svg {
   color: #CDCDCD;
 }
 .header-menu__item:first-child {
-  border-bottom: 3px solid #FAFAFA;
+  border-bottom: 3px solid #F1CDB3;
 }
 .header-menu__item:first-child a {
   color: #FAFAFA;
@@ -331,6 +331,7 @@ header {
   align-items: center;
   cursor: pointer;
   max-width: 270px;
+  background: #FAFAFA;
   transition: background 0.3s;
 }
 .friends-card:hover {
@@ -420,6 +421,9 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+.pagination-handle__handler.current:hover {
+  cursor: default;
 }
 .pagination-handle__handler.next {
   border: 2px solid #F1CDB3;
