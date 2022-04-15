@@ -1,5 +1,9 @@
 .header-container 
     padding: 60px 0px 56px 0px
+    @media screen and ( max-width: 1279px )
+        padding: 4.29% 0px 4% 0px
+    @media screen and ( max-width: $tablet )
+        padding: 30px 0 60px 0
 .header 
     display: flex
     justify-content: space-between 
@@ -18,13 +22,15 @@
             margin: 0
             margin-left: 4px
     &-menu
-        flex-basis: 39.55%
+        @media screen and ( max-width: calc($tablet - 1px) )
+            display: none
         &__list
             width: 100%
             display: flex
             justify-content: flex-end
             margin: 0
             padding: 0
+            flex-grow: 1
         &__item
             a
                 @include link(#CDCDCD)
@@ -36,7 +42,7 @@
                 color: #FAFAFA
                 transition: all 0.3s
             list-style: none
-            margin-right: 35px
+            margin-right: 36px
             &:last-child
                 margin-right: 0px
                 

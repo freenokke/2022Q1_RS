@@ -7,24 +7,60 @@
         display: flex
         flex-direction: column
         align-items: center
+        @media screen and ( max-width: 1279px )
+            padding-top: 11.5%
+            padding-bottom: 14%
+        @media screen and ( max-width: calc($tablet - 1px) )
+            padding-top: 14.5%
+            // padding-bottom: 14%
     &-title
         max-width: 310px
         text-align: center
         margin-bottom: 5%
         letter-spacing: 0.059em
+        @media screen and ( max-width: 1279px )
+            margin-bottom: 8%
+        @media screen and ( max-width: calc($tablet - 1px) )
+            font-size: calc(24px + (10 + 10 * 0.7) * ((100vw - 320px) / 1280))
+            letter-spacing: 0.08em
+            margin-bottom: 14.2%
     &-list
         display: flex
         flex-wrap: wrap
         row-gap: 55px
         column-gap: 120px
         justify-content: center
+        @media screen and ( max-width: 1279px )
+            column-gap: 53px
+        @media screen and ( max-width: calc($tablet - 1px) )
+            column-gap: 30px
+            align-items: flex-start
+            justify-content: normal
+            row-gap: 30px
         &__item
             display: flex
             flex-direction: column
             align-items: center
             row-gap: 30px
+            @media screen and ( max-width: 1279px )
+                flex-basis: 25%
+            @media screen and ( max-width: calc($tablet - 1px) )
+                row-gap: 20px
+                flex-basis: 44%
+                flex-grow: 1
+            &:last-child
+                flex-grow: 0
+        .item
+            &__title
+                @media screen and ( max-width: calc($tablet - 1px) )
+                    font-size: calc(15px + (5 + 5 * 0.7) * ((100vw - 320px) / 1280))
+                    letter-spacing: 0.06em
 .item
     &__image
+        @media screen and ( max-width: calc($tablet - 1px) )
+            max-width: 50px
         img
             display: block
+            @media screen and ( max-width: $mobile-l )
+                width: 100%
 

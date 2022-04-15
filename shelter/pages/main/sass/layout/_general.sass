@@ -5,7 +5,6 @@ html
     scroll-behavior: smooth
 
 body
-    min-width: 1280px //for fixed template
     background: url(../../assets/images/not-only/gradient.png), radial-gradient(100% 215.42% at 0% 0%, #5B483A 0%, #262425 100%), #211F20
     @include textFont
 
@@ -20,6 +19,13 @@ body
 .container-main
     max-width: $container
     margin: 0 auto
+    @media screen and ( max-width: 1279px)
+        max-width: $containerIntermediate
+    @media screen and ( max-width: 768px)
+        max-width: $container-tablet
+    @media screen and ( max-width: 750px)
+        max-width: $containerIntermediate
+        
 
 .header3
     @include titleFont
