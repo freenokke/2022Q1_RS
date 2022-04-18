@@ -7,12 +7,24 @@
             display: flex
             flex-direction: column
             align-items: center
+            @media screen and ( max-width: 1279px )
+                padding-top: 10.67%
+                padding-bottom: 10.67%
+            @media screen and ( max-width: calc($tablet - 1px) )
+                padding-top: 13.67%
+                padding-bottom: 15%
         &-title
             letter-spacing: 0.06em
             max-width: 482px
             text-align: center
             margin: 0
             margin-bottom: 41px
+            @media screen and ( max-width: 1279px )
+                margin-bottom: 2.4%
+            @media screen and ( max-width: calc($tablet - 1px) )
+                letter-spacing: 0.08em
+                font-size: calc(24px + (10 + 10 * 0.7) * ((100vw - 320px) / 1280))
+                margin-bottom: 9.4%
 .friends
     &-cards
         display: flex
@@ -22,19 +34,31 @@
         justify-content: space-between
         padding: 15px 0px 
         margin-bottom: 45px
+        @media screen and ( max-width: 1279px )
+            max-height: 1365px
+            overflow-y: hidden
+            margin-bottom: 53px
+            max-width: 700px
+            justify-content: center
+            column-gap: 5vw
+        @media screen and ( max-width: calc($tablet - 1px) )
+            justify-content: center
+            max-width: 570px
+
     &-card
         &:hover
             background: #FFFFFF
         &:hover .friends-card__button
             background: #FDDCC4
         display: flex
-        // max-width: 270px
         flex-direction: column
         align-items: center
         cursor: pointer
         max-width: 270px
         background: #FAFAFA
         transition: background 0.3s
+        border-radius: 9px
+        overflow: hidden
         &__image
             margin-bottom: 30px
             height: 62.07%

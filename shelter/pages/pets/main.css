@@ -138,6 +138,41 @@ img, svg {
   margin: 0;
   margin-left: 4px;
 }
+.header-menu__icon {
+  display: none;
+  position: relative;
+  width: 30px;
+  height: 22px;
+  z-index: 5;
+  cursor: pointer;
+}
+@media screen and (max-width: 767px) {
+  .header-menu__icon {
+    display: block;
+    margin-right: 42px;
+    margin-top: -1px;
+  }
+}
+.header-menu__icon::after, .header-menu__icon::before, .header-menu__icon span {
+  position: absolute;
+  left: 0;
+  height: 10%;
+  width: 100%;
+  background-color: white;
+}
+.header-menu__icon::after {
+  content: "";
+  bottom: 0;
+  height: 9%;
+}
+.header-menu__icon::before {
+  content: "";
+  top: 0;
+}
+.header-menu__icon span {
+  top: 50%;
+  transform: translate(0%, -50%);
+}
 @media screen and (max-width: 767px) {
   .header-menu {
     display: none;
@@ -417,6 +452,9 @@ header {
   color: #292929;
   transition: all 0.3s;
 }
+.header_white .header-menu__icon::after, .header_white .header-menu__icon::before, .header_white .header-menu__icon span {
+  background-color: #000000;
+}
 
 .friends {
   background-color: #F6F6F6;
@@ -428,12 +466,36 @@ header {
   flex-direction: column;
   align-items: center;
 }
+@media screen and (max-width: 1279px) {
+  .friends .friends-container {
+    padding-top: 10.67%;
+    padding-bottom: 10.67%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .friends .friends-container {
+    padding-top: 13.67%;
+    padding-bottom: 15%;
+  }
+}
 .friends .friends-title {
   letter-spacing: 0.06em;
   max-width: 482px;
   text-align: center;
   margin: 0;
   margin-bottom: 41px;
+}
+@media screen and (max-width: 1279px) {
+  .friends .friends-title {
+    margin-bottom: 2.4%;
+  }
+}
+@media screen and (max-width: 767px) {
+  .friends .friends-title {
+    letter-spacing: 0.08em;
+    font-size: calc(24px + 17 * (100vw - 320px) / 1280);
+    margin-bottom: 9.4%;
+  }
 }
 
 .friends-cards {
@@ -446,6 +508,23 @@ header {
   padding: 15px 0px;
   margin-bottom: 45px;
 }
+@media screen and (max-width: 1279px) {
+  .friends-cards {
+    max-height: 1365px;
+    overflow-y: hidden;
+    margin-bottom: 53px;
+    max-width: 700px;
+    justify-content: center;
+    -moz-column-gap: 5vw;
+         column-gap: 5vw;
+  }
+}
+@media screen and (max-width: 767px) {
+  .friends-cards {
+    justify-content: center;
+    max-width: 570px;
+  }
+}
 .friends-card {
   display: flex;
   flex-direction: column;
@@ -454,6 +533,8 @@ header {
   max-width: 270px;
   background: #FAFAFA;
   transition: background 0.3s;
+  border-radius: 9px;
+  overflow: hidden;
 }
 .friends-card:hover {
   background: #FFFFFF;
@@ -516,6 +597,12 @@ header {
   width: 100%;
   -moz-column-gap: 20px;
        column-gap: 20px;
+}
+@media screen and (max-width: 767px) {
+  .pagination-handle {
+    -moz-column-gap: 10px;
+         column-gap: 10px;
+  }
 }
 .pagination-handle__handler {
   width: 52px;
