@@ -1,5 +1,9 @@
 .header-container 
     padding: 60px 0px 56px 0px
+    @media screen and ( max-width: 1279px )
+        padding: 4.29% 0px 4% 0px
+    @media screen and ( max-width: $tablet )
+        padding: 30px 0 60px 0
 .header 
     display: flex
     justify-content: space-between 
@@ -17,14 +21,43 @@
             font-size: 13px
             margin: 0
             margin-left: 4px
+    &-menu__icon
+        display: none
+        position: relative
+        width: 30px
+        height: 22px
+        z-index: 5
+        cursor: pointer
+        @media screen and ( max-width: calc($tablet - 1px) )
+            display: block
+            margin-right: 42px
+            margin-top: -1px
+        &::after, &::before, span
+            position: absolute
+            left: 0
+            height: 10%
+            width: 100%
+            background-color: #FFFF
+        &::after
+            content: ""
+            bottom: 0
+            height: 9%
+        &::before
+            content: ""
+            top: 0
+        span
+            top: 50%
+            transform: translate(0%, -50%)
     &-menu
-        flex-basis: 39.55%
+        @media screen and ( max-width: calc($tablet - 1px) )
+            display: none
         &__list
             width: 100%
             display: flex
             justify-content: flex-end
             margin: 0
             padding: 0
+            flex-grow: 1
         &__item
             a
                 @include link(#CDCDCD)
@@ -36,7 +69,7 @@
                 color: #FAFAFA
                 transition: all 0.3s
             list-style: none
-            margin-right: 35px
+            margin-right: 36px
             &:last-child
                 margin-right: 0px
                 

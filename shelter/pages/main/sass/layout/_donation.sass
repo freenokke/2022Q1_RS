@@ -4,33 +4,63 @@
     &-container
         padding-top: 6.67%
         padding-bottom: 8.33%
+        @media screen and ( max-width: 1279px )
+            padding: 11.67% 14% 14.5% 14%
+        @media screen and ( max-width: calc($tablet - 1px) )
+            padding: 13.67% 3% 12.33% 3%
+        @media screen and ( max-width: $mobile-m )
+            padding-top: 42px
+            padding-bottom: 42px
     &-content
         display: flex
         justify-content: center
         column-gap: 30px
         align-items: center
+        @media screen and ( max-width: 1279px )
+            flex-direction: column-reverse
+            row-gap: 7.5vw
+        @media screen and ( max-width: $mobile-m )
+            row-gap: 42px
         &__image
             flex-basis: 42.08%
+            @media screen and ( max-width: $mobile-m )
+                max-width:  260px
             img
                 display: block
+                @media screen and ( max-width: 570px )
+                    width: 100%
         &__info
             flex-basis: 31.67%
             &.donation-info
                 display: flex
                 flex-direction: column
                 row-gap:20px
+                @media screen and ( max-width: 1279px )
+                    max-width: 380px
+                @media screen and ( max-width: calc($tablet - 1px) )
+                    align-items: center
             .donation-info
                 &__title
                     max-width: 300px
+                    @media screen and ( max-width: calc($tablet - 1px) )
+                        font-size: calc(25px + (10 + 10 * 0.7) * ((100vw - 320px) / 1280))
+                        text-align: center
+                    @media screen and ( max-width: $mobile-m )
+                        max-width: 225px
                 &__subtitle
                     margin: 0
                     color: #545454
                     @include titleFont("GeorgiaRegular", 15px, 110%)
                     letter-spacing: 0.06em
+                    @media screen and ( max-width: calc($tablet - 1px) )
+                        letter-spacing: 0
+                        line-height: 160%
                 &__text
                     @include textFont("ArialItalic", 12px, 150%)
                     color: #B2B2B2
                     margin: 0
+                    @media screen and ( max-width: calc($tablet - 1px) )
+                        text-align: justify
                 &__payment
                     &:hover
                         background-color: #FDDCC4
@@ -44,6 +74,9 @@
                     @include titleFont($size: 20px, $line-h: 115%)
                     letter-spacing: 0.058em
                     transition: background 0.3s
+                    @media screen and ( max-width: calc($tablet - 1px) )
+                        font-size: calc(15px + (5 + 5 * 0.7) * ((100vw - 320px) / 1280))
+                        letter-spacing: 0.056em
                     .payment-field
                         &__card
                             img
