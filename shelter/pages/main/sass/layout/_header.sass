@@ -50,7 +50,15 @@
             transform: translate(0%, -50%)
     &-menu
         @media screen and ( max-width: calc($tablet - 1px) )
-            display: none
+            width: 320px
+            position: fixed
+            top: 0
+            right: -320px
+            height: 100%
+            background-color: #292929
+            transition: right 0.3s ease 0s
+        &_active
+            right: 0
         &__list
             width: 100%
             display: flex
@@ -58,6 +66,14 @@
             margin: 0
             padding: 0
             flex-grow: 1
+            @media screen and ( max-width: calc($tablet - 1px) )
+                flex-direction: column
+                align-items: center
+                justify-content: center
+                height: 100%
+                row-gap: 40px
+                max-width: 243px
+                margin: 0 auto
         &__item
             a
                 @include link(#CDCDCD)
@@ -72,8 +88,7 @@
             margin-right: 36px
             &:last-child
                 margin-right: 0px
-                
-
-            
-        
+            @media screen and ( max-width: calc($tablet - 1px) ) 
+                margin: 0
+                @include textFont($size: 32px, $line-h: 160%)
 
