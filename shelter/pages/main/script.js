@@ -51,8 +51,8 @@ function comeBackScrollShifting() {
 //==================Burger Menu==================================
 const body = document.querySelector('body')
 const burgerIcon = document.querySelector('.header-menu__icon')
-const menu = document.querySelector('.header-menu')
-const menuItems = document.querySelectorAll('.header-menu__item')
+const menu = document.querySelector('.header-menu.burger-menu')
+const menuItems = document.querySelectorAll('.header-menu.burger-menu .header-menu__item')
 const overlay = document.querySelector('.overlay')
 
 burgerIcon.addEventListener('click', burgerMenuHandler)
@@ -65,6 +65,9 @@ menu.addEventListener('animationend', (e) => {
         menu.prepend(duplicate)
     } else if (e.animationName === 'slide-out') {
         menu.firstElementChild.remove()
+        setTimeout(() => {
+            burgerIcon.classList.remove('re-rotate')
+        }, 1000)
     }
     
     burgerIcon.addEventListener('click', burgerMenuHandler)

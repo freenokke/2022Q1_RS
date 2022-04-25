@@ -50,12 +50,17 @@
             transform: translate(0%, -50%)
     &-menu
         @media screen and ( max-width: calc($tablet - 1px) )
-            width: 320px
-            position: fixed
-            top: 0
-            right: -320px
-            height: 100%
-            background-color: #292929
+            display: none
+        &.burger-menu
+            display: none
+            @media screen and ( max-width: calc($tablet - 1px) )
+                display: block
+                width: 320px
+                position: fixed
+                top: 0
+                right: -320px
+                height: 100%
+                background-color: #292929
         &__list
             width: 100%
             display: flex

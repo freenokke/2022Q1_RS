@@ -187,6 +187,15 @@ img, svg {
 }
 @media screen and (max-width: 767px) {
   .header-menu {
+    display: none;
+  }
+}
+.header-menu.burger-menu {
+  display: none;
+}
+@media screen and (max-width: 767px) {
+  .header-menu.burger-menu {
+    display: block;
     width: 320px;
     position: fixed;
     top: 0;
