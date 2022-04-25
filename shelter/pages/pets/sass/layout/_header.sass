@@ -13,6 +13,8 @@ header
                 color: #292929
             @include link(inherit)
         .header-menu
+            @media screen and ( max-width: calc($tablet - 1px) )
+                background-color: #FFFFFF
             .header-menu__item 
                 a
                     color: #545454
@@ -32,3 +34,5 @@ header
             &__icon
                 &::after, &::before, span
                     background-color: #000000
+.overlay
+    height: 2849px
