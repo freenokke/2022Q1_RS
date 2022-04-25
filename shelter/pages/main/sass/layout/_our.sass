@@ -1,5 +1,5 @@
 #our
-    background-color: $color-section_darken 
+    background-color: $color-section_darken
 .our
     &-container
         padding-top: 6.67%
@@ -37,20 +37,34 @@
                 margin-bottom: 8.5%
             @media screen and ( max-width: calc($tablet - 1px) )
                 flex-wrap: wrap
+                justify-content: center
             @media screen and ( max-width: 500px )
                 margin-bottom: 13.5%
         .slider
-            &-cards
+            &-items__wrapper
+                position: relative
+                margin: 0 auto
                 display: flex
-                flex: 1 1 auto
+                align-items: center
+            &-items
                 max-width: 990px
-                justify-content: space-between
+                display: flex
+                overflow: hidden
                 @media screen and ( max-width: 1279px )
-                    justify-content: space-around
-                    column-gap: 2.5%
+                    max-width: 580px
                 @media screen and ( max-width: calc($tablet - 1px) )
                     order: 1
-                    flex-basis: 100%
+                    max-width: 355px
+                @media screen and ( max-width: 580px )
+                    order: 1
+                    max-width: 270px
+            &-items__item
+                display: flex
+                justify-content: space-between
+                column-gap: 90px
+                @media screen and ( max-width: 1279px )
+                    // justify-content: space-around
+                    column-gap: 40px
             &-card
                 &:hover
                     background: #FFFFFF
@@ -64,16 +78,25 @@
                 transition: background 0.3s
                 border-radius: 9px
                 overflow: hidden
+                width: 270px
+                height: 435px
                 @media screen and ( max-width: 1279px )
                     &:last-child
                         display: none
                 @media screen and ( max-width: calc($tablet - 1px) )
+                    width: 355px
                     &:nth-child(2)
                         display: none
+                @media screen and ( max-width: 580px )
+                    width: 270px
                 &__image
                     margin-bottom: 30px
+                    height: 62.07%
                     img
                         display: block
+                        object-fit: cover
+                        height: 100%
+                        width: 100%
                 &__text
                     @include titleFont($size: 20px, $line-h: 23px)
                     letter-spacing: 0.06em
@@ -142,5 +165,4 @@
         letter-spacing: 0.058em
         transition: background 0.3s
         &:hover
-            background: #FDDCC4   
-
+            background: #FDDCC4

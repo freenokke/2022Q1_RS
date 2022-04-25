@@ -56,9 +56,6 @@
             right: -320px
             height: 100%
             background-color: #292929
-            transition: right 0.3s ease 0s
-        &_active
-            right: 0
         &__list
             width: 100%
             display: flex
@@ -92,3 +89,65 @@
                 margin: 0
                 @include textFont($size: 32px, $line-h: 160%)
 
+@keyframes slide-in
+    0%
+        right: -320px
+    100%
+        right: 0px
+
+@keyframes slide-out
+    0%
+        right: 0px
+    100%
+        right: -320px
+
+@keyframes  logo-in
+    0%
+        top: -200px
+    100%
+        top: 30px
+
+@keyframes  rotate
+    0%
+        transform: rotate(0deg)
+    100%
+        transform: rotate(90deg)
+
+@keyframes  re-rotate
+    0%
+        transform: rotate(90deg)
+    100%
+        transform: rotate(0deg)
+
+
+.active
+    animation-name: slide-in
+    animation-timing-function: ease-in
+    animation-duration: 0.5s
+    animation-fill-mode: forwards
+
+.not-active
+    animation-name: slide-out
+    animation-timing-function: ease-out
+    animation-duration: 0.5s
+    animation-fill-mode: forwards
+
+.duplicate-title
+    animation-name: logo-in
+    animation-timing-function: ease-in-out
+    animation-duration: 0.5s
+    animation-fill-mode: forwards
+    position: absolute
+    left: 10px
+
+.rotate
+    animation-name: rotate
+    animation-timing-function: ease-in-out
+    animation-duration: 1s
+    animation-fill-mode: forwards
+
+.re-rotate
+    animation-name: re-rotate
+    animation-timing-function: ease-in-out
+    animation-duration: 1s
+    animation-fill-mode: forwards
