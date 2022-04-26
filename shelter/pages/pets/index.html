@@ -12,6 +12,7 @@
     <script defer src="./script.js"></script>
 </head>
 <body>
+    <div class="overlay"></div>
     <header class="header-container">
         <div class="container-main header header_white">
             <a href="../main/index.html" class="header-title">
@@ -29,6 +30,14 @@
                     <li class="header-menu__item"><a href="#footer">Contacts</a></li>
                 </ul>
             </nav>
+            <nav class="header-menu burger-menu">
+                <ul class="header-menu__list">
+                    <li class="header-menu__item"><a href="../main/index.html">About the shelter</a></li>
+                    <li class="header-menu__item"><a href="#">Our pets</a></li>
+                    <li class="header-menu__item"><a href="../main/index.html#help">Help the shelter</a></li>
+                    <li class="header-menu__item"><a href="#footer">Contacts</a></li>
+                </ul>
+            </nav>
         </div>
     </header>
     <main>
@@ -36,68 +45,11 @@
             <div class="container-main">
                 <div class="friends-container">
                     <h3 class="friends-title title">Our friends who<br/>are looking for a house</h3>
-                    <div class="friends-cards">
-                        <div class="friends-card">
-                            <div class="friends-card__image">
-                                <img src="../../assets/images/our/katrine.png" alt="katrine">
-                            </div>
-                            <div class="friends-card__text">Katrine</div>
-                            <button type="button" class="friends-card__button">Learn more</button>
-                        </div>
-                        <div class="friends-card">
-                            <div class="friends-card__image">
-                                <img src="../../assets/images/our/jennifer.png" alt="jennifer">
-                            </div>
-                            <div class="friends-card__text">Jennifer</div>
-                            <button type="button" class="friends-card__button">Learn more</button>
-                        </div>
-                        <div class="friends-card">
-                            <div class="friends-card__image">
-                                <img src="../../assets/images/our/woody.png" alt="woody">
-                            </div>
-                            <div class="friends-card__text">Woody</div>
-                            <button type="button" class="friends-card__button">Learn more</button>
-                        </div>
-                        <div class="friends-card">
-                            <div class="friends-card__image">
-                                <img src="../../assets/images/pets/sophia.png" alt="sophia">
-                            </div>
-                            <div class="friends-card__text">Sophia</div>
-                            <button type="button" class="friends-card__button">Learn more</button>
-                        </div>
-                        <div class="friends-card">
-                            <div class="friends-card__image">
-                                <img src="../../assets/images/pets/timmy.png" alt="timmy">
-                            </div>
-                            <div class="friends-card__text">Timmy</div>
-                            <button type="button" class="friends-card__button">Learn more</button>
-                        </div>
-                        <div class="friends-card">
-                            <div class="friends-card__image">
-                                <img src="../../assets/images/pets/charly.png" alt="Charly">
-                            </div>
-                            <div class="friends-card__text">Charly</div>
-                            <button type="button" class="friends-card__button">Learn more</button>
-                        </div>
-                        <div class="friends-card">
-                            <div class="friends-card__image">
-                                <img src="../../assets/images/pets/scarlett.png" alt="scarlett">
-                            </div>
-                            <div class="friends-card__text">Scarlett</div>
-                            <button type="button" class="friends-card__button">Learn more</button>
-                        </div>
-                        <div class="friends-card">
-                            <div class="friends-card__image">
-                                <img src="../../assets/images/pets/freddie.png" alt="freddie">
-                            </div>
-                            <div class="friends-card__text">Freddie</div>
-                            <button type="button" class="friends-card__button">Learn more</button>
-                        </div>
-                    </div>
+                    <div class="friends-cards"></div>
                     <div class="friends-pagination pagination">
                         <div class="pagination-handle">
-                            <button type="button" class="pagination-handle__handler start pagination-handle__handler_inactive"><<</button>
-                            <button type="button" class="pagination-handle__handler prev pagination-handle__handler_inactive"><</button>
+                            <button type="button" class="pagination-handle__handler start"><<</button>
+                            <button type="button" class="pagination-handle__handler prev"><</button>
                             <div class="pagination-handle__handler current header4">1</div>
                             <button type="button" class="pagination-handle__handler next">></button>
                             <button type="button" class="pagination-handle__handler end">>></button>
@@ -138,5 +90,8 @@
             </div>
         </div>
     </footer>
+    <div id="popup" class="popup">
+        <div class="popup-container"></div>
+    </div>
 </body>
 </html>
