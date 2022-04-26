@@ -64,7 +64,10 @@ menu.addEventListener('animationend', (e) => {
         duplicate.classList.add('duplicate-title')
         menu.prepend(duplicate)
     } else if (e.animationName === 'slide-out') {
-        menu.firstElementChild.remove()
+        menu.classList.remove('not-active')
+        document.querySelectorAll('.duplicate-title').forEach(item => {
+            item.remove()
+        })
         setTimeout(() => {
             burgerIcon.classList.remove('re-rotate')
         }, 1000)
