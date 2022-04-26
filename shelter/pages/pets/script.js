@@ -96,6 +96,8 @@ const PETS = async function() {
 const PETS_CONTAINER = document.querySelector('.friends-cards')
 const NEXT_BTN = document.querySelector('.pagination-handle__handler.next')
 const PREV_BTN = document.querySelector('.pagination-handle__handler.prev')
+const FIRSTPAGE_BTN = document.querySelector('.pagination-handle__handler.start')
+const LASTPAGE_BTN = document.querySelector('.pagination-handle__handler.end')
 const PAGE = document.querySelector('.pagination-handle__handler.current')
 let petsArray = [0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7, 0, 1, 2, 3, 4, 5, 6, 7,]
 let filledgWithItemsArr;
@@ -104,22 +106,21 @@ let countOfPages;
 let viewArea = document.documentElement.clientWidth;
 
 
-NEXT_BTN.addEventListener('click', () => {
-    PETS_CONTAINER.innerHTML = ''
-    switchPageUp()
-    PETS_CONTAINER.append(...filledgWithItemsArr[currentPage - 1])
-} );
-PREV_BTN.addEventListener('click', ()  => {
-    PETS_CONTAINER.innerHTML = ''
-    switchPageDown()
-    PETS_CONTAINER.append(...filledgWithItemsArr[currentPage - 1])
-} );
+NEXT_BTN.addEventListener('click', nextPage)
+PREV_BTN.addEventListener('click', previousPage)
+FIRSTPAGE_BTN.addEventListener('click', firstPage)
+LASTPAGE_BTN.addEventListener('click', lastPage)
 
 document.addEventListener('DOMContentLoaded', () => {
     setData(PETS)
     viewArea = document.documentElement.clientWidth
     checkPages()
     PAGE.textContent = currentPage
+
+    PREV_BTN.classList.add('pagination-handle__handler_inactive')
+    FIRSTPAGE_BTN.classList.add('pagination-handle__handler_inactive')
+    PREV_BTN.removeEventListener('click', previousPage)
+    FIRSTPAGE_BTN.removeEventListener('click', firstPage)
 })
 
 
@@ -218,15 +219,77 @@ function switchPageUp() {
     +PAGE.textContent++
     currentPage = +PAGE.textContent
     }
-    if (currentPage != countOfPages) {
-        
-    }
+    checkBtnInactive(currentPage)
 }
 
 function switchPageDown() {
     if (+PAGE.textContent <= countOfPages && +PAGE.textContent != 1) {
         +PAGE.textContent--
         currentPage = +PAGE.textContent
+    }
+    checkBtnInactive(currentPage)
+}
+
+function nextPage() {
+    PETS_CONTAINER.innerHTML = ''
+    switchPageUp()
+    PETS_CONTAINER.append(...filledgWithItemsArr[currentPage - 1])
+}
+
+function previousPage() {
+    PETS_CONTAINER.innerHTML = ''
+    switchPageDown()
+    PETS_CONTAINER.append(...filledgWithItemsArr[currentPage - 1])
+}
+
+function lastPage() {
+    PETS_CONTAINER.innerHTML = ''
+    PETS_CONTAINER.append(...filledgWithItemsArr[countOfPages - 1])
+    currentPage = countOfPages
+    PAGE.textContent = currentPage
+    checkBtnInactive(currentPage)
+}
+
+function firstPage() {
+    PETS_CONTAINER.innerHTML = ''
+    PETS_CONTAINER.append(...filledgWithItemsArr[0])
+    currentPage = 1
+    PAGE.textContent = currentPage
+    checkBtnInactive(currentPage)
+}
+
+function checkBtnInactive(page) {
+    console.log(typeof page)
+    if (page == 1) {
+        PREV_BTN.classList.add('pagination-handle__handler_inactive')
+        FIRSTPAGE_BTN.classList.add('pagination-handle__handler_inactive')
+        PREV_BTN.removeEventListener('click', previousPage)
+        FIRSTPAGE_BTN.removeEventListener('click', firstPage)
+
+        NEXT_BTN.classList.remove('pagination-handle__handler_inactive')
+        LASTPAGE_BTN.classList.remove('pagination-handle__handler_inactive')
+        NEXT_BTN.addEventListener('click', nextPage)
+        LASTPAGE_BTN.addEventListener('click', lastPage)
+    } else if (page > 1 && page < countOfPages ) {
+        PREV_BTN.classList.remove('pagination-handle__handler_inactive')
+        FIRSTPAGE_BTN.classList.remove('pagination-handle__handler_inactive')
+        PREV_BTN.addEventListener('click', previousPage)
+        FIRSTPAGE_BTN.addEventListener('click', firstPage)
+
+        NEXT_BTN.classList.remove('pagination-handle__handler_inactive')
+        LASTPAGE_BTN.classList.remove('pagination-handle__handler_inactive')
+        NEXT_BTN.addEventListener('click', nextPage)
+        LASTPAGE_BTN.addEventListener('click', lastPage)
+    } else if (page == countOfPages) {
+        NEXT_BTN.classList.add('pagination-handle__handler_inactive')
+        LASTPAGE_BTN.classList.add('pagination-handle__handler_inactive')
+        NEXT_BTN.removeEventListener('click', nextPage)
+        LASTPAGE_BTN.removeEventListener('click', lastPage)
+
+        PREV_BTN.classList.remove('pagination-handle__handler_inactive')
+        FIRSTPAGE_BTN.classList.remove('pagination-handle__handler_inactive')
+        PREV_BTN.addEventListener('click', previousPage)
+        FIRSTPAGE_BTN.addEventListener('click', firstPage)
     }
 }
 

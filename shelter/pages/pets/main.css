@@ -592,7 +592,7 @@ img, svg {
 header {
   background-color: #FFFFFF;
   position: -webkit-sticky;
-  position: sticky;
+  position: static;
   top: 0;
 }
 
