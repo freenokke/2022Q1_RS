@@ -18,6 +18,14 @@ export type SourceType = {
     language: string;
     country: string;
 };
+
+export type LoadData = {
+    endpoint: string;
+    options?: {
+        [prop: string]: string;
+    };
+};
+
 export interface ISource {
     draw: (data: SourceType[]) => void;
 }
@@ -31,3 +39,19 @@ export interface IAppView {
     drawSources: (data: SourcesEndpointResponse) => void;
 }
 
+export interface ILoader {
+    baseLink: string;
+    options: {
+        [prop: string]: string;
+    };
+
+    getResp: (data: LoadData, callback: (arg: unknown) => void) => void;
+    errorHandler: (res: Response) => Response;
+    makeUrl: (options: { [prop: string]: string }, endpoint: string) => string;
+    load: (
+        method: string,
+        endpoint: string,
+        callback: (data: SourcesEndpointResponse) => void,
+        options: { [prop: string]: string }
+    ) => void;
+}
