@@ -25,3 +25,9 @@ export interface ISource {
 export interface INews {
     draw: (data: ArticleType[]) => void;
 }
+
+export interface IAppView {
+    drawNews: (data: TopHeadlinesEndpointResponse) => void;
+    drawSources: (data: SourcesEndpointResponse) => void;
+}
+
