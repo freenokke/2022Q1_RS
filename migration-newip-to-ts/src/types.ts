@@ -9,6 +9,19 @@ export type ArticleType = {
     urlToImage: string;
 };
 
+export type SourceType = {
+    id: string;
+    name: string;
+    description: string;
+    url: string;
+    category: string;
+    language: string;
+    country: string;
+};
+export interface ISource {
+    draw: (data: SourceType[]) => void;
+}
+
 export interface INews {
     draw: (data: ArticleType[]) => void;
 }
