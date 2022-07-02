@@ -19,12 +19,25 @@ export type SourceType = {
     country: string;
 };
 
+export type TopHeadlinesEndpointResponse = {
+    status: string;
+    totalResults: number;
+    articles: ArticleType;
+};
+
+export type SourcesEndpointResponse = {
+    status: string;
+    sources: SourceType;
+};
+
 export type LoadData = {
     endpoint: string;
     options?: {
         [prop: string]: string;
     };
 };
+
+export type Callback<T> = (data: T) => void;
 
 export interface ISource {
     draw: (data: SourceType[]) => void;
@@ -54,4 +67,9 @@ export interface ILoader {
         callback: (data: SourcesEndpointResponse) => void,
         options: { [prop: string]: string }
     ) => void;
+}
+
+export interface IController {
+    getSources: (callback: Callback<SourcesEndpointResponse>) => void;
+    getNews: (e: Event, callback: Callback<TopHeadlinesEndpointResponse>) => void;
 }
