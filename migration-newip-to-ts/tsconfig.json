@@ -99,5 +99,14 @@
     /* Completeness */
     // "skipDefaultLibCheck": true,                      /* Skip type checking .d.ts files that are included with TypeScript. */
     "skipLibCheck": true                                 /* Skip type checking all .d.ts files. */
-  }
+  },
+  "files": [
+    "src/types.ts",
+    "src/components/view/news/news.ts",
+    "src/components/view/sources/sources.ts",
+    "src/components/controller/loader.ts",
+    "src/components/controller/appLoader.ts",
+    "src/components/controller/controller.ts",
+    "src/components/app/app.ts",
+  ]
 }
