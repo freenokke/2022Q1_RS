@@ -1,3 +1,6 @@
+import AppController from './components/controller/controller';
+import AppView from './components/view/appView';
+
 export type ArticleType = {
     author: string;
     content: string;
@@ -72,4 +75,11 @@ export interface ILoader {
 export interface IController {
     getSources: (callback: Callback<SourcesEndpointResponse>) => void;
     getNews: (e: Event, callback: Callback<TopHeadlinesEndpointResponse>) => void;
+}
+
+export interface IApp {
+    controller: AppController;
+    view: AppView;
+
+    start: () => void;
 }
