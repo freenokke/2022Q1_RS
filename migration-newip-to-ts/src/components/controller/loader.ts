@@ -1,4 +1,4 @@
-import { ILoader, LoadData } from '../../types';
+import { ILoader, LoadData, StatusCode } from '../../types';
 
 class Loader implements ILoader {
     baseLink: string;
@@ -20,7 +20,7 @@ class Loader implements ILoader {
 
     errorHandler(res: Response) {
         if (!res.ok) {
-            if (res.status === 401 || res.status === 404)
+            if (res.status === StatusCode.unauthorized || res.status === StatusCode.notFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
             throw Error(res.statusText);
         }

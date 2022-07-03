@@ -83,3 +83,8 @@ export interface IApp {
 
     start: () => void;
 }
+
+export enum StatusCode {
+    unauthorized = 401,
+    notFound = 404,
+}
