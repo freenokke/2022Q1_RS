@@ -4,8 +4,8 @@ import { SourceType, ArticleType, TopHeadlinesEndpointResponse, SourcesEndpointR
 import { IAppView } from '../../types';
 
 export class AppView implements IAppView {
-    news: News;
-    sources: Sources;
+    private news: News;
+    private sources: Sources;
 
     constructor() {
         this.news = new News();

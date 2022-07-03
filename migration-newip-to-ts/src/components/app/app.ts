@@ -4,9 +4,9 @@ import { SourcesEndpointResponse, TopHeadlinesEndpointResponse, IApp } from '../
 import { Countries } from '../app/countries';
 
 class App implements IApp {
-    controller: AppController;
-    view: AppView;
-    country = 'us';
+    private controller: AppController;
+    private view: AppView;
+    private country = 'us';
 
     constructor() {
         this.controller = new AppController();
@@ -18,7 +18,7 @@ class App implements IApp {
         this.addEvents();
     }
 
-    addEvents() {
+    private addEvents() {
         const sources = document.querySelector('.sources');
         const categories = document.querySelectorAll('.categories-item');
         const languages = document.querySelectorAll('.lang-option');
@@ -55,7 +55,7 @@ class App implements IApp {
         }
     }
 
-    addCountrySelect() {
+    private addCountrySelect() {
         const selectLang = document.querySelector('#lang');
 
         if (selectLang !== null) {

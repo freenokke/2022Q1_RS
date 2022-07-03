@@ -1,6 +1,3 @@
-import AppController from './components/controller/controller';
-import AppView from './components/view/appView';
-
 export type ArticleType = {
     author: string;
     content: string;
@@ -55,32 +52,12 @@ export interface IAppView {
     drawSources: (data: SourcesEndpointResponse) => void;
 }
 
-export interface ILoader {
-    baseLink: string;
-    options: {
-        [prop: string]: string;
-    };
-
-    getResp: (data: LoadData, callback: (arg: unknown) => void) => void;
-    errorHandler: (res: Response) => Response;
-    makeUrl: (options: { [prop: string]: string }, endpoint: string) => string;
-    load: (
-        method: string,
-        endpoint: string,
-        callback: (data: SourcesEndpointResponse) => void,
-        options: { [prop: string]: string }
-    ) => void;
-}
-
 export interface IController {
     getSources: (e: Event, country: string, callback: Callback<SourcesEndpointResponse>) => void;
     getNews: (e: Event, callback: Callback<TopHeadlinesEndpointResponse>) => void;
 }
 
 export interface IApp {
-    controller: AppController;
-    view: AppView;
-
     start: () => void;
 }
 

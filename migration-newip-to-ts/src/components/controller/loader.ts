@@ -1,15 +1,15 @@
-import { ILoader, LoadData, StatusCode } from '../../types';
+import { LoadData, StatusCode } from '../../types';
 
-class Loader implements ILoader {
-    baseLink: string;
-    options: { [prop: string]: string };
+class Loader {
+    protected baseLink: string;
+    protected options: { [prop: string]: string };
 
     constructor(baseLink: string, options: { [prop: string]: string }) {
         this.baseLink = baseLink;
         this.options = options;
     }
 
-    getResp<T>(
+    protected getResp<T>(
         { endpoint, options = {} }: LoadData,
         callback: (data: T) => void = () => {
             console.error('No callback for GET response');
@@ -18,7 +18,7 @@ class Loader implements ILoader {
         this.load<T>('GET', endpoint, callback, options);
     }
 
-    errorHandler(res: Response) {
+    private errorHandler(res: Response) {
         if (!res.ok) {
             if (res.status === StatusCode.unauthorized || res.status === StatusCode.notFound)
                 console.log(`Sorry, but there is ${res.status} error: ${res.statusText}`);
@@ -28,7 +28,7 @@ class Loader implements ILoader {
         return res;
     }
 
-    makeUrl(options: { [prop: string]: string }, endpoint: string) {
+    private makeUrl(options: { [prop: string]: string }, endpoint: string) {
         const urlOptions = { ...this.options, ...options };
         let url = `${this.baseLink}${endpoint}?`;
 
@@ -39,7 +39,12 @@ class Loader implements ILoader {
         return url.slice(0, -1);
     }
 
-    load<U>(method: string, endpoint: string, callback: (data: U) => void, options: { [prop: string]: string } = {}) {
+    private load<U>(
+        method: string,
+        endpoint: string,
+        callback: (data: U) => void,
+        options: { [prop: string]: string } = {}
+    ) {
         fetch(this.makeUrl(options, endpoint), { method })
             .then(this.errorHandler)
             .then((res) => res.json())
