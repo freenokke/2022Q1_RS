@@ -23,10 +23,15 @@ class Sources implements ISource {
         }
 
         if (document.querySelector('.sources') !== null) {
+            this.clear();
             (document.querySelector('.sources') as HTMLElement).append(fragment);
         } else {
             throw new Error('Element with class ".sources" not found');
         }
+    }
+
+    clear() {
+        (document.querySelector('.sources') as HTMLElement).innerHTML = '';
     }
 }
 

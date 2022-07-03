@@ -47,11 +47,15 @@ class News implements INews {
         });
 
         if (document.querySelector('.news') !== null) {
-            (<HTMLElement>document.querySelector('.news')).innerHTML = '';
+            this.clear();
             (<HTMLElement>document.querySelector('.news')).appendChild(fragment);
         } else {
             throw new Error('Element with class ".news" not found');
         }
+    }
+
+    clear() {
+        (<HTMLElement>document.querySelector('.news')).innerHTML = '';
     }
 }
 

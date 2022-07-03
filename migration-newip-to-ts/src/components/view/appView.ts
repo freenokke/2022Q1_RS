@@ -21,6 +21,14 @@ export class AppView implements IAppView {
         const values = (data?.sources ? data?.sources : []) as SourceType[];
         this.sources.draw(values);
     }
+
+    clearNews() {
+        this.news.clear();
+    }
+
+    clearSources() {
+        this.sources.clear();
+    }
 }
 
 export default AppView;

@@ -2,10 +2,15 @@ import AppLoader from './appLoader';
 import { IController, TopHeadlinesEndpointResponse, SourcesEndpointResponse, Callback } from '../../types';
 
 class AppController extends AppLoader implements IController {
-    getSources(callback: Callback<SourcesEndpointResponse>) {
+    getSources(e: Event, countryName: string, callback: Callback<SourcesEndpointResponse>) {
+        const categoryName = (e.target as HTMLElement).textContent as string;
         super.getResp(
             {
                 endpoint: 'sources',
+                options: {
+                    category: categoryName,
+                    country: countryName,
+                },
             },
             callback
         );

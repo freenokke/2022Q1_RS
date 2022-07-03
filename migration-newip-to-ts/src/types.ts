@@ -73,7 +73,7 @@ export interface ILoader {
 }
 
 export interface IController {
-    getSources: (callback: Callback<SourcesEndpointResponse>) => void;
+    getSources: (e: Event, country: string, callback: Callback<SourcesEndpointResponse>) => void;
     getNews: (e: Event, callback: Callback<TopHeadlinesEndpointResponse>) => void;
 }
 
