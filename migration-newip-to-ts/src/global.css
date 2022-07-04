@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 body {
     color: #fff;
     background: #17181c;
@@ -32,4 +36,41 @@ footer .copyright a:hover {
 }
 footer .copyright:before {
     content: '©';
+}
+
+
+#lang {
+    margin-left: 20px;
+    outline: none;
+    width: 150px;
+    height: 25px;
+}
+
+
+.filter {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    cursor: pointer;
+}
+
+.categories-item {
+    cursor: pointer;
+    margin-bottom: 10px;
+    font-family: Arial, sans-serif;
+    letter-spacing: 2px;
+    padding: 3px;
+    width: fit-content;
+    border-radius: 10px;
+    transition: all 0.2s;
+}
+
+.categories-item:hover {
+    background-color: #30c4ffcb;
+}
+
+@media (min-width: 475px) {
+    .filter {
+        flex-direction: row;
+    }
 }
