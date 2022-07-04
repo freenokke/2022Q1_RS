@@ -1,32 +1,32 @@
 export type ArticleType = {
-    author: string;
-    content: string;
-    description: string;
-    publishedAt: string;
-    source: { id: string; name: string };
-    title: string;
-    url: string;
-    urlToImage: string;
+    readonly author: string;
+    readonly content: string;
+    readonly description: string;
+    readonly publishedAt: string;
+    readonly source: { id: string; name: string };
+    readonly title: string;
+    readonly url: string;
+    readonly urlToImage: string;
 };
 
 export type SourceType = {
-    id: string;
-    name: string;
-    description: string;
-    url: string;
-    category: string;
-    language: string;
-    country: string;
+    readonly id: string;
+    readonly name: string;
+    readonly description: string;
+    readonly url: string;
+    readonly category: string;
+    readonly language: string;
+    readonly country: string;
 };
 
 export type TopHeadlinesEndpointResponse = {
-    status: string;
-    totalResults: number;
+    readonly status: string;
+    readonly totalResults: number;
     articles: ArticleType;
 };
 
 export type SourcesEndpointResponse = {
-    status: string;
+    readonly status: string;
     sources: SourceType;
 };
 
