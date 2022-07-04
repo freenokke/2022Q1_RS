@@ -14,7 +14,7 @@ class News implements INews {
             if (idx % 2) (newsClone.querySelector('.news__item') as HTMLDivElement).classList.add('alt');
 
             (newsClone.querySelector('.news__meta-photo') as HTMLDivElement).style.backgroundImage = `url(${
-                item.urlToImage || 'img/news_placeholder.jpg'
+                item.urlToImage || 'img/news_placeholder.png'
             })`;
             (<HTMLElement>newsClone.querySelector('.news__meta-author')).textContent = item.author || item.source.name;
             (<HTMLElement>newsClone.querySelector('.news__meta-date')).textContent = item.publishedAt
