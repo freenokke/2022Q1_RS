@@ -4,6 +4,7 @@ import { IController, TopHeadlinesEndpointResponse, SourcesEndpointResponse, Cal
 class AppController extends AppLoader implements IController {
     getSources(e: Event, countryName: string, callback: Callback<SourcesEndpointResponse>) {
         const categoryName = (e.target as HTMLElement).textContent as string;
+        (e.target as HTMLElement).style.backgroundColor = '#30c4ffcb';
         super.getResp(
             {
                 endpoint: 'sources',

@@ -35,6 +35,7 @@ class App implements IApp {
         if (categories.length > 0) {
             categories.forEach((item) => {
                 item.addEventListener('click', (e) => {
+                    categories.forEach((item) => ((<HTMLElement>item).style.backgroundColor = 'transparent'));
                     this.controller.getSources(e, this.country, (data: SourcesEndpointResponse) =>
                         this.view.drawSources(data)
                     );
