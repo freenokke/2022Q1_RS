@@ -24,6 +24,7 @@ export class AppController {
         this.colorCheckboxEvent();
         this.diamCheckboxEvent();
         this.pcdCheckboxEvent();
+        this.collapseBtnEvent();
     }
 
     private updateFilters(): void {
@@ -123,6 +124,18 @@ export class AppController {
                     });
                 }
                 this.updateFilters();
+            });
+        });
+    }
+
+    private collapseBtnEvent() {
+        const buttons = document.querySelectorAll('#showHide') as NodeListOf<HTMLElement>;
+
+        buttons.forEach((item) => {
+            item.addEventListener('click', () => {
+                const target = item.nextElementSibling?.firstElementChild as HTMLElement;
+                if (!target) throw Error(`${target} is not found`);
+                target.classList.toggle('hidden');
             });
         });
     }
