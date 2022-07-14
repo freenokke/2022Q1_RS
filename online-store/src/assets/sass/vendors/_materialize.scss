@@ -1,0 +1,10 @@
+[type="checkbox"]:not(:checked), [type="checkbox"]:checked {
+    position: relative !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    appearance: none;
+}
+
+.card-title {
+    filter:drop-shadow(-3px -1px 1px black);
+}

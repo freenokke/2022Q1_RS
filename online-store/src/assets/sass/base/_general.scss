@@ -12,3 +12,30 @@ main {
   border-bottom: 1px solid #ef4444 !important;
   box-shadow: 0 1px 0 0 #ef4444 !important;
 }
+
+.checkbox-input {
+  font: inherit;
+  color: currentColor;
+  width: 1.15em;
+  height: 1.15em;
+  border: 0.15em solid rgba(209, 213, 219);
+  border-radius: 0.15em;
+  transform: translateY(-0.075em);
+  position: relative;
+}
+
+.checkbox-input::before {
+  content: "";
+  left: 15%;
+  top: 15%;
+  position: absolute;
+  width: 0.65em;
+  height: 0.65em;
+  transform: scale(0);
+  transition: 120ms transform ease-in-out;
+  box-shadow: inset 1em 1em #ef4444 ;
+}
+
+.checkbox-input:checked::before {
+  transform: scale(1);
+}
