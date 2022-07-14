@@ -33,6 +33,42 @@ export class AppView {
         this.addToCartEvent();
     }
 
+    renderFilters(goods: GoodsData[]) {
+        function colorFilter() {
+            const filtersArea = document.querySelector('#colorsList') as HTMLElement;
+            if (!filtersArea) throw new Error('#colorList is not found');
+            const fragment = document.createDocumentFragment();
+            const existingColors: Set<string> = new Set();
+            goods.forEach((item) => {
+                existingColors.add(item.color);
+            });
+            const setToArr: string[] = Array.from(existingColors);
+            for (let i = 0; i < setToArr.length; i++) {
+                const block = document.createElement('div');
+                block.className = 'flex items-center';
+                const input = document.createElement('input');
+                input.className = 'cursor-pointer checkbox-input';
+                input.name = 'color';
+                input.id = `filter-color-${i}`;
+                input.type = 'checkbox';
+                input.value = setToArr[i];
+                const label = document.createElement('label');
+                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+                label.setAttribute('for', input.id);
+                label.textContent = input.value;
+                block.append(input, label);
+                fragment.append(block);
+            }
+            if (filtersArea.firstChild) {
+                filtersArea.innerHTML = '';
+            }
+            filtersArea.append(fragment);
+        }
+
+
+        colorFilter();
+    }
+
     addToCartEvent() {
         const addToCartBtn = document.querySelectorAll('#addToCart') as NodeListOf<HTMLElement>;
         // const cart = document.querySelector('#cart') as HTMLElement;

@@ -5,6 +5,7 @@ export class AppController {
     private model: AppModel;
     private searchState = '';
     private sortState = '';
+    private colorState: Array<string> = [];
     constructor(goods: GoodsData[]) {
         this.model = new AppModel(goods);
     }
@@ -17,9 +18,10 @@ export class AppController {
     private makeEvents(): void {
         this.searchEvent();
         this.sortEvent();
+        this.colorCheckboxEvent();
 
     private updateFilters(): void {
-        this.model.updateData(this.searchState, this.sortState);
+        this.model.updateData(this.searchState, this.sortState, this.colorState);
     }
 
     private searchEvent() {
@@ -55,6 +57,27 @@ export class AppController {
                 this.updateFilters();
                 sortList.classList.toggle('opacity-0');
                 sortList.classList.toggle('invisible');
+            });
+        });
+    }
+
+    private colorCheckboxEvent() {
+        const checkBoxesList = document.querySelectorAll('[name="color"]');
+
+        checkBoxesList.forEach((item) => {
+            item.addEventListener('change', (e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.checked) {
+                    this.colorState.push(target.value);
+                } else {
+                    this.colorState = this.colorState.filter((item) => {
+                        if (target.value !== item) {
+                            return item;
+                        }
+                    });
+                }
+                console.log(this.colorState);
+                this.updateFilters();
             });
         });
     }

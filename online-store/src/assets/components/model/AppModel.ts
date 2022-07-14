@@ -13,15 +13,19 @@ export class AppModel {
 
     start() {
         this.view.renderGoods(this.goods);
+        this.view.renderFilters(this.goods);
     }
 
-    updateData(search: string, sort: string) {
+    updateData(search: string, sort: string, color: Array<string>) {
         this.updatedGoods = [...this.goods];
         if (search) {
             this.updatedGoods = this.searchFilter(search, this.updatedGoods);
         }
         if (sort) {
             this.updatedGoods = this.sortFilter(sort, this.updatedGoods);
+        }
+        if (color.length > 0) {
+            this.updatedGoods = this.colorFilter(color, this.updatedGoods);
         }
         console.log(this.updatedGoods);
         this.view.renderGoods(this.updatedGoods);
@@ -63,6 +67,16 @@ export class AppModel {
                 return a.name.localeCompare(b.name);
             });
         }
+        return updatedData;
+    }
+
+    colorFilter(colorsArray: Array<string>, goods: GoodsData[]): GoodsData[] {
+        let updatedData: GoodsData[] = [];
+        colorsArray.forEach((color) => {
+            let tempData: GoodsData[] = [];
+            tempData = goods.filter((item) => item.color === color);
+            updatedData = [...updatedData, ...tempData];
+        });
         return updatedData;
     }
 
