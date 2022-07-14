@@ -25,6 +25,7 @@ export class AppController {
         this.diamCheckboxEvent();
         this.pcdCheckboxEvent();
         this.collapseBtnEvent();
+        this.resetBtnEvent();
     }
 
     private updateFilters(): void {
@@ -137,6 +138,26 @@ export class AppController {
                 if (!target) throw Error(`${target} is not found`);
                 target.classList.toggle('hidden');
             });
+        });
+    }
+
+    private resetBtnEvent() {
+        const resetBtn = document.querySelector('#reset') as HTMLElement;
+        const checkboxes = document.querySelectorAll('[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+
+        resetBtn.addEventListener('click', () => {
+            this.searchState = '';
+            this.sortState = '';
+            this.colorState = [];
+            this.diameterState = [];
+            this.pcdState = [];
+
+            checkboxes.forEach((item) => {
+                item.checked = false;
+            });
+            (document.querySelector('#search') as HTMLInputElement).value = '';
+            (document.querySelector('#current-sort') as HTMLElement).textContent = 'Choose...';
+            this.updateFilters();
         });
     }
 }

@@ -33,7 +33,6 @@ export class AppModel {
         if (sort) {
             this.updatedGoods = this.sortFilter(sort, this.updatedGoods);
         }
-        console.log(this.updatedGoods);
         this.view.renderGoods(this.updatedGoods);
     }
 
