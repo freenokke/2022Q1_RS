@@ -16,7 +16,7 @@ export class AppModel {
         this.view.renderFilters(this.goods);
     }
 
-    updateData(search: string, sort: string, color: Array<string>) {
+    updateData(search: string, sort: string, color: Array<string>, diameter: Array<string>) {
         this.updatedGoods = [...this.goods];
         if (search) {
             this.updatedGoods = this.searchFilter(search, this.updatedGoods);
@@ -26,6 +26,9 @@ export class AppModel {
         }
         if (color.length > 0) {
             this.updatedGoods = this.colorFilter(color, this.updatedGoods);
+        }
+        if (diameter.length > 0) {
+            this.updatedGoods = this.diameterFilter(diameter, this.updatedGoods);
         }
         console.log(this.updatedGoods);
         this.view.renderGoods(this.updatedGoods);
@@ -80,4 +83,13 @@ export class AppModel {
         return updatedData;
     }
 
+    diameterFilter(diametersArray: Array<string>, goods: GoodsData[]): GoodsData[] {
+        let updatedData: GoodsData[] = [];
+        diametersArray.forEach((diameter) => {
+            let tempData: GoodsData[] = [];
+            tempData = goods.filter((item) => item.parameters.diameter === diameter);
+            updatedData = [...updatedData, ...tempData];
+        });
+        return updatedData;
+    }
 }

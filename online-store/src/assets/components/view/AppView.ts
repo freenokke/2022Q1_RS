@@ -65,8 +65,39 @@ export class AppView {
             filtersArea.append(fragment);
         }
 
+        function diameterFilter() {
+            const filtersArea = document.querySelector('#diamsList') as HTMLElement;
+            if (!filtersArea) throw new Error('#diamsList is not found');
+            const fragment = document.createDocumentFragment();
+            const existingDiameters: Set<string> = new Set();
+            goods.forEach((item) => {
+                existingDiameters.add(item.parameters.diameter);
+            });
+            const setToArr = Array.from(existingDiameters).sort((a, b) => Number(a) - Number(b));
+            for (let i = 0; i < setToArr.length; i++) {
+                const block = document.createElement('div');
+                block.className = 'flex items-center';
+                const input = document.createElement('input');
+                input.className = 'cursor-pointer checkbox-input';
+                input.id = `filter-diameter-${i}`;
+                input.name = 'diam';
+                input.type = 'checkbox';
+                input.value = setToArr[i].toString();
+                const label = document.createElement('label');
+                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+                label.setAttribute('for', input.id);
+                label.textContent = input.value + '"';
+                block.append(input, label);
+                fragment.append(block);
+            }
+            if (filtersArea.firstChild) {
+                filtersArea.innerHTML = '';
+            }
+            filtersArea.append(fragment);
+        }
 
         colorFilter();
+        diameterFilter();
     }
 
     addToCartEvent() {

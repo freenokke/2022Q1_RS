@@ -6,6 +6,8 @@ export class AppController {
     private searchState = '';
     private sortState = '';
     private colorState: Array<string> = [];
+    private diameterState: Array<string> = [];
+
     constructor(goods: GoodsData[]) {
         this.model = new AppModel(goods);
     }
@@ -19,9 +21,11 @@ export class AppController {
         this.searchEvent();
         this.sortEvent();
         this.colorCheckboxEvent();
+        this.diamCheckboxEvent();
+    }
 
     private updateFilters(): void {
-        this.model.updateData(this.searchState, this.sortState, this.colorState);
+        this.model.updateData(this.searchState, this.sortState, this.colorState, this.diameterState);
     }
 
     private searchEvent() {
@@ -82,4 +86,24 @@ export class AppController {
         });
     }
 
+    private diamCheckboxEvent() {
+        const checkBoxesList = document.querySelectorAll('[name="diam"]');
+
+        checkBoxesList.forEach((item) => {
+            item.addEventListener('change', (e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.checked) {
+                    this.diameterState.push(target.value);
+                } else {
+                    this.diameterState = this.diameterState.filter((item) => {
+                        if (target.value !== item) {
+                            return item;
+                        }
+                    });
+                }
+                console.log(this.diameterState);
+                this.updateFilters();
+            });
+        });
+    }
 }
