@@ -7,6 +7,7 @@ export class AppController {
     private sortState = '';
     private colorState: Array<string> = [];
     private diameterState: Array<string> = [];
+    private pcdState: Array<string> = [];
 
     constructor(goods: GoodsData[]) {
         this.model = new AppModel(goods);
@@ -22,10 +23,11 @@ export class AppController {
         this.sortEvent();
         this.colorCheckboxEvent();
         this.diamCheckboxEvent();
+        this.pcdCheckboxEvent();
     }
 
     private updateFilters(): void {
-        this.model.updateData(this.searchState, this.sortState, this.colorState, this.diameterState);
+        this.model.updateData(this.searchState, this.sortState, this.colorState, this.diameterState, this.pcdState);
     }
 
     private searchEvent() {
@@ -66,7 +68,7 @@ export class AppController {
     }
 
     private colorCheckboxEvent() {
-        const checkBoxesList = document.querySelectorAll('[name="color"]');
+        const checkBoxesList = document.querySelectorAll('[name="color"]') as NodeListOf<HTMLInputElement>;
 
         checkBoxesList.forEach((item) => {
             item.addEventListener('change', (e) => {
@@ -80,7 +82,6 @@ export class AppController {
                         }
                     });
                 }
-                console.log(this.colorState);
                 this.updateFilters();
             });
         });
@@ -101,7 +102,26 @@ export class AppController {
                         }
                     });
                 }
-                console.log(this.diameterState);
+                this.updateFilters();
+            });
+        });
+    }
+
+    private pcdCheckboxEvent() {
+        const checkBoxesList = document.querySelectorAll('[name="pcd"]');
+
+        checkBoxesList.forEach((item) => {
+            item.addEventListener('change', (e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.checked) {
+                    this.pcdState.push(target.value);
+                } else {
+                    this.pcdState = this.pcdState.filter((item) => {
+                        if (target.value !== item) {
+                            return item;
+                        }
+                    });
+                }
                 this.updateFilters();
             });
         });
