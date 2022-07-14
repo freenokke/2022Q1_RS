@@ -4,17 +4,17 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const EslingPlugin = require('eslint-webpack-plugin');
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const CopyPlugin = require("copy-webpack-plugin");
+// const CopyPlugin = require("copy-webpack-plugin");
 
 const baseConfig = {
     entry: path.resolve(__dirname, './src/index'),
     mode: 'development',
     module: {
         rules: [
-            // {
-            //     test: /\.css$/i,
-            //     use: ['style-loader','css-loader', 'postcss-loader'],
-            // },
+            {
+                test: /\.css$/i,
+                use: ['style-loader','css-loader', 'postcss-loader'],
+            },
             {
                 test: /\.s[ac]ss$/i,
                 use: [  MiniCssExtractPlugin.loader,
@@ -38,7 +38,7 @@ const baseConfig = {
                 use: 'ts-loader',
             },
             {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
+                test: /\.(png|svg|jpg|jpeg|webp|gif)$/i,
                 type: 'asset/resource',
                 generator: {
                     filename: 'assets/images/[name][ext]',
@@ -68,11 +68,11 @@ const baseConfig = {
         new CleanWebpackPlugin(),
         new EslingPlugin({ extensions: 'ts' }),
         new MiniCssExtractPlugin(),
-        new CopyPlugin({
-            patterns: [
-                { from: "src/assets/images", to: "assets/images" },
-            ],
-        }),
+        // new CopyPlugin({
+        //     patterns: [
+        //         { from: "src/assets/images", to: "assets/images" },
+        //     ],
+        // }),
     ],
 };
 
