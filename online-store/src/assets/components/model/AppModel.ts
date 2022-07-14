@@ -15,10 +15,13 @@ export class AppModel {
         this.view.renderGoods(this.goods);
     }
 
-    updateData(search: string) {
+    updateData(search: string, sort: string) {
         this.updatedGoods = [...this.goods];
         if (search) {
             this.updatedGoods = this.searchFilter(search, this.updatedGoods);
+        }
+        if (sort) {
+            this.updatedGoods = this.sortFilter(sort, this.updatedGoods);
         }
         console.log(this.updatedGoods);
         this.view.renderGoods(this.updatedGoods);
@@ -33,4 +36,34 @@ export class AppModel {
         });
         return updatedData;
     }
+
+    sortFilter(rule: string, goods: GoodsData[]): GoodsData[] {
+        let updatedData = goods;
+        if (rule === 'byHighPrice') {
+            updatedData = goods.sort((a, b) => {
+                const parsedA = parseInt(a.price, 10);
+                const parsedB = parseInt(b.price, 10);
+                return parsedB - parsedA;
+            });
+        }
+        if (rule === 'byLowPrice') {
+            updatedData = goods.sort((a, b) => {
+                const parsedA = parseInt(a.price, 10);
+                const parsedB = parseInt(b.price, 10);
+                return parsedA - parsedB;
+            });
+        }
+        if (rule === 'byNameReversely') {
+            updatedData = goods.sort((a, b) => {
+                return b.name.localeCompare(a.name);
+            });
+        }
+        if (rule === 'byName') {
+            updatedData = goods.sort((a, b) => {
+                return a.name.localeCompare(b.name);
+            });
+        }
+        return updatedData;
+    }
+
 }
