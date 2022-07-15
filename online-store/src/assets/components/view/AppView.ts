@@ -121,9 +121,38 @@ export class AppView {
             filtersArea.append(fragment);
         }
 
+        function wideFilter() {
+            const filtersArea = document.querySelector('#wideList') as HTMLElement;
+            if (!filtersArea) throw new Error('#wideList is not found');
+            const fragment = document.createDocumentFragment();
+            const existingWide: Set<string> = new Set();
+            goods.forEach((item) => {
+                existingWide.add(item.parameters.wide);
+            });
+            const setToArr = Array.from(existingWide).sort((a, b) => Number(a) - Number(b));
+            for (let i = 0; i < setToArr.length; i++) {
+                const block = document.createElement('div');
+                block.className = 'flex items-center';
+                const input = document.createElement('input');
+                input.className = 'cursor-pointer checkbox-input';
+                input.id = `filter-wide-${i}`;
+                input.name = 'wide';
+                input.type = 'checkbox';
+                input.value = setToArr[i].toString();
+                const label = document.createElement('label');
+                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+                label.setAttribute('for', input.id);
+                label.textContent = input.value;
+                block.append(input, label);
+                fragment.append(block);
+            }
+            filtersArea.append(fragment);
+        }
+
         colorFilter();
         diameterFilter();
         pcdFilter();
+        wideFilter();
     }
 
     addToCartEvent() {

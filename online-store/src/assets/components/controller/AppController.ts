@@ -8,6 +8,7 @@ export class AppController {
     private colorState: Array<string> = [];
     private diameterState: Array<string> = [];
     private pcdState: Array<string> = [];
+    private wideState: Array<string> = [];
 
     constructor(goods: GoodsData[]) {
         this.model = new AppModel(goods);
@@ -24,12 +25,20 @@ export class AppController {
         this.colorCheckboxEvent();
         this.diamCheckboxEvent();
         this.pcdCheckboxEvent();
+        this.wideheckboxEvent();
         this.collapseBtnEvent();
         this.resetBtnEvent();
     }
 
     private updateFilters(): void {
-        this.model.updateData(this.searchState, this.sortState, this.colorState, this.diameterState, this.pcdState);
+        this.model.updateData(
+            this.searchState,
+            this.sortState,
+            this.colorState,
+            this.diameterState,
+            this.pcdState,
+            this.wideState
+        );
     }
 
     private searchEvent() {
@@ -128,6 +137,25 @@ export class AppController {
             });
         });
     }
+    private wideheckboxEvent() {
+        const checkBoxesList = document.querySelectorAll('[name="wide"]');
+
+        checkBoxesList.forEach((item) => {
+            item.addEventListener('change', (e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.checked) {
+                    this.wideState.push(target.value);
+                } else {
+                    this.wideState = this.wideState.filter((item) => {
+                        if (target.value !== item) {
+                            return item;
+                        }
+                    });
+                }
+                this.updateFilters();
+            });
+        });
+    }
 
     private collapseBtnEvent() {
         const buttons = document.querySelectorAll('#showHide') as NodeListOf<HTMLElement>;
@@ -151,6 +179,7 @@ export class AppController {
             this.colorState = [];
             this.diameterState = [];
             this.pcdState = [];
+            this.wideState = [];
 
             checkboxes.forEach((item) => {
                 item.checked = false;

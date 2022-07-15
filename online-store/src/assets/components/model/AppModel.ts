@@ -16,7 +16,14 @@ export class AppModel {
         this.view.renderFilters(this.goods);
     }
 
-    updateData(search: string, sort: string, color: Array<string>, diameter: Array<string>, pcd: Array<string>) {
+    updateData(
+        search: string,
+        sort: string,
+        color: Array<string>,
+        diameter: Array<string>,
+        pcd: Array<string>,
+        wide: Array<string>
+    ) {
         this.updatedGoods = [...this.goods];
         if (search) {
             this.updatedGoods = this.searchFilter(search, this.updatedGoods);
@@ -30,13 +37,16 @@ export class AppModel {
         if (pcd.length > 0) {
             this.updatedGoods = this.pcdFilter(pcd, this.updatedGoods);
         }
+        if (wide.length > 0) {
+            this.updatedGoods = this.wideFilter(wide, this.updatedGoods);
+        }
         if (sort) {
             this.updatedGoods = this.sortFilter(sort, this.updatedGoods);
         }
         this.view.renderGoods(this.updatedGoods);
     }
 
-    searchFilter(rule: string, goods: GoodsData[]): GoodsData[] {
+    private searchFilter(rule: string, goods: GoodsData[]): GoodsData[] {
         const regexp = new RegExp(rule, 'i');
         const updatedData: GoodsData[] = goods.filter((item) => {
             if (regexp.test(item.name)) {
@@ -46,7 +56,7 @@ export class AppModel {
         return updatedData;
     }
 
-    sortFilter(rule: string, goods: GoodsData[]): GoodsData[] {
+    private sortFilter(rule: string, goods: GoodsData[]): GoodsData[] {
         let updatedData = goods;
         if (rule === 'byHighPrice') {
             updatedData = goods.sort((a, b) => {
@@ -75,7 +85,7 @@ export class AppModel {
         return updatedData;
     }
 
-    colorFilter(colorsArray: Array<string>, goods: GoodsData[]): GoodsData[] {
+    private colorFilter(colorsArray: Array<string>, goods: GoodsData[]): GoodsData[] {
         let updatedData: GoodsData[] = [];
         colorsArray.forEach((color) => {
             let tempData: GoodsData[] = [];
@@ -85,7 +95,7 @@ export class AppModel {
         return updatedData;
     }
 
-    diameterFilter(diametersArray: Array<string>, goods: GoodsData[]): GoodsData[] {
+    private diameterFilter(diametersArray: Array<string>, goods: GoodsData[]): GoodsData[] {
         let updatedData: GoodsData[] = [];
         diametersArray.forEach((diameter) => {
             let tempData: GoodsData[] = [];
@@ -95,11 +105,21 @@ export class AppModel {
         return updatedData;
     }
 
-    pcdFilter(pcdArray: Array<string>, goods: GoodsData[]): GoodsData[] {
+    private pcdFilter(pcdArray: Array<string>, goods: GoodsData[]): GoodsData[] {
         let updatedData: GoodsData[] = [];
         pcdArray.forEach((pcd) => {
             let tempData: GoodsData[] = [];
             tempData = goods.filter((item) => item.parameters.pcd === pcd);
+            updatedData = [...updatedData, ...tempData];
+        });
+        return updatedData;
+    }
+
+    private wideFilter(wideArray: Array<string>, goods: GoodsData[]): GoodsData[] {
+        let updatedData: GoodsData[] = [];
+        wideArray.forEach((wide) => {
+            let tempData: GoodsData[] = [];
+            tempData = goods.filter((item) => item.parameters.wide === wide);
             updatedData = [...updatedData, ...tempData];
         });
         return updatedData;
