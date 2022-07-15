@@ -17,7 +17,10 @@ export class AppView {
             (clone.querySelector('.wide') as HTMLElement).textContent = item.parameters.wide;
             (clone.querySelector('.et') as HTMLElement).textContent = item.parameters.ET.toString();
             (clone.querySelector('.price') as HTMLElement).textContent = item.price;
-
+            if (item.purchaseQuantity >= 10) {
+                (clone.querySelector('#popular') as HTMLElement).classList.remove('hidden');
+                (clone.querySelector('#popular') as HTMLElement).classList.add('flex');
+            }
             fragment.append(clone);
         });
 
