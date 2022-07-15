@@ -9,6 +9,7 @@ export class AppController {
     private diameterState: Array<string> = [];
     private pcdState: Array<string> = [];
     private wideState: Array<string> = [];
+    private cartState: Array<string> = [];
 
     constructor(goods: GoodsData[]) {
         this.model = new AppModel(goods);
@@ -28,6 +29,7 @@ export class AppController {
         this.wideheckboxEvent();
         this.collapseBtnEvent();
         this.resetBtnEvent();
+        this.addToCartEvent();
     }
 
     private updateFilters(): void {
@@ -37,8 +39,10 @@ export class AppController {
             this.colorState,
             this.diameterState,
             this.pcdState,
-            this.wideState
+            this.wideState,
+            this.cartState
         );
+        this.addToCartEvent();
     }
 
     private searchEvent() {
@@ -187,6 +191,52 @@ export class AppController {
             (document.querySelector('#search') as HTMLInputElement).value = '';
             (document.querySelector('#current-sort') as HTMLElement).textContent = 'Choose...';
             this.updateFilters();
+        });
+    }
+
+    private addToCartEvent() {
+        const addToCartBtn = document.querySelectorAll('#addToCart') as NodeListOf<HTMLElement>;
+        const count = document.querySelector('#cartCount') as HTMLElement;
+
+        addToCartBtn.forEach((item) => {
+            item.addEventListener('click', () => {
+                const state = (item.firstChild as HTMLElement).textContent as string;
+
+                if (state === 'add_shopping_cart') {
+                    if (Number(count.textContent) < 20) {
+                        (item.firstChild as HTMLElement).textContent = 'check';
+                        item.classList.remove('red');
+                        item.classList.add('green');
+                        item.style.display = 'flex';
+                        item.style.alignItems = 'center';
+                        item.style.borderRadius = '20px';
+                        item.style.width = 'max-content';
+                        item.style.padding = '5px';
+                        (item as HTMLElement).insertAdjacentHTML(
+                            'beforeend',
+                            '<span class="ml-3 ">added to cart</span>'
+                        );
+                        count.textContent = (Number(count.textContent) + 1).toString();
+                        const cardId = item.parentElement?.parentElement?.id as string;
+                        this.cartState.push(cardId);
+                    } else {
+                        alert('Sorry, all slots are full');
+                    }
+                } else {
+                    item.classList.add('red');
+                    item.classList.remove('green');
+                    (item.firstChild as HTMLElement).textContent = 'add_shopping_cart';
+                    item.removeAttribute('style');
+                    (item.querySelector('span') as HTMLElement).remove();
+                    count.textContent = (Number(count.textContent) - 1).toString();
+                }
+
+                if (Number(count.textContent) > 0) {
+                    count.style.display = 'flex';
+                } else {
+                    count.style.display = 'none';
+                }
+            });
         });
     }
 }

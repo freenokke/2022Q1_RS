@@ -1,4 +1,5 @@
 export type GoodsData = {
+    id: number;
     name: string;
     brand: string;
     img: string;

@@ -1,5 +1,6 @@
 [
   {
+    "id": 0,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -16,6 +17,7 @@
     "price": "200€"
 },
 {
+  "id": 1,
   "name": "OZ Futura",
   "brand": "OZ",
   "img": "./assets/images/oz.png",
@@ -32,6 +34,7 @@
   "price": "200€"
 },
   {
+    "id": 2,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -48,6 +51,7 @@
     "price": "200€"
 },
   {
+    "id": 3,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -64,6 +68,7 @@
     "price": "220€"
 },
   {
+    "id": 4,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -80,6 +85,7 @@
     "price": "300€"
 },
   {
+    "id": 5,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -96,6 +102,7 @@
     "price": "350€"
 },
 {
+  "id": 6,
   "name": "OZ Futura",
   "brand": "OZ",
   "img": "./assets/images/oz.png",
@@ -112,6 +119,7 @@
   "price": "200€"
 },
   {
+    "id": 7,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -128,6 +136,7 @@
     "price": "500€"
 },
   {
+    "id": 8,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -144,6 +153,7 @@
     "price": "180€"
 },
   {
+    "id": 9,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -160,6 +170,7 @@
     "price": "240€"
 },
   {
+    "id": 10,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -176,6 +187,7 @@
     "price": "380€"
 },
   {
+    "id": 11,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -192,6 +204,7 @@
     "price": "1000€"
 },
   {
+    "id": 12,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -208,6 +221,7 @@
     "price": "620€"
 },
   {
+    "id": 13,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -224,6 +238,7 @@
     "price": "710€"
 },
   {
+    "id": 14,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -240,6 +255,7 @@
     "price": "280€"
 },
   {
+    "id": 15,
     "name": "3SDM 0.01",
     "brand": "3SDM",
     "img": "./assets/images/3sdm001.jpg",
@@ -256,6 +272,7 @@
     "price": "580€"
 },
   {
+    "id": 16,
     "name": "OZ Futura",
     "brand": "OZ",
     "img": "./assets/images/oz.png",
@@ -272,6 +289,7 @@
     "price": "630€"
 },
   {
+    "id": 17,
     "name": "OZ Futura",
     "brand": "OZ",
     "img": "./assets/images/oz.png",
@@ -288,6 +306,7 @@
     "price": "970€"
 },
   {
+    "id": 18,
     "name": "OZ Futura",
     "brand": "OZ",
     "img": "./assets/images/oz.png",
@@ -304,6 +323,7 @@
     "price": "750€"
 },
   {
+    "id": 19,
     "name": "OZ Futura",
     "brand": "OZ",
     "img": "./assets/images/oz.png",
@@ -318,5 +338,39 @@
     "color": "Matt Black",
     "country": "UK",
     "price": "200€"
+},
+  {
+    "id": 20,
+    "name": "OZ Futura",
+    "brand": "OZ",
+    "img": "./assets/images/oz.png",
+    "parameters": {
+      "diameter": "19",
+      "ET": 15,
+      "pcd": "5х120",
+      "wide": "8J"
+    },
+    "count": 4,
+    "purchaseQuantity": 0,
+    "color": "Matt Black",
+    "country": "UK",
+    "price": "350€"
+},
+  {
+    "id": 21,
+    "name": "OZ Futura",
+    "brand": "OZ",
+    "img": "./assets/images/oz.png",
+    "parameters": {
+      "diameter": "19",
+      "ET": 12,
+      "pcd": "5х120",
+      "wide": "8J"
+    },
+    "count": 4,
+    "purchaseQuantity": 0,
+    "color": "Matt Black",
+    "country": "UK",
+    "price": "350€"
 }
 ]

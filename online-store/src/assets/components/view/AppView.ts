@@ -1,7 +1,7 @@
 import { GoodsData } from '../additional/types/types';
 
 export class AppView {
-    renderGoods(goods: GoodsData[]) {
+    renderGoods(goods: GoodsData[], inCart: Array<string> = []) {
         const fragment = document.createDocumentFragment() as DocumentFragment;
         const template = document.querySelector('#goodsCardTemp') as HTMLTemplateElement;
         const contentBlock = document.querySelector('#goods') as HTMLElement;
@@ -17,9 +17,24 @@ export class AppView {
             (clone.querySelector('.wide') as HTMLElement).textContent = item.parameters.wide;
             (clone.querySelector('.et') as HTMLElement).textContent = item.parameters.ET.toString();
             (clone.querySelector('.price') as HTMLElement).textContent = item.price;
+            (clone.querySelector('.card') as HTMLElement).id = item.id.toString();
             if (item.purchaseQuantity >= 10) {
                 (clone.querySelector('#popular') as HTMLElement).classList.remove('hidden');
                 (clone.querySelector('#popular') as HTMLElement).classList.add('flex');
+            }
+            if (inCart.includes(item.id.toString())) {
+                ((clone.querySelector('#addToCart') as HTMLElement).firstChild as HTMLElement).textContent = 'check';
+                (clone.querySelector('#addToCart') as HTMLElement).classList.remove('red');
+                (clone.querySelector('#addToCart') as HTMLElement).classList.add('green');
+                (clone.querySelector('#addToCart') as HTMLElement).style.display = 'flex';
+                (clone.querySelector('#addToCart') as HTMLElement).style.alignItems = 'center';
+                (clone.querySelector('#addToCart') as HTMLElement).style.borderRadius = '20px';
+                (clone.querySelector('#addToCart') as HTMLElement).style.width = 'max-content';
+                (clone.querySelector('#addToCart') as HTMLElement).style.padding = '5px';
+                (clone.querySelector('#addToCart') as HTMLElement).insertAdjacentHTML(
+                    'beforeend',
+                    '<span class="ml-3 ">added to cart</span>'
+                );
             }
             fragment.append(clone);
         });
@@ -32,8 +47,6 @@ export class AppView {
         if (!contentBlock.firstChild) {
             contentBlock.insertAdjacentHTML('afterbegin', '<h5 style="text-align:center;">No matches found<h5>');
         }
-
-        this.addToCartEvent();
     }
 
     renderFilters(goods: GoodsData[]) {
@@ -153,18 +166,5 @@ export class AppView {
         diameterFilter();
         pcdFilter();
         wideFilter();
-    }
-
-    addToCartEvent() {
-        const addToCartBtn = document.querySelectorAll('#addToCart') as NodeListOf<HTMLElement>;
-        // const cart = document.querySelector('#cart') as HTMLElement;
-
-        addToCartBtn.forEach((item) => {
-            item.addEventListener('click', () => {
-                (item.firstChild as HTMLElement).textContent = 'check';
-                item.classList.remove('red');
-                item.classList.add('green');
-            });
-        });
     }
 }

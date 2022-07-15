@@ -22,7 +22,8 @@ export class AppModel {
         color: Array<string>,
         diameter: Array<string>,
         pcd: Array<string>,
-        wide: Array<string>
+        wide: Array<string>,
+        inCart: Array<string>
     ) {
         this.updatedGoods = [...this.goods];
         if (search) {
@@ -43,7 +44,7 @@ export class AppModel {
         if (sort) {
             this.updatedGoods = this.sortFilter(sort, this.updatedGoods);
         }
-        this.view.renderGoods(this.updatedGoods);
+        this.view.renderGoods(this.updatedGoods, inCart);
     }
 
     private searchFilter(rule: string, goods: GoodsData[]): GoodsData[] {

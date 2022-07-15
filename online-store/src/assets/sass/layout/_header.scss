@@ -7,3 +7,24 @@
 .nav {
   backdrop-filter: blur(3px);
 }
+
+#cartCount {
+  position: absolute;
+  top: 5px;
+  right: 0;
+  min-width: 18px;
+  max-width: 28px;
+  height: 18px;
+  padding: 0 4px;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 9px;
+  line-height: 14px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: rgba(220, 38, 38);
+  color: #fff;
+  transition: .2s ease;
+}

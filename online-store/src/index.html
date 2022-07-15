@@ -17,8 +17,11 @@
           <a href="/" class="brand-logo">
             <span class="text-red-600 font-bold">Wheel</span>shop<span class="motion-safe:animate-pulse">_</span>
           </a>
-          <ul id="nav-mobile" class="right">
-            <li><a id="cart" href="javascript:void(0)"><i class="large material-icons">shopping_cart</i></a></li>
+          <ul id="nav-mobile" class="right flex">
+            <li class="relative">
+              <a id="cart" href="javascript:void(0)"><i class="large material-icons">shopping_cart</i></a>
+              <span id="cartCount">0</span>
+            </li>
           </ul>
         </div>
       </div>
@@ -213,6 +216,9 @@
     <div class="col s12 m6 l4 xl3">
       <div class="card hoverable hover:scale-105 transition-transform cursor-pointer overflow-hidden">
         <div id="popular"
+            class="absolute justify-center items-end w-32 h-16 right-[-45px] top-[-7px] z-[1] rotate-45
+                    bg-indigo-600 text-white hidden">popular</div>
+        <div id="inCart"
             class="absolute justify-center items-end w-32 h-16 right-[-45px] top-[-7px] z-[1] rotate-45
                     bg-indigo-600 text-white hidden">popular</div>
         <div class="card-image">
