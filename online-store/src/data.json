@@ -3,7 +3,7 @@
     "id": 0,
     "name": "3SDM 0.01",
     "model": "0.01",
-    "img": "./assets/images/goods/3sdm001.jpg",
+    "img": "./assets/images/goods/3dsm001.jpg",
     "parameters": {
       "diameter": "19",
       "ET": 38,
@@ -20,7 +20,7 @@
   "id": 1,
   "name": "3SDM 0.01",
   "model": "0.01",
-  "img": "./assets/images/goods/3sdm001.jpg",
+  "img": "./assets/images/goods/3dsm001.jpg",
   "parameters": {
     "diameter": "18",
     "ET": 35,
@@ -76,7 +76,7 @@
       "diameter": "19",
       "ET": 35,
       "pcd": "5х120",
-      "wide": "8,5J"
+      "wide": "8.5J"
     },
     "count": 4,
     "purchaseQuantity": 8,
