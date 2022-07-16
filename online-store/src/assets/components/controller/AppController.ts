@@ -37,7 +37,7 @@ export class AppController {
         this.addToCartEvent();
     }
 
-    private updateFilters(): void {
+    public updateFilters(): void {
         this.model.updateData(
             this.searchState,
             this.sortState,
@@ -61,7 +61,6 @@ export class AppController {
     }
 
     private sortEvent(): void {
-        const currentSort = document.querySelector('#current-sort') as HTMLElement;
         const sortListBtn = document.querySelector('#sort-list_button') as HTMLElement;
         const sortList = document.querySelector('#sort-list') as HTMLElement;
         const sortOptions = document.querySelectorAll('#sort-list > li') as NodeListOf<HTMLElement>;
@@ -80,7 +79,6 @@ export class AppController {
 
         sortOptions.forEach((option) => {
             option.addEventListener('click', () => {
-                currentSort.textContent = (option.querySelector('.sort-name') as HTMLElement).textContent;
                 this.sortState = option.id;
                 this.updateFilters();
                 sortList.classList.toggle('opacity-0');
@@ -225,10 +223,18 @@ export class AppController {
     private addToCartEvent() {
         const addToCartBtn = document.querySelectorAll('#addToCart') as NodeListOf<HTMLElement>;
         const count = document.querySelector('#cartCount') as HTMLElement;
+        if (this.cartState.length > 0) {
+            count.textContent = this.cartState.length.toString();
+            count.style.display = 'flex';
+        } else {
+            count.textContent = '0';
+            count.style.display = 'none';
+        }
 
         addToCartBtn.forEach((item) => {
             item.addEventListener('click', () => {
                 const state = (item.firstChild as HTMLElement).textContent as string;
+                const cardId = item.parentElement?.parentElement?.id as string;
 
                 if (state === 'add_shopping_cart') {
                     if (Number(count.textContent) < 20) {
@@ -245,7 +251,6 @@ export class AppController {
                             '<span class="ml-3 ">added to cart</span>'
                         );
                         count.textContent = (Number(count.textContent) + 1).toString();
-                        const cardId = item.parentElement?.parentElement?.id as string;
                         this.cartState.push(cardId);
                     } else {
                         alert('Sorry, all slots are full');
@@ -257,6 +262,11 @@ export class AppController {
                     item.removeAttribute('style');
                     (item.querySelector('span') as HTMLElement).remove();
                     count.textContent = (Number(count.textContent) - 1).toString();
+                    this.cartState = this.cartState.filter((item) => {
+                        if (item !== cardId) {
+                            return item;
+                        }
+                    });
                 }
 
                 if (Number(count.textContent) > 0) {

@@ -1,5 +1,6 @@
 import { AppView } from '../view/AppView';
 import { GoodsData } from '../additional/types/types';
+import * as noUiSlider from 'nouislider';
 
 export class AppModel {
     private goods: GoodsData[];
@@ -62,12 +63,15 @@ export class AppModel {
                 return item;
             }
         });
+        (<HTMLInputElement>document.querySelector('#search')).value = rule;
         return updatedData;
     }
 
     private sortFilter(rule: string, goods: GoodsData[]): GoodsData[] {
+        const sortField = document.querySelector('#current-sort') as HTMLElement;
         let updatedData = goods;
         if (rule === 'byHighPrice') {
+            sortField.textContent = 'The most exepensive first';
             updatedData = goods.sort((a, b) => {
                 const parsedA = parseInt(a.price, 10);
                 const parsedB = parseInt(b.price, 10);
@@ -75,6 +79,7 @@ export class AppModel {
             });
         }
         if (rule === 'byLowPrice') {
+            sortField.textContent = 'The cheapest first';
             updatedData = goods.sort((a, b) => {
                 const parsedA = parseInt(a.price, 10);
                 const parsedB = parseInt(b.price, 10);
@@ -82,11 +87,13 @@ export class AppModel {
             });
         }
         if (rule === 'byNameReversely') {
+            sortField.textContent = 'From Z to A';
             updatedData = goods.sort((a, b) => {
                 return b.name.localeCompare(a.name);
             });
         }
         if (rule === 'byName') {
+            sortField.textContent = 'From A to Z';
             updatedData = goods.sort((a, b) => {
                 return a.name.localeCompare(b.name);
             });
@@ -101,6 +108,12 @@ export class AppModel {
             tempData = goods.filter((item) => item.color === color);
             updatedData = [...updatedData, ...tempData];
         });
+        const colorCheckboxes = document.querySelectorAll('[name="color"]') as NodeListOf<HTMLInputElement>;
+        colorCheckboxes.forEach((item) => {
+            if (colorsArray.includes(item.value)) {
+                item.checked = true;
+            }
+        });
         return updatedData;
     }
 
@@ -110,6 +123,12 @@ export class AppModel {
             let tempData: GoodsData[] = [];
             tempData = goods.filter((item) => item.parameters.diameter === diameter);
             updatedData = [...updatedData, ...tempData];
+        });
+        const diameterCheckboxes = document.querySelectorAll('[name="diam"]') as NodeListOf<HTMLInputElement>;
+        diameterCheckboxes.forEach((item) => {
+            if (diametersArray.includes(item.value)) {
+                item.checked = true;
+            }
         });
         return updatedData;
     }
@@ -121,6 +140,12 @@ export class AppModel {
             tempData = goods.filter((item) => item.parameters.pcd === pcd);
             updatedData = [...updatedData, ...tempData];
         });
+        const pcdCheckboxes = document.querySelectorAll('[name="pcd"]') as NodeListOf<HTMLInputElement>;
+        pcdCheckboxes.forEach((item) => {
+            if (pcdArray.includes(item.value)) {
+                item.checked = true;
+            }
+        });
         return updatedData;
     }
 
@@ -130,6 +155,12 @@ export class AppModel {
             let tempData: GoodsData[] = [];
             tempData = goods.filter((item) => item.parameters.wide === wide);
             updatedData = [...updatedData, ...tempData];
+        });
+        const wideCheckboxes = document.querySelectorAll('[name="wide"]') as NodeListOf<HTMLInputElement>;
+        wideCheckboxes.forEach((item) => {
+            if (wideArray.includes(item.value)) {
+                item.checked = true;
+            }
         });
         return updatedData;
     }
@@ -144,6 +175,9 @@ export class AppModel {
             }
         });
         updatedData = [...updatedData, ...tempData];
+        const slider = document.getElementById('price-slider') as noUiSlider.target;
+        slider.noUiSlider?.set([priceRange[0], priceRange[1]]);
+
         return updatedData;
     }
 
@@ -157,6 +191,9 @@ export class AppModel {
             }
         });
         updatedData = [...updatedData, ...tempData];
+        const slider = document.getElementById('offset-slider') as noUiSlider.target;
+        slider.noUiSlider?.set([offsetRange[0], offsetRange[1]]);
+
         return updatedData;
     }
 }
