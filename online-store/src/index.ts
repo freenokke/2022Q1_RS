@@ -1,6 +1,7 @@
 import '../node_modules/materialize-css/dist/css/materialize.min.css';
 import '../node_modules/materialize-css/dist/js/materialize.min.js';
 import './assets/sass/style.scss';
+import 'nouislider/dist/nouislider.css';
 
 import { AppController } from './assets/components/controller/AppController';
 import { GoodsData } from './assets/components/additional/types/types';

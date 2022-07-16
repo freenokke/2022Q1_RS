@@ -23,7 +23,8 @@ export class AppModel {
         diameter: Array<string>,
         pcd: Array<string>,
         wide: Array<string>,
-        inCart: Array<string>
+        inCart: Array<string>,
+        priceRange: Array<number>
     ) {
         this.updatedGoods = [...this.goods];
         if (search) {
@@ -40,6 +41,9 @@ export class AppModel {
         }
         if (wide.length > 0) {
             this.updatedGoods = this.wideFilter(wide, this.updatedGoods);
+        }
+        if (priceRange.length > 0) {
+            this.updatedGoods = this.priceFilter(priceRange, this.updatedGoods);
         }
         if (sort) {
             this.updatedGoods = this.sortFilter(sort, this.updatedGoods);
@@ -123,6 +127,19 @@ export class AppModel {
             tempData = goods.filter((item) => item.parameters.wide === wide);
             updatedData = [...updatedData, ...tempData];
         });
+        return updatedData;
+    }
+
+    private priceFilter(priceRange: Array<number>, goods: GoodsData[]): GoodsData[] {
+        let updatedData: GoodsData[] = [];
+        const [minPrice, maxPrice] = priceRange;
+        let tempData: GoodsData[] = [];
+        tempData = goods.filter((item) => {
+            if (Number(parseInt(item.price, 10)) >= minPrice && Number(parseInt(item.price, 10)) <= maxPrice) {
+                return item;
+            }
+        });
+        updatedData = [...updatedData, ...tempData];
         return updatedData;
     }
 }

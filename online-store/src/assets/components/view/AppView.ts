@@ -1,4 +1,5 @@
 import { GoodsData } from '../additional/types/types';
+import * as noUiSlider from 'nouislider';
 
 export class AppView {
     renderGoods(goods: GoodsData[], inCart: Array<string> = []) {
@@ -162,9 +163,49 @@ export class AppView {
             filtersArea.append(fragment);
         }
 
+        function priceFilter() {
+            const slider = document.getElementById('slider') as noUiSlider.target;
+            let minPrice = 0;
+            let maxPrice = 0;
+
+            const pricesArr = goods.map((item) => {
+                const price = parseInt(item.price, 10);
+                return price;
+            });
+
+            minPrice = Math.min(...pricesArr);
+            maxPrice = Math.max(...pricesArr);
+
+            const formatForSlider = {
+                from: function (formattedValue: string) {
+                    return Number(formattedValue);
+                },
+                to: function (numericValue: number) {
+                    return Math.round(numericValue);
+                },
+            };
+
+            noUiSlider.create(slider, {
+                start: [0, maxPrice],
+                connect: true,
+                step: 1,
+                range: {
+                    min: minPrice,
+                    max: maxPrice,
+                },
+                format: formatForSlider,
+                tooltips: {
+                    to: function (numericValue) {
+                        return numericValue.toFixed(1);
+                    },
+                },
+            });
+        }
+
         colorFilter();
         diameterFilter();
         pcdFilter();
         wideFilter();
+        priceFilter();
     }
 }

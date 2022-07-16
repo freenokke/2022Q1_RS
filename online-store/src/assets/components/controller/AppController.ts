@@ -1,5 +1,6 @@
 import { AppModel } from '../model/AppModel';
 import { GoodsData } from '../additional/types/types';
+import * as noUiSlider from 'nouislider';
 
 export class AppController {
     private model: AppModel;
@@ -10,6 +11,7 @@ export class AppController {
     private pcdState: Array<string> = [];
     private wideState: Array<string> = [];
     private cartState: Array<string> = [];
+    private priceState: Array<number> = [];
 
     constructor(goods: GoodsData[]) {
         this.model = new AppModel(goods);
@@ -27,6 +29,7 @@ export class AppController {
         this.diamCheckboxEvent();
         this.pcdCheckboxEvent();
         this.wideheckboxEvent();
+        this.priceRangeEvent();
         this.collapseBtnEvent();
         this.resetBtnEvent();
         this.addToCartEvent();
@@ -40,7 +43,8 @@ export class AppController {
             this.diameterState,
             this.pcdState,
             this.wideState,
-            this.cartState
+            this.cartState,
+            this.priceState
         );
         this.addToCartEvent();
     }
@@ -161,6 +165,16 @@ export class AppController {
         });
     }
 
+    private priceRangeEvent() {
+        const slider = document.getElementById('slider') as noUiSlider.target;
+
+        slider.noUiSlider?.on('end', (values) => {
+            const [from, to] = values;
+            this.priceState = [Number(from), Number(to)];
+            this.updateFilters();
+        });
+    }
+
     private collapseBtnEvent() {
         const buttons = document.querySelectorAll('#showHide') as NodeListOf<HTMLElement>;
 
@@ -190,6 +204,7 @@ export class AppController {
             });
             (document.querySelector('#search') as HTMLInputElement).value = '';
             (document.querySelector('#current-sort') as HTMLElement).textContent = 'Choose...';
+            (document.getElementById('slider') as noUiSlider.target).noUiSlider?.reset();
             this.updateFilters();
         });
     }
