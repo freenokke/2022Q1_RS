@@ -11,7 +11,6 @@ export class AppView {
             const clone = template.content.cloneNode(true) as HTMLElement;
             (clone.querySelector('.card-title') as HTMLElement).textContent = item.name;
             (clone.querySelector('.img') as HTMLImageElement).src = item.img;
-            (clone.querySelector('.brand') as HTMLElement).textContent = item.brand;
             (clone.querySelector('.color') as HTMLElement).textContent = item.color;
             (clone.querySelector('.diam') as HTMLElement).textContent = item.parameters.diameter + '"';
             (clone.querySelector('.pcd') as HTMLElement).textContent = item.parameters.pcd;

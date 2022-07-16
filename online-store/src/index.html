@@ -216,24 +216,18 @@
 
   <template id="goodsCardTemp">
     <div class="col s12 m6 l4 xl3">
-      <div class="card hoverable hover:scale-105 transition-transform cursor-pointer overflow-hidden">
+      <div class="card hoverable hover:scale-105 transition-transform cursor-pointer overflow-hidden flex flex-col">
         <div id="popular"
             class="absolute justify-center items-end w-32 h-16 right-[-45px] top-[-7px] z-[1] rotate-45
-                    bg-indigo-600 text-white hidden">popular</div>
-        <div id="inCart"
-            class="absolute justify-center items-end w-32 h-16 right-[-45px] top-[-7px] z-[1] rotate-45
-                    bg-indigo-600 text-white hidden">popular</div>
-        <div class="card-image">
-          <img class="img responsive-img">
+                    bg-indigo-600 text-white hidden">Bestseller!</div>
+        <div class="card-image h-[300px]">
+          <img class="img h-full object-contain">
           <span class="card-title"></span>
           <a id="addToCart" class="btn-floating halfway-fab waves-effect waves-light red"><i
               class="material-icons">add_shopping_cart</i></a>
         </div>
-        <div class="card-content flex-col">
-          <ul class="mb-2">
-            <li>
-              <span class="text-black font-semibold">Brand: </span><span class="brand text-gray-700"></span>
-            </li>
+        <div class="card-content flex-col p-3 pt-5">
+          <ul class="mb-1">
             <li>
               <span class="text-black font-semibold">Color: </span><span class="color text-gray-700"></span>
             </li>
@@ -250,8 +244,9 @@
               <span class="text-black font-semibold">Offset: </span><span class="et text-gray-700"></span>
             </li>
           </ul>
-          <p class="flex justify-center"><span class="text-black font-semibold mr-1">Price:</span><span class="price text-gray-700"></span></p>
         </div>
+        <p class="flex justify-center"><span class="text-black font-semibold mr-1">Price:</span><span class="price font-bold text-[#ab9912]"></span></p>
+        <p class="flex justify-center text-gray-700 font-normal italic mb-2">(The price is for 4 pieces)</p>
       </div>
     </div>
   </template>
