@@ -33,7 +33,8 @@ export class AppController {
         this.priceRangeEvent();
         this.offsetRangeEvent();
         this.collapseBtnEvent();
-        this.resetBtnEvent();
+        this.totalResetBtnEvent();
+        this.softResetBtnEvent();
         this.addToCartEvent();
     }
 
@@ -198,7 +199,7 @@ export class AppController {
         });
     }
 
-    private resetBtnEvent() {
+    private totalResetBtnEvent() {
         const resetBtn = document.querySelector('#reset') as HTMLElement;
         const checkboxes = document.querySelectorAll('[type="checkbox"]') as NodeListOf<HTMLInputElement>;
 
@@ -209,13 +210,53 @@ export class AppController {
             this.diameterState = [];
             this.pcdState = [];
             this.wideState = [];
+            this.cartState = [];
 
             checkboxes.forEach((item) => {
                 item.checked = false;
             });
             (document.querySelector('#search') as HTMLInputElement).value = '';
             (document.querySelector('#current-sort') as HTMLElement).textContent = 'Choose...';
-            (document.getElementById('slider') as noUiSlider.target).noUiSlider?.reset();
+
+            const priceSlider = document.getElementById('price-slider') as noUiSlider.target;
+            const min = priceSlider.noUiSlider?.options.range.min as number;
+            const max = priceSlider.noUiSlider?.options.range.max as number;
+            this.priceState = [min, max];
+
+            const offsetFilter = document.getElementById('offset-slider') as noUiSlider.target;
+            const minOffset = offsetFilter.noUiSlider?.options.range.min as number;
+            const maxOffset = offsetFilter.noUiSlider?.options.range.max as number;
+            this.offsetState = [minOffset, maxOffset];
+
+            this.updateFilters();
+
+            localStorage.clear();
+        });
+    }
+    private softResetBtnEvent() {
+        const resetBtn = document.querySelector('#resetFilters') as HTMLElement;
+        const checkboxes = document.querySelectorAll('[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+
+        resetBtn.addEventListener('click', () => {
+            this.colorState = [];
+            this.diameterState = [];
+            this.pcdState = [];
+            this.wideState = [];
+
+            checkboxes.forEach((item) => {
+                item.checked = false;
+            });
+
+            const priceSlider = document.getElementById('price-slider') as noUiSlider.target;
+            const min = priceSlider.noUiSlider?.options.range.min as number;
+            const max = priceSlider.noUiSlider?.options.range.max as number;
+            this.priceState = [min, max];
+
+            const offsetFilter = document.getElementById('offset-slider') as noUiSlider.target;
+            const minOffset = offsetFilter.noUiSlider?.options.range.min as number;
+            const maxOffset = offsetFilter.noUiSlider?.options.range.max as number;
+            this.offsetState = [minOffset, maxOffset];
+
             this.updateFilters();
         });
     }
