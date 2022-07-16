@@ -12,6 +12,7 @@ export class AppController {
     private wideState: Array<string> = [];
     private cartState: Array<string> = [];
     private priceState: Array<number> = [];
+    private offsetState: Array<number> = [];
 
     constructor(goods: GoodsData[]) {
         this.model = new AppModel(goods);
@@ -30,6 +31,7 @@ export class AppController {
         this.pcdCheckboxEvent();
         this.wideheckboxEvent();
         this.priceRangeEvent();
+        this.offsetRangeEvent();
         this.collapseBtnEvent();
         this.resetBtnEvent();
         this.addToCartEvent();
@@ -44,7 +46,8 @@ export class AppController {
             this.pcdState,
             this.wideState,
             this.cartState,
-            this.priceState
+            this.priceState,
+            this.offsetState
         );
         this.addToCartEvent();
     }
@@ -166,11 +169,21 @@ export class AppController {
     }
 
     private priceRangeEvent() {
-        const slider = document.getElementById('slider') as noUiSlider.target;
+        const slider = document.getElementById('price-slider') as noUiSlider.target;
 
         slider.noUiSlider?.on('end', (values) => {
             const [from, to] = values;
             this.priceState = [Number(from), Number(to)];
+            this.updateFilters();
+        });
+    }
+
+    private offsetRangeEvent() {
+        const slider = document.getElementById('offset-slider') as noUiSlider.target;
+
+        slider.noUiSlider?.on('end', (values) => {
+            const [from, to] = values;
+            this.offsetState = [Number(from), Number(to)];
             this.updateFilters();
         });
     }

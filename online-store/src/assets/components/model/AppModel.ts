@@ -24,7 +24,8 @@ export class AppModel {
         pcd: Array<string>,
         wide: Array<string>,
         inCart: Array<string>,
-        priceRange: Array<number>
+        priceRange: Array<number>,
+        offsetRange: Array<number>
     ) {
         this.updatedGoods = [...this.goods];
         if (search) {
@@ -44,6 +45,9 @@ export class AppModel {
         }
         if (priceRange.length > 0) {
             this.updatedGoods = this.priceFilter(priceRange, this.updatedGoods);
+        }
+        if (offsetRange.length > 0) {
+            this.updatedGoods = this.offsetFilter(offsetRange, this.updatedGoods);
         }
         if (sort) {
             this.updatedGoods = this.sortFilter(sort, this.updatedGoods);
@@ -136,6 +140,19 @@ export class AppModel {
         let tempData: GoodsData[] = [];
         tempData = goods.filter((item) => {
             if (Number(parseInt(item.price, 10)) >= minPrice && Number(parseInt(item.price, 10)) <= maxPrice) {
+                return item;
+            }
+        });
+        updatedData = [...updatedData, ...tempData];
+        return updatedData;
+    }
+
+    private offsetFilter(offsetRange: Array<number>, goods: GoodsData[]): GoodsData[] {
+        let updatedData: GoodsData[] = [];
+        const [minPrice, maxPrice] = offsetRange;
+        let tempData: GoodsData[] = [];
+        tempData = goods.filter((item) => {
+            if (item.parameters.ET >= minPrice && item.parameters.ET <= maxPrice) {
                 return item;
             }
         });

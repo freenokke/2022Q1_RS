@@ -163,7 +163,7 @@ export class AppView {
         }
 
         function priceFilter() {
-            const slider = document.getElementById('slider') as noUiSlider.target;
+            const slider = document.getElementById('price-slider') as noUiSlider.target;
             let minPrice = 0;
             let maxPrice = 0;
 
@@ -201,10 +201,50 @@ export class AppView {
             });
         }
 
+        function offsetFilter() {
+            const slider = document.getElementById('offset-slider') as noUiSlider.target;
+            let minOffset = 0;
+            let maxOffset = 0;
+
+            const pricesArr = goods.map((item) => {
+                const offset = item.parameters.ET;
+                return offset;
+            });
+
+            minOffset = Math.min(...pricesArr);
+            maxOffset = Math.max(...pricesArr);
+
+            const formatForSlider = {
+                from: function (formattedValue: string) {
+                    return Number(formattedValue);
+                },
+                to: function (numericValue: number) {
+                    return Math.round(numericValue);
+                },
+            };
+
+            noUiSlider.create(slider, {
+                start: [0, maxOffset],
+                connect: true,
+                step: 1,
+                range: {
+                    min: minOffset,
+                    max: maxOffset,
+                },
+                format: formatForSlider,
+                tooltips: {
+                    to: function (numericValue) {
+                        return numericValue.toFixed(1);
+                    },
+                },
+            });
+        }
+
         colorFilter();
         diameterFilter();
         pcdFilter();
         wideFilter();
         priceFilter();
+        offsetFilter();
     }
 }
