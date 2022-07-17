@@ -10,6 +10,7 @@ export class AppController {
     private diameterState: Array<string> = [];
     private pcdState: Array<string> = [];
     private wideState: Array<string> = [];
+    private brandState: Array<string> = [];
     private cartState: Array<string> = [];
     private priceState: Array<number> = [];
     private offsetState: Array<number> = [];
@@ -30,6 +31,7 @@ export class AppController {
         this.diamCheckboxEvent();
         this.pcdCheckboxEvent();
         this.wideheckboxEvent();
+        this.brandCheckboxEvent();
         this.priceRangeEvent();
         this.offsetRangeEvent();
         this.collapseBtnEvent();
@@ -48,7 +50,8 @@ export class AppController {
             this.wideState,
             this.cartState,
             this.priceState,
-            this.offsetState
+            this.offsetState,
+            this.brandState
         );
         this.addToCartEvent();
     }
@@ -147,6 +150,7 @@ export class AppController {
             });
         });
     }
+
     private wideheckboxEvent() {
         const checkBoxesList = document.querySelectorAll('[name="wide"]');
 
@@ -157,6 +161,26 @@ export class AppController {
                     this.wideState.push(target.value);
                 } else {
                     this.wideState = this.wideState.filter((item) => {
+                        if (target.value !== item) {
+                            return item;
+                        }
+                    });
+                }
+                this.updateFilters();
+            });
+        });
+    }
+
+    private brandCheckboxEvent() {
+        const checkBoxesList = document.querySelectorAll('[name="brand"]');
+
+        checkBoxesList.forEach((item) => {
+            item.addEventListener('change', (e) => {
+                const target = e.target as HTMLInputElement;
+                if (target.checked) {
+                    this.brandState.push(target.value);
+                } else {
+                    this.brandState = this.brandState.filter((item) => {
                         if (target.value !== item) {
                             return item;
                         }
@@ -210,6 +234,7 @@ export class AppController {
             this.diameterState = [];
             this.pcdState = [];
             this.wideState = [];
+            this.brandState = [];
             this.cartState = [];
 
             checkboxes.forEach((item) => {
@@ -242,6 +267,7 @@ export class AppController {
             this.diameterState = [];
             this.pcdState = [];
             this.wideState = [];
+            this.brandState = [];
 
             checkboxes.forEach((item) => {
                 item.checked = false;

@@ -26,7 +26,8 @@ export class AppModel {
         wide: Array<string>,
         inCart: Array<string>,
         priceRange: Array<number>,
-        offsetRange: Array<number>
+        offsetRange: Array<number>,
+        brand: Array<string>
     ) {
         this.updatedGoods = [...this.goods];
         if (search) {
@@ -43,6 +44,9 @@ export class AppModel {
         }
         if (wide.length > 0) {
             this.updatedGoods = this.wideFilter(wide, this.updatedGoods);
+        }
+        if (brand.length > 0) {
+            this.updatedGoods = this.brandFilter(brand, this.updatedGoods);
         }
         if (priceRange.length > 0) {
             this.updatedGoods = this.priceFilter(priceRange, this.updatedGoods);
@@ -159,6 +163,22 @@ export class AppModel {
         const wideCheckboxes = document.querySelectorAll('[name="wide"]') as NodeListOf<HTMLInputElement>;
         wideCheckboxes.forEach((item) => {
             if (wideArray.includes(item.value)) {
+                item.checked = true;
+            }
+        });
+        return updatedData;
+    }
+
+    private brandFilter(brandArray: Array<string>, goods: GoodsData[]): GoodsData[] {
+        let updatedData: GoodsData[] = [];
+        brandArray.forEach((brand) => {
+            let tempData: GoodsData[] = [];
+            tempData = goods.filter((item) => item.brand === brand);
+            updatedData = [...updatedData, ...tempData];
+        });
+        const brandCheckboxes = document.querySelectorAll('[name="brand"]') as NodeListOf<HTMLInputElement>;
+        brandCheckboxes.forEach((item) => {
+            if (brandArray.includes(item.value)) {
                 item.checked = true;
             }
         });

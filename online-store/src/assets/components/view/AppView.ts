@@ -162,6 +162,34 @@ export class AppView {
             filtersArea.append(fragment);
         }
 
+        function brandFilter() {
+            const filtersArea = document.querySelector('#brandsList') as HTMLElement;
+            if (!filtersArea) throw new Error('#brandList is not found');
+            const fragment = document.createDocumentFragment();
+            const existingBrands: Set<string> = new Set();
+            goods.forEach((item) => {
+                existingBrands.add(item.brand);
+            });
+            const setToArr = Array.from(existingBrands).sort();
+            for (let i = 0; i < setToArr.length; i++) {
+                const block = document.createElement('div');
+                block.className = 'flex items-center';
+                const input = document.createElement('input');
+                input.className = 'cursor-pointer checkbox-input';
+                input.id = `filter-brand-${i}`;
+                input.name = 'brand';
+                input.type = 'checkbox';
+                input.value = setToArr[i].toString();
+                const label = document.createElement('label');
+                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+                label.setAttribute('for', input.id);
+                label.textContent = input.value;
+                block.append(input, label);
+                fragment.append(block);
+            }
+            filtersArea.append(fragment);
+        }
+
         function priceFilter() {
             const slider = document.getElementById('price-slider') as noUiSlider.target;
             let minPrice = 0;
@@ -244,6 +272,7 @@ export class AppView {
         diameterFilter();
         pcdFilter();
         wideFilter();
+        brandFilter();
         priceFilter();
         offsetFilter();
     }
