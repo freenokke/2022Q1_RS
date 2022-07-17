@@ -782,10 +782,10 @@ video {
   line-height: 1.5rem !important;
 }.font-extrabold {
   font-weight: 800 !important;
-}.font-bold {
-  font-weight: 700 !important;
 }.font-semibold {
   font-weight: 600 !important;
+}.font-bold {
+  font-weight: 700 !important;
 }.font-medium {
   font-weight: 500 !important;
 }.font-normal {
@@ -863,6 +863,8 @@ video {
   transition-duration: 150ms !important;
 }.duration-100 {
   transition-duration: 100ms !important;
+}.duration-300 {
+  transition-duration: 300ms !important;
 }.ease-in {
   transition-timing-function: cubic-bezier(0.4, 0, 1, 1) !important;
 }.header{background-image:linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5));box-shadow:0px 30px 32px 0px rgba(0,0,0,.24);z-index:10}.nav{-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}#cartCount{position:absolute;top:5px;right:0;min-width:18px;max-width:28px;height:18px;padding:0 4px;display:none;align-items:center;justify-content:center;font-weight:700;font-size:9px;line-height:14px;border-radius:10px;overflow:hidden;background:#dc2626;color:#fff;transition:.2s ease}body{display:flex;min-height:100vh;flex-direction:column}main{flex:1 0 auto}.text-input:focus{border-bottom:1px solid #ef4444 !important;box-shadow:0 1px 0 0 #ef4444 !important}.checkbox-input{font:inherit;color:currentColor;width:1.15em;height:1.15em;border:.15em solid #d1d5db;border-radius:.15em;transform:translateY(-0.075em);position:relative}.checkbox-input::before{content:"";left:15%;top:15%;position:absolute;width:.65em;height:.65em;transform:scale(0);transition:120ms transform ease-in-out;box-shadow:inset 1em 1em #ef4444}.checkbox-input:checked::before{transform:scale(1)}.hero{background-image:linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)),url(assets/images/hero1.jpg);background-position:center center}[type=checkbox]:not(:checked),[type=checkbox]:checked{position:relative !important;opacity:1 !important;pointer-events:auto !important}[type=checkbox]:not(:checked),[type=checkbox]:checked{-webkit-appearance:none;-moz-appearance:none;appearance:none}.card-title{filter:drop-shadow(-3px -1px 1px black)}.noUi-handle-upper{right:-5px !important}.noUi-handle-lower{right:-17px !important}.noUi-handle-lower .noUi-tooltip{left:100% !important}.noUi-handle{width:25px !important;height:25px !important;border-radius:50% !important}.noUi-connect{background:#ef4444 !important}.hover\:scale-105:hover {
