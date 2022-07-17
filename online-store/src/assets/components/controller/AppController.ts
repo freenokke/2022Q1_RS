@@ -58,8 +58,23 @@ export class AppController {
 
     private searchEvent() {
         const searchInput = document.querySelector('#search') as HTMLInputElement;
+        const clearInput = document.querySelector('#clearSearchInput') as HTMLInputElement;
+
         searchInput.addEventListener('input', () => {
             this.searchState = searchInput.value;
+            if (searchInput.value) {
+                (clearInput.firstElementChild as HTMLElement).textContent = 'close';
+            } else {
+                (clearInput.firstElementChild as HTMLElement).textContent = 'search';
+            }
+            this.updateFilters();
+        });
+
+        clearInput.addEventListener('click', () => {
+            if (searchInput.value) {
+                searchInput.value = '';
+                this.searchState = '';
+            }
             this.updateFilters();
         });
     }

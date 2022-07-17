@@ -61,13 +61,18 @@ export class AppModel {
     }
 
     private searchFilter(rule: string, goods: GoodsData[]): GoodsData[] {
+        const clearInput = document.querySelector('#clearSearchInput') as HTMLInputElement;
         const regexp = new RegExp(rule, 'i');
         const updatedData: GoodsData[] = goods.filter((item) => {
             if (regexp.test(item.name)) {
                 return item;
             }
         });
-        (<HTMLInputElement>document.querySelector('#search')).value = rule;
+        if (rule) {
+            (<HTMLElement>clearInput.firstElementChild).textContent = 'close';
+            clearInput.classList.add('cursor-pointer');
+            (<HTMLInputElement>document.querySelector('#search')).value = rule;
+        }
         return updatedData;
     }
 
