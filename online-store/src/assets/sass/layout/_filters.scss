@@ -1,0 +1,26 @@
+.toggler {
+  background-color: #ef4444;
+  width: 40px;
+  height: 20px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.toggler:checked {
+  background-color: #3ddf38;
+}
+.toggler::before {
+  left: 5%;
+  top: 13%;
+  border-radius: 50%;
+  transition: 0.3s all ease-in-out;
+  box-shadow: inset 1em 1em #ffffff ;
+  transform: scale(1);
+}
+.toggler:not(:checked)::before {
+  background-color: #ef4444;
+}
+.toggler:checked::before {
+  left: auto;
+  right: 15%;
+  
+}

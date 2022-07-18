@@ -27,7 +27,8 @@ export class AppModel {
         inCart: Array<string>,
         priceRange: Array<number>,
         offsetRange: Array<number>,
-        brand: Array<string>
+        brand: Array<string>,
+        isPopular: boolean
     ) {
         this.updatedGoods = [...this.goods];
         if (search) {
@@ -53,6 +54,9 @@ export class AppModel {
         }
         if (offsetRange.length > 0) {
             this.updatedGoods = this.offsetFilter(offsetRange, this.updatedGoods);
+        }
+        if (isPopular) {
+            this.updatedGoods = this.isPopularFilter(isPopular, this.updatedGoods);
         }
         if (sort) {
             this.updatedGoods = this.sortFilter(sort, this.updatedGoods);
@@ -219,6 +223,19 @@ export class AppModel {
         const slider = document.getElementById('offset-slider') as noUiSlider.target;
         slider.noUiSlider?.set([offsetRange[0], offsetRange[1]]);
 
+        return updatedData;
+    }
+
+    private isPopularFilter(isPopular: boolean, goods: GoodsData[]): GoodsData[] {
+        let updatedData: GoodsData[] = [];
+        const toggler = document.querySelector('[name="popular"]') as HTMLInputElement;
+        if (isPopular) {
+            let tempData: GoodsData[] = [];
+            tempData = goods.filter((item) => item.purchaseQuantity >= 10);
+            updatedData = [...updatedData, ...tempData];
+
+            toggler.checked = true;
+        }
         return updatedData;
     }
 }

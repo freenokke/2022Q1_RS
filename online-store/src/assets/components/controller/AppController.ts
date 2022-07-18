@@ -14,6 +14,7 @@ export class AppController {
     private cartState: Array<string> = [];
     private priceState: Array<number> = [];
     private offsetState: Array<number> = [];
+    private isPopularState = false;
 
     constructor(goods: GoodsData[]) {
         this.model = new AppModel(goods);
@@ -27,6 +28,7 @@ export class AppController {
     private makeEvents(): void {
         this.searchEvent();
         this.sortEvent();
+        this.popularCheckboxEvent();
         this.colorCheckboxEvent();
         this.diamCheckboxEvent();
         this.pcdCheckboxEvent();
@@ -51,7 +53,8 @@ export class AppController {
             this.cartState,
             this.priceState,
             this.offsetState,
-            this.brandState
+            this.brandState,
+            this.isPopularState
         );
         this.addToCartEvent();
     }
@@ -74,6 +77,7 @@ export class AppController {
             if (searchInput.value) {
                 searchInput.value = '';
                 this.searchState = '';
+                (clearInput.firstElementChild as HTMLElement).textContent = 'search';
             }
             this.updateFilters();
         });
@@ -206,6 +210,20 @@ export class AppController {
         });
     }
 
+    private popularCheckboxEvent() {
+        const checkbox = document.querySelector('[name="popular"]') as HTMLInputElement;
+
+        checkbox.addEventListener('change', (e) => {
+            const target = e.target as HTMLInputElement;
+            if (target.checked) {
+                this.isPopularState = true;
+            } else {
+                this.isPopularState = false;
+            }
+            this.updateFilters();
+        });
+    }
+
     private priceRangeEvent() {
         const slider = document.getElementById('price-slider') as noUiSlider.target;
 
@@ -251,6 +269,7 @@ export class AppController {
             this.wideState = [];
             this.brandState = [];
             this.cartState = [];
+            this.isPopularState = false;
 
             checkboxes.forEach((item) => {
                 item.checked = false;
@@ -283,6 +302,7 @@ export class AppController {
             this.pcdState = [];
             this.wideState = [];
             this.brandState = [];
+            this.isPopularState = false;
 
             checkboxes.forEach((item) => {
                 item.checked = false;
