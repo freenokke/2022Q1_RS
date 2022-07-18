@@ -33,6 +33,7 @@ export class App {
                     }
                 }
             }
+            (document.querySelector('#search') as HTMLInputElement).focus();
             this.controller.updateFilters();
         });
     }
