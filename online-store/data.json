@@ -754,7 +754,7 @@
     "id": 50,
     "name": "3SDM 0.66",
     "brand": "3SDM",
-    "img": "./assets/images/goods/3sdm_066-hd-bronze.jpg",
+    "img": "./assets/images/goods/3SDM_066-hd-bronze.jpg",
     "parameters": {
       "diameter": "20",
       "ET": 40,
@@ -769,7 +769,7 @@
     "id": 51,
     "name": "3SDM 0.66",
     "brand": "3SDM",
-    "img": "./assets/images/goods/3sdm_066-hd-mattblack.jpg",
+    "img": "./assets/images/goods/3SDM_066-hd-mattblack.jpg",
     "parameters": {
       "diameter": "20",
       "ET": 40,
@@ -784,7 +784,7 @@
     "id": 52,
     "name": "3SDM 0.66",
     "brand": "3SDM",
-    "img": "./assets/images/goods/3sdm_066-hd-mattblack.jpg",
+    "img": "./assets/images/goods/3SDM_066-hd-mattblack.jpg",
     "parameters": {
       "diameter": "20",
       "ET": 15,
@@ -799,7 +799,7 @@
     "id": 53,
     "name": "3SDM 0.66",
     "brand": "3SDM",
-    "img": "./assets/images/goods/3sdm_066-hd-bronze.jpg",
+    "img": "./assets/images/goods/3SDM_066-hd-bronze.jpg",
     "parameters": {
       "diameter": "20",
       "ET": 45,
