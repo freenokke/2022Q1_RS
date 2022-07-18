@@ -1,5 +1,5 @@
 import { AppController } from './controller/AppController';
-import { GoodsData } from './additional/types/types';
+import { GoodsData } from './additional/interfaces/interfaces';
 
 export class App {
     private controller: AppController;

@@ -1,5 +1,5 @@
 import { AppView } from '../view/AppView';
-import { GoodsData } from '../additional/types/types';
+import { GoodsData } from '../additional/interfaces/interfaces';
 import * as noUiSlider from 'nouislider';
 
 export class AppModel {

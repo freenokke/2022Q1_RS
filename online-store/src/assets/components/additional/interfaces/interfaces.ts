@@ -1,4 +1,4 @@
-export type GoodsData = {
+export interface GoodsData {
     id: number;
     name: string;
     brand: string;
@@ -9,4 +9,4 @@ export type GoodsData = {
     purchaseQuantity: number;
     color: string;
     price: string;
-};
+}

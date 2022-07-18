@@ -4,7 +4,7 @@ import './assets/sass/style.scss';
 import 'nouislider/dist/nouislider.css';
 
 import { App } from './assets/components/app';
-import { GoodsData } from './assets/components/additional/types/types';
+import { GoodsData } from './assets/components/additional/interfaces/interfaces';
 
 async function loadData(): Promise<void> {
     const resp: Response = await fetch('./data.json');
