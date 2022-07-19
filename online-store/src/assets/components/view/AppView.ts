@@ -45,230 +45,230 @@ export class AppView {
     }
 
     public renderFilters(goods: GoodsData[]) {
-        function colorFilter() {
-            const filtersArea = document.querySelector('#colorsList') as HTMLElement;
-            if (!filtersArea) throw new Error('#colorList is not found');
-            const fragment = document.createDocumentFragment();
-            const existingColors: Set<string> = new Set();
-            goods.forEach((item) => {
-                existingColors.add(item.color);
-            });
-            const setToArr: string[] = Array.from(existingColors);
-            for (let i = 0; i < setToArr.length; i++) {
-                const block = document.createElement('div');
-                block.className = 'flex items-center';
-                const input = document.createElement('input');
-                input.className = 'cursor-pointer checkbox-input';
-                input.name = 'color';
-                input.id = `filter-color-${i}`;
-                input.type = 'checkbox';
-                input.value = setToArr[i];
-                const label = document.createElement('label');
-                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
-                label.setAttribute('for', input.id);
-                label.textContent = input.value;
-                block.append(input, label);
-                fragment.append(block);
-            }
-            filtersArea.append(fragment);
+        this.colorFilter(goods);
+        this.diameterFilter(goods);
+        this.pcdFilter(goods);
+        this.wideFilter(goods);
+        this.brandFilter(goods);
+        this.priceFilter(goods);
+        this.offsetFilter(goods);
+    }
+
+    private colorFilter(goods: GoodsData[]) {
+        const filtersArea = document.querySelector('#colorsList') as HTMLElement;
+        if (!filtersArea) throw new Error('#colorList is not found');
+        const fragment = document.createDocumentFragment();
+        const existingColors: Set<string> = new Set();
+        goods.forEach((item) => {
+            existingColors.add(item.color);
+        });
+        const setToArr: string[] = Array.from(existingColors);
+        for (let i = 0; i < setToArr.length; i++) {
+            const block = document.createElement('div');
+            block.className = 'flex items-center';
+            const input = document.createElement('input');
+            input.className = 'cursor-pointer checkbox-input';
+            input.name = 'color';
+            input.id = `filter-color-${i}`;
+            input.type = 'checkbox';
+            input.value = setToArr[i];
+            const label = document.createElement('label');
+            label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+            label.setAttribute('for', input.id);
+            label.textContent = input.value;
+            block.append(input, label);
+            fragment.append(block);
         }
+        filtersArea.append(fragment);
+    }
 
-        function diameterFilter() {
-            const filtersArea = document.querySelector('#diamsList') as HTMLElement;
-            if (!filtersArea) throw new Error('#diamsList is not found');
-            const fragment = document.createDocumentFragment();
-            const existingDiameters: Set<string> = new Set();
-            goods.forEach((item) => {
-                existingDiameters.add(item.parameters.diameter);
-            });
-            const setToArr = Array.from(existingDiameters).sort((a, b) => Number(a) - Number(b));
-            for (let i = 0; i < setToArr.length; i++) {
-                const block = document.createElement('div');
-                block.className = 'flex items-center';
-                const input = document.createElement('input');
-                input.className = 'cursor-pointer checkbox-input';
-                input.id = `filter-diameter-${i}`;
-                input.name = 'diam';
-                input.type = 'checkbox';
-                input.value = setToArr[i].toString();
-                const label = document.createElement('label');
-                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
-                label.setAttribute('for', input.id);
-                label.textContent = input.value + '"';
-                block.append(input, label);
-                fragment.append(block);
-            }
-            filtersArea.append(fragment);
+    private diameterFilter(goods: GoodsData[]) {
+        const filtersArea = document.querySelector('#diamsList') as HTMLElement;
+        if (!filtersArea) throw new Error('#diamsList is not found');
+        const fragment = document.createDocumentFragment();
+        const existingDiameters: Set<string> = new Set();
+        goods.forEach((item) => {
+            existingDiameters.add(item.parameters.diameter);
+        });
+        const setToArr = Array.from(existingDiameters).sort((a, b) => Number(a) - Number(b));
+        for (let i = 0; i < setToArr.length; i++) {
+            const block = document.createElement('div');
+            block.className = 'flex items-center';
+            const input = document.createElement('input');
+            input.className = 'cursor-pointer checkbox-input';
+            input.id = `filter-diameter-${i}`;
+            input.name = 'diam';
+            input.type = 'checkbox';
+            input.value = setToArr[i].toString();
+            const label = document.createElement('label');
+            label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+            label.setAttribute('for', input.id);
+            label.textContent = input.value + '"';
+            block.append(input, label);
+            fragment.append(block);
         }
+        filtersArea.append(fragment);
+    }
 
-        function pcdFilter() {
-            const filtersArea = document.querySelector('#pcdList') as HTMLElement;
-            if (!filtersArea) throw new Error('#pcdList is not found');
-            const fragment = document.createDocumentFragment();
-            const existingPcd: Set<string> = new Set();
-            goods.forEach((item) => {
-                existingPcd.add(item.parameters.pcd);
-            });
-            const setToArr = Array.from(existingPcd).sort((a, b) => Number(a) - Number(b));
-            for (let i = 0; i < setToArr.length; i++) {
-                const block = document.createElement('div');
-                block.className = 'flex items-center';
-                const input = document.createElement('input');
-                input.className = 'cursor-pointer checkbox-input';
-                input.id = `filter-pcd-${i}`;
-                input.name = 'pcd';
-                input.type = 'checkbox';
-                input.value = setToArr[i].toString();
-                const label = document.createElement('label');
-                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
-                label.setAttribute('for', input.id);
-                label.textContent = input.value;
-                block.append(input, label);
-                fragment.append(block);
-            }
-            filtersArea.append(fragment);
+    private pcdFilter(goods: GoodsData[]) {
+        const filtersArea = document.querySelector('#pcdList') as HTMLElement;
+        if (!filtersArea) throw new Error('#pcdList is not found');
+        const fragment = document.createDocumentFragment();
+        const existingPcd: Set<string> = new Set();
+        goods.forEach((item) => {
+            existingPcd.add(item.parameters.pcd);
+        });
+        const setToArr = Array.from(existingPcd).sort((a, b) => Number(a) - Number(b));
+        for (let i = 0; i < setToArr.length; i++) {
+            const block = document.createElement('div');
+            block.className = 'flex items-center';
+            const input = document.createElement('input');
+            input.className = 'cursor-pointer checkbox-input';
+            input.id = `filter-pcd-${i}`;
+            input.name = 'pcd';
+            input.type = 'checkbox';
+            input.value = setToArr[i].toString();
+            const label = document.createElement('label');
+            label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+            label.setAttribute('for', input.id);
+            label.textContent = input.value;
+            block.append(input, label);
+            fragment.append(block);
         }
+        filtersArea.append(fragment);
+    }
 
-        function wideFilter() {
-            const filtersArea = document.querySelector('#wideList') as HTMLElement;
-            if (!filtersArea) throw new Error('#wideList is not found');
-            const fragment = document.createDocumentFragment();
-            const existingWide: Set<string> = new Set();
-            goods.forEach((item) => {
-                existingWide.add(item.parameters.wide);
-            });
-            const setToArr = Array.from(existingWide).sort((a, b) => Number(a) - Number(b));
-            for (let i = 0; i < setToArr.length; i++) {
-                const block = document.createElement('div');
-                block.className = 'flex items-center';
-                const input = document.createElement('input');
-                input.className = 'cursor-pointer checkbox-input';
-                input.id = `filter-wide-${i}`;
-                input.name = 'wide';
-                input.type = 'checkbox';
-                input.value = setToArr[i].toString();
-                const label = document.createElement('label');
-                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
-                label.setAttribute('for', input.id);
-                label.textContent = input.value;
-                block.append(input, label);
-                fragment.append(block);
-            }
-            filtersArea.append(fragment);
+    private wideFilter(goods: GoodsData[]) {
+        const filtersArea = document.querySelector('#wideList') as HTMLElement;
+        if (!filtersArea) throw new Error('#wideList is not found');
+        const fragment = document.createDocumentFragment();
+        const existingWide: Set<string> = new Set();
+        goods.forEach((item) => {
+            existingWide.add(item.parameters.wide);
+        });
+        const setToArr = Array.from(existingWide).sort((a, b) => Number(a) - Number(b));
+        for (let i = 0; i < setToArr.length; i++) {
+            const block = document.createElement('div');
+            block.className = 'flex items-center';
+            const input = document.createElement('input');
+            input.className = 'cursor-pointer checkbox-input';
+            input.id = `filter-wide-${i}`;
+            input.name = 'wide';
+            input.type = 'checkbox';
+            input.value = setToArr[i].toString();
+            const label = document.createElement('label');
+            label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+            label.setAttribute('for', input.id);
+            label.textContent = input.value;
+            block.append(input, label);
+            fragment.append(block);
         }
+        filtersArea.append(fragment);
+    }
 
-        function brandFilter() {
-            const filtersArea = document.querySelector('#brandsList') as HTMLElement;
-            if (!filtersArea) throw new Error('#brandList is not found');
-            const fragment = document.createDocumentFragment();
-            const existingBrands: Set<string> = new Set();
-            goods.forEach((item) => {
-                existingBrands.add(item.brand);
-            });
-            const setToArr = Array.from(existingBrands).sort();
-            for (let i = 0; i < setToArr.length; i++) {
-                const block = document.createElement('div');
-                block.className = 'flex items-center';
-                const input = document.createElement('input');
-                input.className = 'cursor-pointer checkbox-input';
-                input.id = `filter-brand-${i}`;
-                input.name = 'brand';
-                input.type = 'checkbox';
-                input.value = setToArr[i].toString();
-                const label = document.createElement('label');
-                label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
-                label.setAttribute('for', input.id);
-                label.textContent = input.value;
-                block.append(input, label);
-                fragment.append(block);
-            }
-            filtersArea.append(fragment);
+    private brandFilter(goods: GoodsData[]) {
+        const filtersArea = document.querySelector('#brandsList') as HTMLElement;
+        if (!filtersArea) throw new Error('#brandList is not found');
+        const fragment = document.createDocumentFragment();
+        const existingBrands: Set<string> = new Set();
+        goods.forEach((item) => {
+            existingBrands.add(item.brand);
+        });
+        const setToArr = Array.from(existingBrands).sort();
+        for (let i = 0; i < setToArr.length; i++) {
+            const block = document.createElement('div');
+            block.className = 'flex items-center';
+            const input = document.createElement('input');
+            input.className = 'cursor-pointer checkbox-input';
+            input.id = `filter-brand-${i}`;
+            input.name = 'brand';
+            input.type = 'checkbox';
+            input.value = setToArr[i].toString();
+            const label = document.createElement('label');
+            label.className = 'ml-3 text-sm text-gray-600 cursor-pointer text-gray-700';
+            label.setAttribute('for', input.id);
+            label.textContent = input.value;
+            block.append(input, label);
+            fragment.append(block);
         }
+        filtersArea.append(fragment);
+    }
 
-        function priceFilter() {
-            const slider = document.getElementById('price-slider') as noUiSlider.target;
-            let minPrice = 0;
-            let maxPrice = 0;
+    private priceFilter(goods: GoodsData[]) {
+        const slider = document.getElementById('price-slider') as noUiSlider.target;
+        let minPrice = 0;
+        let maxPrice = 0;
 
-            const pricesArr = goods.map((item) => {
-                const price = parseInt(item.price, 10);
-                return price;
-            });
+        const pricesArr = goods.map((item) => {
+            const price = parseInt(item.price, 10);
+            return price;
+        });
 
-            minPrice = Math.min(...pricesArr);
-            maxPrice = Math.max(...pricesArr);
+        minPrice = Math.min(...pricesArr);
+        maxPrice = Math.max(...pricesArr);
 
-            const formatForSlider = {
-                from: function (formattedValue: string) {
-                    return Number(formattedValue);
+        const formatForSlider = {
+            from: function (formattedValue: string) {
+                return Number(formattedValue);
+            },
+            to: function (numericValue: number) {
+                return Math.round(numericValue);
+            },
+        };
+
+        noUiSlider.create(slider, {
+            start: [0, maxPrice],
+            connect: true,
+            step: 1,
+            range: {
+                min: minPrice,
+                max: maxPrice,
+            },
+            format: formatForSlider,
+            tooltips: {
+                to: function (numericValue) {
+                    return numericValue.toFixed(1);
                 },
-                to: function (numericValue: number) {
-                    return Math.round(numericValue);
-                },
-            };
+            },
+        });
+    }
 
-            noUiSlider.create(slider, {
-                start: [0, maxPrice],
-                connect: true,
-                step: 1,
-                range: {
-                    min: minPrice,
-                    max: maxPrice,
-                },
-                format: formatForSlider,
-                tooltips: {
-                    to: function (numericValue) {
-                        return numericValue.toFixed(1);
-                    },
-                },
-            });
-        }
+    private offsetFilter(goods: GoodsData[]) {
+        const slider = document.getElementById('offset-slider') as noUiSlider.target;
+        let minOffset = 0;
+        let maxOffset = 0;
 
-        function offsetFilter() {
-            const slider = document.getElementById('offset-slider') as noUiSlider.target;
-            let minOffset = 0;
-            let maxOffset = 0;
+        const pricesArr = goods.map((item) => {
+            const offset = item.parameters.ET;
+            return offset;
+        });
 
-            const pricesArr = goods.map((item) => {
-                const offset = item.parameters.ET;
-                return offset;
-            });
+        minOffset = Math.min(...pricesArr);
+        maxOffset = Math.max(...pricesArr);
 
-            minOffset = Math.min(...pricesArr);
-            maxOffset = Math.max(...pricesArr);
+        const formatForSlider = {
+            from: function (formattedValue: string) {
+                return Number(formattedValue);
+            },
+            to: function (numericValue: number) {
+                return Math.round(numericValue);
+            },
+        };
 
-            const formatForSlider = {
-                from: function (formattedValue: string) {
-                    return Number(formattedValue);
+        noUiSlider.create(slider, {
+            start: [0, maxOffset],
+            connect: true,
+            step: 1,
+            range: {
+                min: minOffset,
+                max: maxOffset,
+            },
+            format: formatForSlider,
+            tooltips: {
+                to: function (numericValue) {
+                    return numericValue.toFixed(1);
                 },
-                to: function (numericValue: number) {
-                    return Math.round(numericValue);
-                },
-            };
-
-            noUiSlider.create(slider, {
-                start: [0, maxOffset],
-                connect: true,
-                step: 1,
-                range: {
-                    min: minOffset,
-                    max: maxOffset,
-                },
-                format: formatForSlider,
-                tooltips: {
-                    to: function (numericValue) {
-                        return numericValue.toFixed(1);
-                    },
-                },
-            });
-        }
-
-        colorFilter();
-        diameterFilter();
-        pcdFilter();
-        wideFilter();
-        brandFilter();
-        priceFilter();
-        offsetFilter();
+            },
+        });
     }
 }
