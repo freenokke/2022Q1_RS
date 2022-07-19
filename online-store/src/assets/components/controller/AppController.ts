@@ -327,10 +327,11 @@ export class AppController {
         const count = document.querySelector('#cartCount') as HTMLElement;
         if (this.cartState.length > 0) {
             count.textContent = this.cartState.length.toString();
-            count.style.display = 'flex';
+            count.classList.add('flex');
+            count.classList.remove('hidden');
         } else {
             count.textContent = '0';
-            count.style.display = 'none';
+            count.classList.add('hidden');
         }
 
         addToCartBtn.forEach((item) => {
@@ -342,12 +343,7 @@ export class AppController {
                     if (Number(count.textContent) < 20) {
                         (item.firstChild as HTMLElement).textContent = 'check';
                         item.classList.remove('red');
-                        item.classList.add('green');
-                        item.style.display = 'flex';
-                        item.style.alignItems = 'center';
-                        item.style.borderRadius = '20px';
-                        item.style.width = 'max-content';
-                        item.style.padding = '5px';
+                        item.classList.add('green', 'added');
                         (item as HTMLElement).insertAdjacentHTML(
                             'beforeend',
                             '<span class="ml-3 ">added to cart</span>'
@@ -359,9 +355,8 @@ export class AppController {
                     }
                 } else {
                     item.classList.add('red');
-                    item.classList.remove('green');
+                    item.classList.remove('green', 'added');
                     (item.firstChild as HTMLElement).textContent = 'add_shopping_cart';
-                    item.removeAttribute('style');
                     (item.querySelector('span') as HTMLElement).remove();
                     count.textContent = (Number(count.textContent) - 1).toString();
                     this.cartState = this.cartState.filter((item) => {
@@ -372,9 +367,11 @@ export class AppController {
                 }
 
                 if (Number(count.textContent) > 0) {
-                    count.style.display = 'flex';
+                    count.classList.remove('hidden');
+                    count.classList.add('flex');
                 } else {
-                    count.style.display = 'none';
+                    count.classList.add('hidden');
+                    count.classList.remove('flex');
                 }
             });
         });

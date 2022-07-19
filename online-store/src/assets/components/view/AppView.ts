@@ -25,12 +25,7 @@ export class AppView {
             if (inCart.includes(item.id.toString())) {
                 ((clone.querySelector('#addToCart') as HTMLElement).firstChild as HTMLElement).textContent = 'check';
                 (clone.querySelector('#addToCart') as HTMLElement).classList.remove('red');
-                (clone.querySelector('#addToCart') as HTMLElement).classList.add('green');
-                (clone.querySelector('#addToCart') as HTMLElement).style.display = 'flex';
-                (clone.querySelector('#addToCart') as HTMLElement).style.alignItems = 'center';
-                (clone.querySelector('#addToCart') as HTMLElement).style.borderRadius = '20px';
-                (clone.querySelector('#addToCart') as HTMLElement).style.width = 'max-content';
-                (clone.querySelector('#addToCart') as HTMLElement).style.padding = '5px';
+                (clone.querySelector('#addToCart') as HTMLElement).classList.add('green', 'added');
                 (clone.querySelector('#addToCart') as HTMLElement).insertAdjacentHTML(
                     'beforeend',
                     '<span class="ml-3 ">added to cart</span>'
