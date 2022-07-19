@@ -67,8 +67,10 @@ export class AppController {
             this.searchState = searchInput.value;
             if (searchInput.value) {
                 (clearInput.firstElementChild as HTMLElement).textContent = 'close';
+                clearInput.classList.add('cursor-pointer');
             } else {
                 (clearInput.firstElementChild as HTMLElement).textContent = 'search';
+                clearInput.classList.remove('cursor-pointer');
             }
             this.updateFilters();
         });
@@ -78,6 +80,7 @@ export class AppController {
                 searchInput.value = '';
                 this.searchState = '';
                 (clearInput.firstElementChild as HTMLElement).textContent = 'search';
+                clearInput.classList.remove('cursor-pointer');
             }
             this.updateFilters();
         });
@@ -259,6 +262,7 @@ export class AppController {
     private totalResetBtnEvent() {
         const resetBtn = document.querySelector('#reset') as HTMLElement;
         const checkboxes = document.querySelectorAll('[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+        const clearInput = document.querySelector('#clearSearchInput') as HTMLInputElement;
 
         resetBtn.addEventListener('click', () => {
             this.searchState = '';
@@ -286,6 +290,9 @@ export class AppController {
             const minOffset = offsetFilter.noUiSlider?.options.range.min as number;
             const maxOffset = offsetFilter.noUiSlider?.options.range.max as number;
             this.offsetState = [minOffset, maxOffset];
+
+            (clearInput.firstElementChild as HTMLElement).textContent = 'search';
+            clearInput.classList.remove('cursor-pointer');
 
             this.updateFilters();
 
