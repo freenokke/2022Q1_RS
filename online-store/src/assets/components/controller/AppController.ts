@@ -20,7 +20,7 @@ export class AppController {
         this.model = new AppModel(goods);
     }
 
-    start(): void {
+    public start(): void {
         this.model.start();
         this.makeEvents();
     }

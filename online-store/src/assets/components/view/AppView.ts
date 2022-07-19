@@ -2,7 +2,7 @@ import { GoodsData } from '../additional/interfaces/interfaces';
 import * as noUiSlider from 'nouislider';
 
 export class AppView {
-    renderGoods(goods: GoodsData[], inCart: Array<string> = []) {
+    public renderGoods(goods: GoodsData[], inCart: Array<string> = []) {
         const fragment = document.createDocumentFragment() as DocumentFragment;
         const template = document.querySelector('#goodsCardTemp') as HTMLTemplateElement;
         const contentBlock = document.querySelector('#goods') as HTMLElement;
@@ -49,7 +49,7 @@ export class AppView {
         }
     }
 
-    renderFilters(goods: GoodsData[]) {
+    public renderFilters(goods: GoodsData[]) {
         function colorFilter() {
             const filtersArea = document.querySelector('#colorsList') as HTMLElement;
             if (!filtersArea) throw new Error('#colorList is not found');

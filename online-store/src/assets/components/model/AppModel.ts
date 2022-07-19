@@ -12,12 +12,12 @@ export class AppModel {
         this.view = new AppView();
     }
 
-    start() {
+    public start() {
         this.view.renderGoods(this.goods);
         this.view.renderFilters(this.goods);
     }
 
-    updateData(
+    public updateData(
         search: string,
         sort: string,
         color: Array<string>,
