@@ -2,7 +2,7 @@ import { GoodsData } from '../additional/interfaces/interfaces';
 import * as noUiSlider from 'nouislider';
 
 export class AppView {
-    public renderGoods(goods: GoodsData[], inCart: Array<string> = []) {
+    public renderGoods(goods: GoodsData[], inCart: Array<string> = []): void {
         const fragment = document.createDocumentFragment() as DocumentFragment;
         const template = document.querySelector('#goodsCardTemp') as HTMLTemplateElement;
         const contentBlock = document.querySelector('#goods') as HTMLElement;
@@ -44,7 +44,7 @@ export class AppView {
         }
     }
 
-    public renderFilters(goods: GoodsData[]) {
+    public renderFilters(goods: GoodsData[]): void {
         this.colorFilter(goods);
         this.diameterFilter(goods);
         this.pcdFilter(goods);
@@ -54,7 +54,7 @@ export class AppView {
         this.offsetFilter(goods);
     }
 
-    private colorFilter(goods: GoodsData[]) {
+    private colorFilter(goods: GoodsData[]): void {
         const filtersArea = document.querySelector('#colorsList') as HTMLElement;
         if (!filtersArea) throw new Error('#colorList is not found');
         const fragment = document.createDocumentFragment();
@@ -82,7 +82,7 @@ export class AppView {
         filtersArea.append(fragment);
     }
 
-    private diameterFilter(goods: GoodsData[]) {
+    private diameterFilter(goods: GoodsData[]): void {
         const filtersArea = document.querySelector('#diamsList') as HTMLElement;
         if (!filtersArea) throw new Error('#diamsList is not found');
         const fragment = document.createDocumentFragment();
@@ -110,7 +110,7 @@ export class AppView {
         filtersArea.append(fragment);
     }
 
-    private pcdFilter(goods: GoodsData[]) {
+    private pcdFilter(goods: GoodsData[]): void {
         const filtersArea = document.querySelector('#pcdList') as HTMLElement;
         if (!filtersArea) throw new Error('#pcdList is not found');
         const fragment = document.createDocumentFragment();
@@ -138,7 +138,7 @@ export class AppView {
         filtersArea.append(fragment);
     }
 
-    private wideFilter(goods: GoodsData[]) {
+    private wideFilter(goods: GoodsData[]): void {
         const filtersArea = document.querySelector('#wideList') as HTMLElement;
         if (!filtersArea) throw new Error('#wideList is not found');
         const fragment = document.createDocumentFragment();
@@ -166,7 +166,7 @@ export class AppView {
         filtersArea.append(fragment);
     }
 
-    private brandFilter(goods: GoodsData[]) {
+    private brandFilter(goods: GoodsData[]): void {
         const filtersArea = document.querySelector('#brandsList') as HTMLElement;
         if (!filtersArea) throw new Error('#brandList is not found');
         const fragment = document.createDocumentFragment();
@@ -194,7 +194,7 @@ export class AppView {
         filtersArea.append(fragment);
     }
 
-    private priceFilter(goods: GoodsData[]) {
+    private priceFilter(goods: GoodsData[]): void {
         const slider = document.getElementById('price-slider') as noUiSlider.target;
         let minPrice = 0;
         let maxPrice = 0;
@@ -233,7 +233,7 @@ export class AppView {
         });
     }
 
-    private offsetFilter(goods: GoodsData[]) {
+    private offsetFilter(goods: GoodsData[]): void {
         const slider = document.getElementById('offset-slider') as noUiSlider.target;
         let minOffset = 0;
         let maxOffset = 0;

@@ -59,7 +59,7 @@ export class AppController {
         this.addToCartEvent();
     }
 
-    private searchEvent() {
+    private searchEvent(): void {
         const searchInput = document.querySelector('#search') as HTMLInputElement;
         const clearInput = document.querySelector('#clearSearchInput') as HTMLInputElement;
 
@@ -113,7 +113,7 @@ export class AppController {
         });
     }
 
-    private colorCheckboxEvent() {
+    private colorCheckboxEvent(): void {
         const checkBoxesList = document.querySelectorAll('[name="color"]') as NodeListOf<HTMLInputElement>;
 
         checkBoxesList.forEach((item) => {
@@ -133,7 +133,7 @@ export class AppController {
         });
     }
 
-    private diamCheckboxEvent() {
+    private diamCheckboxEvent(): void {
         const checkBoxesList = document.querySelectorAll('[name="diam"]');
 
         checkBoxesList.forEach((item) => {
@@ -153,7 +153,7 @@ export class AppController {
         });
     }
 
-    private pcdCheckboxEvent() {
+    private pcdCheckboxEvent(): void {
         const checkBoxesList = document.querySelectorAll('[name="pcd"]');
 
         checkBoxesList.forEach((item) => {
@@ -173,7 +173,7 @@ export class AppController {
         });
     }
 
-    private wideheckboxEvent() {
+    private wideheckboxEvent(): void {
         const checkBoxesList = document.querySelectorAll('[name="wide"]');
 
         checkBoxesList.forEach((item) => {
@@ -193,7 +193,7 @@ export class AppController {
         });
     }
 
-    private brandCheckboxEvent() {
+    private brandCheckboxEvent(): void {
         const checkBoxesList = document.querySelectorAll('[name="brand"]');
 
         checkBoxesList.forEach((item) => {
@@ -213,7 +213,7 @@ export class AppController {
         });
     }
 
-    private popularCheckboxEvent() {
+    private popularCheckboxEvent(): void {
         const checkbox = document.querySelector('[name="popular"]') as HTMLInputElement;
 
         checkbox.addEventListener('change', (e) => {
@@ -227,7 +227,7 @@ export class AppController {
         });
     }
 
-    private priceRangeEvent() {
+    private priceRangeEvent(): void {
         const slider = document.getElementById('price-slider') as noUiSlider.target;
 
         slider.noUiSlider?.on('end', (values) => {
@@ -237,7 +237,7 @@ export class AppController {
         });
     }
 
-    private offsetRangeEvent() {
+    private offsetRangeEvent(): void {
         const slider = document.getElementById('offset-slider') as noUiSlider.target;
 
         slider.noUiSlider?.on('end', (values) => {
@@ -247,7 +247,7 @@ export class AppController {
         });
     }
 
-    private collapseBtnEvent() {
+    private collapseBtnEvent(): void {
         const buttons = document.querySelectorAll('#showHide') as NodeListOf<HTMLElement>;
 
         buttons.forEach((item) => {
@@ -259,7 +259,7 @@ export class AppController {
         });
     }
 
-    private totalResetBtnEvent() {
+    private totalResetBtnEvent(): void {
         const resetBtn = document.querySelector('#reset') as HTMLElement;
         const checkboxes = document.querySelectorAll('[type="checkbox"]') as NodeListOf<HTMLInputElement>;
         const clearInput = document.querySelector('#clearSearchInput') as HTMLInputElement;
@@ -299,7 +299,7 @@ export class AppController {
             localStorage.clear();
         });
     }
-    private softResetBtnEvent() {
+    private softResetBtnEvent(): void {
         const resetBtn = document.querySelector('#resetFilters') as HTMLElement;
         const checkboxes = document.querySelectorAll('[type="checkbox"]') as NodeListOf<HTMLInputElement>;
 
@@ -329,7 +329,7 @@ export class AppController {
         });
     }
 
-    private addToCartEvent() {
+    private addToCartEvent(): void {
         const addToCartBtn = document.querySelectorAll('#addToCart') as NodeListOf<HTMLElement>;
         const count = document.querySelector('#cartCount') as HTMLElement;
         if (this.cartState.length > 0) {

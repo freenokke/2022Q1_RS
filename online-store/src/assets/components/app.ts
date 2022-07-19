@@ -8,12 +8,12 @@ export class App {
         this.controller = new AppController(data);
     }
 
-    public start() {
+    public start(): void {
         this.controller.start();
         this.localeStorageEvent();
     }
 
-    private localeStorageEvent() {
+    private localeStorageEvent(): void {
         window.addEventListener('unload', () => {
             let prop: keyof AppController;
             for (prop in this.controller) {

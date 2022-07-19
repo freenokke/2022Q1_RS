@@ -12,7 +12,7 @@ export class AppModel {
         this.view = new AppView();
     }
 
-    public start() {
+    public start(): void {
         this.view.renderGoods(this.goods);
         this.view.renderFilters(this.goods);
     }
@@ -29,7 +29,7 @@ export class AppModel {
         offsetRange: Array<number>,
         brand: Array<string>,
         isPopular: boolean
-    ) {
+    ): void {
         this.updatedGoods = [...this.goods];
         if (search) {
             this.updatedGoods = this.searchFilter(search, this.updatedGoods);
