@@ -302,8 +302,10 @@ export class AppController {
     private softResetBtnEvent(): void {
         const resetBtn = document.querySelector('#resetFilters') as HTMLElement;
         const checkboxes = document.querySelectorAll('[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+        const clearInput = document.querySelector('#clearSearchInput') as HTMLInputElement;
 
         resetBtn.addEventListener('click', () => {
+            this.searchState = '';
             this.colorState = [];
             this.diameterState = [];
             this.pcdState = [];
@@ -315,6 +317,8 @@ export class AppController {
                 item.checked = false;
             });
 
+            (document.querySelector('#search') as HTMLInputElement).value = '';
+
             const priceSlider = document.getElementById('price-slider') as noUiSlider.target;
             const min = priceSlider.noUiSlider?.options.range.min as number;
             const max = priceSlider.noUiSlider?.options.range.max as number;
@@ -324,6 +328,9 @@ export class AppController {
             const minOffset = offsetFilter.noUiSlider?.options.range.min as number;
             const maxOffset = offsetFilter.noUiSlider?.options.range.max as number;
             this.offsetState = [minOffset, maxOffset];
+
+            (clearInput.firstElementChild as HTMLElement).textContent = 'search';
+            clearInput.classList.remove('cursor-pointer');
 
             this.updateFilters();
         });
