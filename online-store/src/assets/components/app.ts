@@ -10,6 +10,7 @@ export class App {
 
     public start(): void {
         this.controller.start();
+        this.checklocalStorage();
         this.localeStorageEvent();
     }
 
@@ -22,19 +23,19 @@ export class App {
                 }
             }
         });
+    }
 
-        window.addEventListener('load', () => {
-            let prop: keyof AppController;
-            for (prop in this.controller) {
-                if (prop.endsWith('State')) {
-                    const filterName = prop.slice(0, prop.search('S'));
-                    if (localStorage.getItem(filterName) !== null) {
-                        this.controller[prop] = JSON.parse(<string>localStorage.getItem(filterName));
-                    }
+    private checklocalStorage() {
+        let prop: keyof AppController;
+        for (prop in this.controller) {
+            if (prop.endsWith('State')) {
+                const filterName = prop.slice(0, prop.search('S'));
+                if (localStorage.getItem(filterName) !== null) {
+                    this.controller[prop] = JSON.parse(<string>localStorage.getItem(filterName));
                 }
             }
-            (document.querySelector('#search') as HTMLInputElement).focus();
-            this.controller.updateFilters();
-        });
+        }
+        (document.querySelector('#search') as HTMLInputElement).focus();
+        this.controller.updateFilters();
     }
 }
