@@ -2,3 +2,13 @@
   background-image: linear-gradient( rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3) ), url('../../assets/images/hero/hero1.jpg');
   background-position: center center;
 }
+
+@media screen and (max-width: 900px) {
+  .hero__title {
+    font-size: 5rem !important;
+    letter-spacing: 25px !important;
+  }
+  .hero__subtitle {
+    font-size: 5rem !important;
+  }
+}
