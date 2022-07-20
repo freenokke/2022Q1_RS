@@ -230,7 +230,7 @@ export class AppController {
     private priceRangeEvent(): void {
         const slider = document.getElementById('price-slider') as noUiSlider.target;
 
-        slider.noUiSlider?.on('end', (values) => {
+        slider.noUiSlider?.on('change', (values) => {
             const [from, to] = values;
             this.priceState = [Number(from), Number(to)];
             this.updateFilters();
@@ -240,7 +240,7 @@ export class AppController {
     private offsetRangeEvent(): void {
         const slider = document.getElementById('offset-slider') as noUiSlider.target;
 
-        slider.noUiSlider?.on('end', (values) => {
+        slider.noUiSlider?.on('change', (values) => {
             const [from, to] = values;
             this.offsetState = [Number(from), Number(to)];
             this.updateFilters();
