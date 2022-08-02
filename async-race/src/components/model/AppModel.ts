@@ -9,6 +9,13 @@ class AppModel {
     this.domain = Domain.BASE;
   }
 
+  public async getCars() {
+    const res = await fetch(`${this.domain}/${Path.GARAGE}`);
+    const json = await res.json();
+    this.carsInGarage = json;
+    return this.carsInGarage;
+  }
+
 }
 
 export default AppModel;

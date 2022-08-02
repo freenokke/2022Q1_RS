@@ -1,3 +1,4 @@
+import ICar from '../types/ICar';
 import Control from './Control';
 import AppController from './controller/AppController';
 import AppModel from './model/AppModel';
@@ -21,6 +22,15 @@ class Application extends Control {
     );
   }
 
+  public async init(): Promise<void> {
+    this.checkActiveScreen();
+    const cars = await this.model.getCars();
+    this.renderCarsInGarage(cars);
+  }
+
+  private async renderCarsInGarage(cars: Array<ICar>): Promise<void> {
+    this.view.gameScreen.garage.render(cars);
+  }
 }
 
 export default Application;
