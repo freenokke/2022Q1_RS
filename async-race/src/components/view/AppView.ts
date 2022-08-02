@@ -1,9 +1,12 @@
 import Control from '../Control';
 import AppController from '../controller/AppController';
 import GameScreen from './gameScreen/GameScreen';
+import ScreenToggler from './screenToggler/ScreenToggler';
 import WinnersScreen from './winnerScreen/WinnersScreen';
+
 class AppView extends Control {
   controller: AppController;
+  screenToggler: ScreenToggler;
   gameScreen: GameScreen;
   winnerScreen: WinnersScreen;
 
@@ -27,6 +30,14 @@ class AppView extends Control {
       this.node,
       'div',
       'view__winnerScreen w-[100%] h-[500px] bg-blue-200 absolute top-[45px] left-0 hidden'
+    );
+    this.screenToggler = new ScreenToggler(
+      parentNode,
+      'div',
+      'view__screen-toggler',
+      '',
+      this.gameScreen,
+      this.winnerScreen
     );
   }
 }
