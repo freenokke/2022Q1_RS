@@ -3,10 +3,10 @@ import GameScreen from '../gameScreen/GameScreen';
 import WinnersScreen from '../winnerScreen/WinnersScreen';
 
 class ScreenToggler extends Control {
-  showGameViewButton: Control<HTMLElement>;
-  showWinnersViewButton: Control<HTMLElement>;
-  winnersScreen: any;
-  gameScreen: any;
+  private showGameViewButton: Control<HTMLElement>;
+  private showWinnersViewButton: Control<HTMLElement>;
+  private winnersScreen: WinnersScreen;
+  private gameScreen: GameScreen;
 
   constructor(
     parentNode: HTMLElement,

@@ -5,9 +5,9 @@ import AppModel from './model/AppModel';
 import AppView from './view/AppView';
 
 class Application extends Control {
-  controller: AppController;
-  view: AppView;
-  model: AppModel;
+  private controller: AppController;
+  private view: AppView;
+  private model: AppModel;
 
   constructor(parentNode: HTMLElement, tagName: string, className: string) {
     super(parentNode, tagName, className);

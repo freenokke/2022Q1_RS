@@ -9,26 +9,29 @@ class AppModel {
     this.domain = Domain.BASE;
   }
 
-  public async getCars() {
-    const res = await fetch(`${this.domain}/${Path.GARAGE}`);
-    const json = await res.json();
+  public async getCars(): Promise<ICar[]> {
+    const res: Response = await fetch(`${this.domain}/${Path.GARAGE}`);
+    const json: ICar[] = await res.json();
     this.carsInGarage = json;
     return this.carsInGarage;
   }
 
-  public async getCar(id: number) {
-    const res = await fetch(`${this.domain}/${Path.GARAGE}/${id}`);
-    const car = await res.json();
+  public async getCar(id: number): Promise<ICar> {
+    const res: Response = await fetch(`${this.domain}/${Path.GARAGE}/${id}`);
+    const car: ICar = await res.json();
     return car;
   }
 
-  public async deleteCar(id: number) {
+  public async deleteCar(id: number): Promise<void> {
     await fetch(`${this.domain}/${Path.GARAGE}/${id}`, {
       method: 'DELETE',
     });
   }
 
-  public async createCar(parameters: { name: string; color: string }) {
+  public async createCar(parameters: {
+    name: string;
+    color: string;
+  }): Promise<ICar[]> {
     await fetch(`${this.domain}/${Path.GARAGE}`, {
       method: 'POST',
       headers: {
@@ -43,7 +46,7 @@ class AppModel {
   public async updateCar(
     id: number,
     parameters: { name: string; color: string }
-  ) {
+  ): Promise<ICar[]> {
     await fetch(`${this.domain}/${Path.GARAGE}/${id}`, {
       method: 'PUT',
       headers: {

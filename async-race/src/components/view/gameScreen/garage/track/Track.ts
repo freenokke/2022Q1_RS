@@ -33,7 +33,7 @@ class Track extends Control {
     this.addListeners();
   }
 
-  private draw() {
+  private draw(): void {
     this.node.innerHTML = `
     <div class="handle">
       <span class='name text-center font-extrabold text-orange-600'>${this.name}</span>
@@ -63,7 +63,7 @@ class Track extends Control {
     );
   }
 
-  private createButtons() {
+  private createButtons(): void {
     this.selectCarButton = new Control(
       null,
       'button',
@@ -78,7 +78,7 @@ class Track extends Control {
     );
   }
 
-  private async addListeners() {
+  private async addListeners(): Promise<void> {
     this.selectCarButton.node.onclick = () => {
       const input = document.querySelector(
         '#updateTextInput'

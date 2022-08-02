@@ -4,9 +4,8 @@ import ScreenRouter from '../ViewRouter';
 import AppController from '../../controller/AppController';
 
 class GameScreen extends ScreenRouter {
-  handler: GameHadler;
-  garage: Garage;
-  private controller: AppController;
+  private handler: GameHadler;
+  public garage: Garage;
 
   constructor(
     parentNode: HTMLElement,
@@ -16,7 +15,6 @@ class GameScreen extends ScreenRouter {
     controller: AppController
   ) {
     super(parentNode, tagName, className, content);
-    this.controller = controller;
     this.handler = new GameHadler(
       this.node,
       'div',

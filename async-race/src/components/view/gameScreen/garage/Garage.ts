@@ -5,8 +5,8 @@ import AppController from '../../../controller/AppController';
 import Track from './track/Track';
 
 class Garage extends Control {
-  displayedCars: Array<Track>;
-  controller: AppController;
+  private displayedCars: Array<Track>;
+  private controller: AppController;
 
   constructor(
     parentNode: HTMLElement,
@@ -19,7 +19,7 @@ class Garage extends Control {
     this.controller = controller;
   }
 
-  render(cars: Array<ICar>) {
+  render(cars: Array<ICar>): void {
     if (this.node.firstElementChild) {
       this.clear();
     }

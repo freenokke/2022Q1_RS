@@ -1,11 +1,11 @@
 import Control from '../Control';
 
 class ScreenRouter extends Control {
-  showScreen() {
+  public showScreen(): void {
     this.node.classList.remove('hidden');
   }
 
-  hideScreen() {
+  public hideScreen(): void {
     this.node.classList.add('hidden');
   }
 }

@@ -5,10 +5,9 @@ import ScreenToggler from './screenToggler/ScreenToggler';
 import WinnersScreen from './winnerScreen/WinnersScreen';
 
 class AppView extends Control {
-  controller: AppController;
-  screenToggler: ScreenToggler;
-  gameScreen: GameScreen;
-  winnerScreen: WinnersScreen;
+  public screenToggler: ScreenToggler;
+  public gameScreen: GameScreen;
+  public winnerScreen: WinnersScreen;
 
   constructor(
     parentNode: HTMLElement,
@@ -18,7 +17,6 @@ class AppView extends Control {
     controller: AppController
   ) {
     super(parentNode, tag, className, content);
-    this.controller = controller;
     this.gameScreen = new GameScreen(
       this.node,
       'main',

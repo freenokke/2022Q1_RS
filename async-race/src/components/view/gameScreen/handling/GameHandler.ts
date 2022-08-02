@@ -4,16 +4,16 @@ import AppController from '../../../controller/AppController';
 
 class GameHadler extends Control {
   private controller: AppController;
-  public createNameInput: Control<HTMLInputElement>;
-  public createColorInput: Control<HTMLInputElement>;
-  public createButton: Control<HTMLElement>;
-  public updateNameInput: Control<HTMLInputElement>;
-  public updateColorInput: Control<HTMLInputElement>;
-  public updateButton: Control<HTMLElement>;
-  public raceButton: Control<HTMLElement>;
-  public resetButton: Control<HTMLElement>;
-  public generateCarsButton: Control<HTMLElement>;
-  public renderGARAGE: (cars: Array<ICar>) => void;
+  private createNameInput: Control<HTMLInputElement>;
+  private createColorInput: Control<HTMLInputElement>;
+  private createButton: Control<HTMLElement>;
+  private updateNameInput: Control<HTMLInputElement>;
+  private updateColorInput: Control<HTMLInputElement>;
+  private updateButton: Control<HTMLElement>;
+  private raceButton: Control<HTMLElement>;
+  private resetButton: Control<HTMLElement>;
+  private generateCarsButton: Control<HTMLElement>;
+  private renderGARAGE: (cars: Array<ICar>) => void;
 
   constructor(
     parentNode: HTMLElement,
@@ -69,7 +69,7 @@ class GameHadler extends Control {
     this.updatingFieldListeners();
   }
 
-  private carCreationField() {
+  private carCreationField(): void {
     const createCarField = new Control(
       this.node,
       'div',
@@ -100,7 +100,7 @@ class GameHadler extends Control {
     this.creationFieldListeners();
   }
 
-  private handleButtons() {
+  private handleButtons(): void {
     const handleFields = new Control(
       this.node,
       'div',
@@ -127,7 +127,7 @@ class GameHadler extends Control {
     );
   }
 
-  private creationFieldListeners() {
+  private creationFieldListeners(): void {
     this.createButton.node.onclick = async () => {
       const cars = await this.controller.createCar({
         name: this.createNameInput.node.value.trim()
@@ -140,7 +140,7 @@ class GameHadler extends Control {
     };
   }
 
-  private updatingFieldListeners() {
+  private updatingFieldListeners(): void {
     this.updateButton.node.onclick = async () => {
       const cars = await this.controller.updateCar(
         Number(this.updateNameInput.node.dataset.id),
