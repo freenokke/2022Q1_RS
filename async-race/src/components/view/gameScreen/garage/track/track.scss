@@ -1,0 +1,14 @@
+.distance {
+  position: relative;
+  &::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 47%;
+    width: 100%;
+    border-bottom-color: white;
+    border-bottom-style: dashed;
+    z-index: 10;
+    border-bottom-width: 5px;
+  }
+}
