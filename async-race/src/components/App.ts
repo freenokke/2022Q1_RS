@@ -28,6 +28,18 @@ class Application extends Control {
     this.renderCarsInGarage(cars);
   }
 
+  private checkActiveScreen(): void {
+    if (localStorage.getItem('screen') === 'winners') {
+      this.view.winnerScreen.showScreen();
+      return;
+    }
+    if (localStorage.getItem('screen') === 'game') {
+      this.view.gameScreen.showScreen();
+      return;
+    }
+    this.view.gameScreen.showScreen();
+  }
+
   private async renderCarsInGarage(cars: Array<ICar>): Promise<void> {
     this.view.gameScreen.garage.render(cars);
   }
