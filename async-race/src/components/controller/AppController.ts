@@ -8,6 +8,11 @@ class AppController {
     this.model = new AppModel();
   }
 
+  public async getCars(page?: number) {
+    const res = await this.model.getCars(page);
+    return res;
+  }
+
   public async deleteCar(id: number): Promise<ICar[]> {
     await this.model.deleteCar(id);
     const cars = await this.model.getCars();

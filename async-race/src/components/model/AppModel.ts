@@ -4,13 +4,27 @@ import ICar from '../../types/ICar';
 class AppModel {
   private domain: Domain;
   private carsInGarage: Array<ICar>;
+  private limitOnPage: number;
 
   constructor() {
     this.domain = Domain.BASE;
+    this.limitOnPage = 7;
   }
 
-  public async getCars(): Promise<ICar[]> {
-    const res: Response = await fetch(`${this.domain}/${Path.GARAGE}`);
+  public async getCars(page?: number): Promise<ICar[]> {
+    let res: Response;
+    if (page) {
+      res = await fetch(
+        `${this.domain}/${Path.GARAGE}/?_limit=${this.limitOnPage}/&_page=${page}`
+      );
+      sessionStorage.setItem('currentGamePage', page.toString());
+    } else {
+      res = await fetch(
+        `${this.domain}/${Path.GARAGE}/?_limit=${this.limitOnPage}`
+      );
+    }
+    const totalCarsCount = res.headers.get('X-Total-Count');
+    sessionStorage.setItem('totalCarsCount', totalCarsCount);
     const json: ICar[] = await res.json();
     this.carsInGarage = json;
     return this.carsInGarage;
@@ -39,7 +53,8 @@ class AppModel {
       },
       body: JSON.stringify(parameters),
     });
-    const cars = this.getCars();
+    const currentPage = sessionStorage.getItem('currentGamePage');
+    const cars = this.getCars(Number(currentPage));
     return cars;
   }
 
@@ -54,7 +69,8 @@ class AppModel {
       },
       body: JSON.stringify(parameters),
     });
-    const cars = this.getCars();
+    const currentPage = sessionStorage.getItem('currentGamePage');
+    const cars = this.getCars(Number(currentPage));
     return cars;
   }
 }

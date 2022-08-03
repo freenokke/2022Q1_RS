@@ -24,7 +24,7 @@ class Application extends Control {
 
   public async init(): Promise<void> {
     this.checkActiveScreen();
-    const cars = await this.model.getCars();
+    const cars = await this.model.getCars(1);
     this.renderCarsInGarage(cars);
   }
 
