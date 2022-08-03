@@ -1,4 +1,5 @@
 import ICar from '../../types/ICar';
+import IRaceData from '../../types/IRaceData';
 import AppModel from '../model/AppModel';
 
 class AppController {
@@ -33,6 +34,16 @@ class AppController {
   ): Promise<ICar[]> {
     const cars = await this.model.updateCar(id, parameters);
     return cars;
+  }
+
+  public async startEngine(id: number, status: string): Promise<IRaceData> {
+    const data = await this.model.startEngine(id, status);
+    return data;
+  }
+
+  public async driveMode(id: number) {
+    const res = await this.model.driveMode(id);
+    return res;
   }
 }
 

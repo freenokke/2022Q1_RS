@@ -1,5 +1,6 @@
 import { Domain, Path } from '../../enum/endpoint';
 import ICar from '../../types/ICar';
+import IRaceData from '../../types/IRaceData';
 
 class AppModel {
   private domain: Domain;
@@ -72,6 +73,27 @@ class AppModel {
     const currentPage = sessionStorage.getItem('currentGamePage');
     const cars = this.getCars(Number(currentPage));
     return cars;
+  }
+
+  public async startEngine(id: number, status: string): Promise<IRaceData> {
+    const res: Response = await fetch(
+      `${this.domain}/${Path.ENGINE}?id=${id}&status=${status}`,
+      {
+        method: 'PATCH',
+      }
+    );
+    const data: IRaceData = await res.json();
+    return data;
+  }
+
+  public async driveMode(id: number, status: string = 'drive') {
+    const res = await fetch(
+      `${this.domain}/${Path.ENGINE}?id=${id}&status=${status}`,
+      {
+        method: 'PATCH',
+      }
+    );
+    return res;
   }
 }
 
