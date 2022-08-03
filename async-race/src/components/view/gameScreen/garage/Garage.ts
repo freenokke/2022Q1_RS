@@ -34,7 +34,10 @@ class Garage extends Control {
     if (this.node.firstElementChild) {
       this.clear();
     }
+    // обновление данных о состоянии гаража
+    this.currentPage = sessionStorage.getItem('currentGamePage');
     this.carsInGarage = sessionStorage.getItem('totalCarsCount');
+    this.lastPage = Math.ceil(Number(this.carsInGarage) / this.limitOnPage);
 
     this.showCarsInGarage();
 
