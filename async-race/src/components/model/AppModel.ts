@@ -86,7 +86,10 @@ class AppModel {
     return data;
   }
 
-  public async driveMode(id: number, status: string = 'drive') {
+  public async driveMode(
+    id: number,
+    status: string = 'drive'
+  ): Promise<Response> {
     const res = await fetch(
       `${this.domain}/${Path.ENGINE}?id=${id}&status=${status}`,
       {

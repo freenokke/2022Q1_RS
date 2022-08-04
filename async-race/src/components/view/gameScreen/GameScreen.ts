@@ -15,15 +15,9 @@ class GameScreen extends ScreenRouter {
     controller: AppController
   ) {
     super(parentNode, tagName, className, content);
-    this.handler = new GameHadler(
-      this.node,
-      'div',
-      'handler',
-      '',
-      controller,
-      (cars) => this.garage.render(cars)
-    );
+    this.handler = new GameHadler(this.node, 'div', 'handler', '', controller);
     this.garage = new Garage(this.node, 'div', 'garage mt-3', '', controller);
+    this.handler.GARAGE = this.garage;
   }
 }
 export default GameScreen;

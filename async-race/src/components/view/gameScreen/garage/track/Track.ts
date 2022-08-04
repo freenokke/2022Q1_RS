@@ -10,11 +10,11 @@ class Track extends Control {
   private selectCarButton: Control<HTMLElement>;
   private removeCarButton: Control<HTMLElement>;
   private controller: AppController;
-  private id: number;
+  public id: number;
   private renderGARAGE: (cars: Array<ICar>) => void;
-  private startEngineButton: Control<HTMLElement>;
+  public startEngineButton: Control<HTMLElement>;
   private stopEngineButton: Control<HTMLElement>;
-  private animationFrameId: number;
+  public animationFrameId: number;
 
   constructor(
     parentNode: HTMLElement,
@@ -117,24 +117,28 @@ class Track extends Control {
   }
 
   // Добавление обработчиков для кнопок управления двигателем
-  private async controlEngineListeners() {
+  private async controlEngineListeners(): Promise<void> {
     this.startEngineButton.node.onclick = async () => {
       const data: IRaceData = await this.controller.startEngine(
         this.id,
         'started'
       );
-      const { velocity, distance } = data;
-      const time = distance / velocity;
-      this.drive(time);
-      this.controller.driveMode(this.id).then((res) => {
-        if (res.status === 500) {
-          cancelAnimationFrame(this.animationFrameId);
-        }
-      });
+      this.preparingToDrive(data);
     };
   }
 
-  private drive = (time: number) => {
+  public preparingToDrive(data: IRaceData): void {
+    const { velocity, distance } = data;
+    const time = distance / velocity;
+    this.drive(time);
+    this.controller.driveMode(this.id).then((res) => {
+      if (res.status === 500) {
+        cancelAnimationFrame(this.animationFrameId);
+      }
+    });
+  }
+
+  public drive: (time: number) => void = (time: number) => {
     const distance = this.node.querySelector('.distance') as HTMLElement;
     const car = this.node.querySelector('.car') as HTMLElement;
     let start = 0;

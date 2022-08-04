@@ -13,6 +13,7 @@ class Garage extends Control {
   private limitOnPage: number;
   private currentPage: string;
   private lastPage: number;
+  public displayedCar: Track[];
 
   constructor(
     parentNode: HTMLElement,
@@ -41,7 +42,7 @@ class Garage extends Control {
 
     this.showCarsInGarage();
 
-    cars.map((element) => {
+    this.displayedCar = cars.map((element) => {
       const track = new Track(
         this.node,
         'div',
