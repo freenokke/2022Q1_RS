@@ -1,5 +1,5 @@
 import ICar from '../types/ICar';
-import Control from './Control';
+import Control from './helpers/Control';
 import AppController from './controller/AppController';
 import AppModel from './model/AppModel';
 import AppView from './view/AppView';

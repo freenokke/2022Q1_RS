@@ -1,4 +1,4 @@
-import Control from '../../../../Control';
+import Control from '../../../../helpers/Control';
 import '../../../../../assets/images/sprite-car.svg';
 import AppController from '../../../../controller/AppController';
 import ICar from '../../../../../types/ICar';

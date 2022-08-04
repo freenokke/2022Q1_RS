@@ -1,5 +1,5 @@
 import IRaceData from '../../../../types/IRaceData';
-import Control from '../../../Control';
+import Control from '../../../helpers/Control';
 import AppController from '../../../controller/AppController';
 import Garage from '../garage/Garage';
 

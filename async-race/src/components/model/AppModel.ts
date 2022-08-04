@@ -1,5 +1,5 @@
 import { Domain, Path } from '../../enum/endpoint';
-import { carBrand, carModel } from './randomNames';
+import { carBrand, carModel } from '../helpers/randomNames';
 import ICar from '../../types/ICar';
 import IRaceData from '../../types/IRaceData';
 

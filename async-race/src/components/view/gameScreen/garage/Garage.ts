@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import ICar from '../../../../types/ICar';
-import Control from '../../../Control';
+import Control from '../../../helpers/Control';
 import AppController from '../../../controller/AppController';
 import Track from './track/Track';
 

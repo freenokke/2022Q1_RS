@@ -1,4 +1,4 @@
-import Control from '../../Control';
+import Control from '../../helpers/Control';
 import GameScreen from '../gameScreen/GameScreen';
 import WinnersScreen from '../winnerScreen/WinnersScreen';
 

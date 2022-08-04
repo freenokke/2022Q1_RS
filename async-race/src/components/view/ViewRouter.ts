@@ -1,4 +1,4 @@
-import Control from '../Control';
+import Control from '../helpers/Control';
 
 class ScreenRouter extends Control {
   public showScreen(): void {

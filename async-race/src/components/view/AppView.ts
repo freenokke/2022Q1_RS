@@ -1,4 +1,4 @@
-import Control from '../Control';
+import Control from '../helpers/Control';
 import AppController from '../controller/AppController';
 import GameScreen from './gameScreen/GameScreen';
 import ScreenToggler from './screenToggler/ScreenToggler';
