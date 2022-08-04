@@ -81,6 +81,8 @@ class GameHadler extends Control {
       'textInput'
     );
     (this.createNameInput.node as HTMLInputElement).type = 'text';
+    (this.createNameInput.node as HTMLInputElement).placeholder =
+      ' Some new car';
 
     this.createColorInput = new Control(
       createCarField.node,
@@ -185,6 +187,12 @@ class GameHadler extends Control {
     };
   }
 
+  private generateCarButtonListener(): void {
+    this.generateCarsButton.node.onclick = async () => {
+      const cars = await this.controller.createPlentyOfCars(100);
+      this.GARAGE.render(cars);
+    };
+  }
 }
 
 export default GameHadler;

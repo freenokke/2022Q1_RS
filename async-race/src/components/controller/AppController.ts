@@ -28,6 +28,11 @@ class AppController {
     return cars;
   }
 
+  public async createPlentyOfCars(number: number): Promise<ICar[]> {
+    const cars = await this.model.createPlentyOfCars(number);
+    return cars;
+  }
+
   public async updateCar(
     id: number,
     parameters: { name: string; color: string }

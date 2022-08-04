@@ -1,4 +1,5 @@
 import { Domain, Path } from '../../enum/endpoint';
+import { carBrand, carModel } from './randomNames';
 import ICar from '../../types/ICar';
 import IRaceData from '../../types/IRaceData';
 
@@ -56,6 +57,37 @@ class AppModel {
     });
     const currentPage = sessionStorage.getItem('currentGamePage');
     const cars = this.getCars(Number(currentPage));
+    return cars;
+  }
+
+  public async createPlentyOfCars(number: number): Promise<ICar[]> {
+    const arr: Promise<Response>[] = [];
+    let i = 0;
+    while (i < number) {
+      const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+      const randomBrand = carBrand[Math.floor(Math.random() * carBrand.length)];
+      const randomModel = carModel[Math.floor(Math.random() * carModel.length)];
+      const parameters: {
+        name: string;
+        color: string;
+      } = {
+        name: `${randomBrand} ${randomModel}`,
+        color: `#${randomColor}`,
+      };
+
+      const res = fetch(`${this.domain}/${Path.GARAGE}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(parameters),
+      });
+      arr.push(res);
+      i += 1;
+    }
+    await Promise.all(arr);
+    const currentPage = sessionStorage.getItem('currentGamePage');
+    const cars = await this.getCars(Number(currentPage));
     return cars;
   }
 
