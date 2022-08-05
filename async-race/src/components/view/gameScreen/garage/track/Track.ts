@@ -119,11 +119,20 @@ class Track extends Control {
   // Добавление обработчиков для кнопок управления двигателем
   private async controlEngineListeners(): Promise<void> {
     this.startEngineButton.node.onclick = async () => {
-      const data: IRaceData = await this.controller.startEngine(
+      const data: IRaceData = await this.controller.startStopEngine(
         this.id,
         'started'
       );
       this.preparingToDrive(data);
+      this.disableStopEngineButton(false);
+      this.disableStartEngineButton(true);
+    };
+
+    this.stopEngineButton.node.onclick = async () => {
+      await this.controller.startStopEngine(this.id, 'stopped');
+      this.preventDriving();
+      this.disableStopEngineButton(true);
+      this.disableStartEngineButton(false);
     };
   }
 
@@ -156,6 +165,44 @@ class Track extends Control {
 
     tick();
   };
+
+  public preventDriving() {
+    cancelAnimationFrame(this.animationFrameId);
+    const car = this.node.querySelector('.car') as HTMLElement;
+    car.style.transform = `translateX(0px)`;
+  }
+
+  public disableStartEngineButton(boolean: boolean): void {
+    if (boolean) {
+      this.startEngineButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.startEngineButton.node.classList.remove('btn-blue');
+    } else {
+      this.startEngineButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.startEngineButton.node.classList.add('btn-blue');
+    }
+  }
+
+  public disableStopEngineButton(boolean: boolean): void {
+    if (boolean) {
+      this.stopEngineButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.stopEngineButton.node.classList.remove('btn-red');
+    } else {
+      this.stopEngineButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.stopEngineButton.node.classList.add('btn-red');
+    }
+  }
 }
 
 export default Track;

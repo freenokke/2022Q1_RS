@@ -41,8 +41,8 @@ class AppController {
     return cars;
   }
 
-  public async startEngine(id: number, status: string): Promise<IRaceData> {
-    const data = await this.model.startEngine(id, status);
+  public async startStopEngine(id: number, status: string): Promise<IRaceData> {
+    const data = await this.model.startStopEngine(id, status);
     return data;
   }
 

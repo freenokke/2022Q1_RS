@@ -107,7 +107,7 @@ class AppModel {
     return cars;
   }
 
-  public async startEngine(id: number, status: string): Promise<IRaceData> {
+  public async startStopEngine(id: number, status: string): Promise<IRaceData> {
     const res: Response = await fetch(
       `${this.domain}/${Path.ENGINE}?id=${id}&status=${status}`,
       {

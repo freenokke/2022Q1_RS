@@ -166,7 +166,7 @@ class GameHadler extends Control {
       // Пробежаться по машинам и наполненить массив промисами на данные для гонки
       this.GARAGE.displayedCar.forEach((item) => {
         const track = item;
-        race.push(this.controller.startEngine(track.id, 'started'));
+        race.push(this.controller.startStopEngine(track.id, 'started'));
       });
       // ожидание выполнения всех промисов
       const result: PromiseSettledResult<IRaceData>[] = await Promise.allSettled(
@@ -181,9 +181,24 @@ class GameHadler extends Control {
         return res;
       });
       // Заново пробежаться по машинам и запустить анимации в соответствии с полученными данными
-      this.GARAGE.displayedCar.forEach((track, index) => {
-        track.preparingToDrive(raceDatas[index]);
+
+  private resetButtonListener(): void {
+    this.resetButton.node.onclick = async () => {
+      // Ожидание окончания заезда всех машин
+      await Promise.allSettled(
+        this.GARAGE.displayedCar.map((track) => {
+          return this.controller.startStopEngine(track.id, 'stopped');
+        })
+      );
+      // сброс в исходное положение + изменение состояния кнопок
+      this.GARAGE.displayedCar.forEach((track) => {
+        track.preventDriving();
+        track.disableStartEngineButton(false);
+        track.disableStopEngineButton(true);
       });
+      this.disableResetButton(true);
+      this.disableRaceButton(false);
+      this.disableGenerateButton(false);
     };
   }
 
@@ -192,6 +207,48 @@ class GameHadler extends Control {
       const cars = await this.controller.createPlentyOfCars(100);
       this.GARAGE.render(cars);
     };
+  }
+
+  private disableRaceButton(boolean: boolean): void {
+    if (boolean) {
+      this.raceButton.node.classList.add('pointer-events-none', 'btn-pressed');
+      this.raceButton.node.classList.remove('btn-red');
+    } else {
+      this.raceButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.raceButton.node.classList.add('btn-red');
+    }
+  }
+
+  private disableGenerateButton(boolean: boolean): void {
+    if (boolean) {
+      this.generateCarsButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.generateCarsButton.node.classList.remove('btn-red');
+    } else {
+      this.generateCarsButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.generateCarsButton.node.classList.add('btn-red');
+    }
+  }
+
+  private disableResetButton(boolean: boolean): void {
+    if (boolean) {
+      this.resetButton.node.classList.add('pointer-events-none', 'btn-pressed');
+      this.resetButton.node.classList.remove('btn-red');
+    } else {
+      this.resetButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.resetButton.node.classList.add('btn-red');
+    }
   }
 }
 
