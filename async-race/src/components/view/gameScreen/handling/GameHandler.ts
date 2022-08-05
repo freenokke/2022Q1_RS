@@ -116,7 +116,7 @@ class GameHadler extends Control {
     this.resetButton = new Control(
       handleFields.node,
       'button',
-      'raceButton btn btn-red',
+      'raceButton btn btn-pressed pointer-events-none',
       'RESET'
     );
     this.generateCarsButton = new Control(
@@ -128,6 +128,7 @@ class GameHadler extends Control {
 
     this.raceButtonListener();
     this.generateCarButtonListener();
+    this.resetButtonListener();
   }
 
   private creationFieldListeners(): void {
@@ -180,7 +181,19 @@ class GameHadler extends Control {
         }
         return res;
       });
+      this.disableRaceButton(true);
+      this.disableGenerateButton(true);
       // Заново пробежаться по машинам и запустить анимации в соответствии с полученными данными
+      await Promise.allSettled(
+        this.GARAGE.displayedCar.map((track, index) => {
+          track.disableStartEngineButton(true);
+          track.disableStopEngineButton(false);
+          return track.preparingToDrive(raceDatas[index]);
+        })
+      );
+      this.disableResetButton(false);
+    };
+  }
 
   private resetButtonListener(): void {
     this.resetButton.node.onclick = async () => {

@@ -15,6 +15,7 @@ module.exports = {
           padding: '.5rem 1rem',
           borderRadius: '.25rem',
           fontWeight: '600',
+          boxShadow: '0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1)'
         },
         '.btn-blue': {
           backgroundColor: '#3490dc',
@@ -29,6 +30,10 @@ module.exports = {
           '&:hover': {
             backgroundColor: '#cc1f1a'
           },
+        },
+        '.btn-pressed': {
+          backgroundColor: 'rgb(203 213 225)',
+          boxShadow: '0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset'
         },
       });
     }),

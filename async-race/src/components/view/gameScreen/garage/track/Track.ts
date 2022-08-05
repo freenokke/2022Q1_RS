@@ -41,11 +41,11 @@ class Track extends Control {
 
   private draw(): void {
     this.node.innerHTML = `
-    <div class="handle">
+    <div>
       <span class='name text-center font-extrabold text-orange-600'>${this.name}</span>
     </div>
     <div class="way flex h-[100px] bg-gray-500 px-2">
-      <div class="self-center flex gap-1 startstop"></div>
+      <div class="self-center"></div>
       <div class="distance flex grow items-center justify-start">
         <div class="car z-20">
           <svg width="165" height="80" class="relative rotate-[-90]" fill="${this.color}">
@@ -86,14 +86,14 @@ class Track extends Control {
     this.startEngineButton = new Control(
       null,
       'button',
-      'btn p-1 bg-orange-300',
-      'A'
+      'btn btn-blue block p-1 mb-2',
+      'START'
     );
     this.stopEngineButton = new Control(
       null,
       'button',
-      'btn pointer-events-none p-1 bg-gray-300',
-      'B'
+      'btn btn-pressed block pointer-events-none p-1',
+      'STOP'
     );
   }
 
@@ -136,11 +136,11 @@ class Track extends Control {
     };
   }
 
-  public preparingToDrive(data: IRaceData): void {
+  public async preparingToDrive(data: IRaceData): Promise<void> {
     const { velocity, distance } = data;
     const time = distance / velocity;
     this.drive(time);
-    this.controller.driveMode(this.id).then((res) => {
+    await this.controller.driveMode(this.id).then((res) => {
       if (res.status === 500) {
         cancelAnimationFrame(this.animationFrameId);
       }
