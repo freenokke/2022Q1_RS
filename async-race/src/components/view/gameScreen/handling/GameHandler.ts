@@ -45,7 +45,7 @@ class GameHadler extends Control {
     this.updateNameInput = new Control(
       updateCarField.node,
       'input',
-      'textInput'
+      'textInput p-1 rounded'
     );
     (this.updateNameInput.node as HTMLInputElement).type = 'text';
     this.updateNameInput.node.id = 'updateTextInput';
@@ -53,7 +53,7 @@ class GameHadler extends Control {
     this.updateColorInput = new Control(
       updateCarField.node,
       'input',
-      'colorInpit'
+      'colorInpit rounded'
     );
     (this.updateColorInput.node as HTMLInputElement).type = 'color';
     this.updateColorInput.node.id = 'updateColorInput';
@@ -61,7 +61,7 @@ class GameHadler extends Control {
     this.updateButton = new Control(
       updateCarField.node,
       'button',
-      'btn p-1 bg-gray-200',
+      'btn btn-orange',
       'UPDATE'
     );
 
@@ -78,7 +78,7 @@ class GameHadler extends Control {
     this.createNameInput = new Control(
       createCarField.node,
       'input',
-      'textInput'
+      'textInput p-1 rounded'
     );
     (this.createNameInput.node as HTMLInputElement).type = 'text';
     (this.createNameInput.node as HTMLInputElement).placeholder =
@@ -87,14 +87,14 @@ class GameHadler extends Control {
     this.createColorInput = new Control(
       createCarField.node,
       'input',
-      'colorInput'
+      'colorInput rounded'
     );
     (this.createColorInput.node as HTMLInputElement).type = 'color';
 
     this.createButton = new Control(
       createCarField.node,
       'button',
-      'btn p-1 bg-gray-200',
+      'btn btn-orange',
       'CREATE'
     );
 

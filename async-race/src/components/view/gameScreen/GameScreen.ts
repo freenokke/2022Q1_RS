@@ -16,7 +16,13 @@ class GameScreen extends ScreenRouter {
   ) {
     super(parentNode, tagName, className, content);
     this.handler = new GameHadler(this.node, 'div', 'handler', '', controller);
-    this.garage = new Garage(this.node, 'div', 'garage mt-3', '', controller);
+    this.garage = new Garage(
+      this.node,
+      'div',
+      'garage mt-3 flex flex-col gap-2',
+      '',
+      controller
+    );
     this.handler.GARAGE = this.garage;
   }
 }

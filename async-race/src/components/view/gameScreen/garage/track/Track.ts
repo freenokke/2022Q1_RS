@@ -41,10 +41,10 @@ class Track extends Control {
 
   private draw(): void {
     this.node.innerHTML = `
-    <div>
-      <span class='name text-center font-extrabold text-orange-600'>${this.name}</span>
+    <div class="flex gap-2">
+      <span class='name text-center font-semibold text-white p-1 bg-black bg-opacity-25 rounded-xl'>${this.name}</span>
     </div>
-    <div class="way flex h-[100px] bg-gray-500 px-2">
+    <div class="way flex h-[100px] bg-neutral-500 px-2">
       <div class="self-center"></div>
       <div class="distance flex grow items-center justify-start">
         <div class="car z-20">

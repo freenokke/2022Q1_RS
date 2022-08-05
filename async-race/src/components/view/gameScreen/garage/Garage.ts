@@ -46,7 +46,7 @@ class Garage extends Control {
       const track = new Track(
         this.node,
         'div',
-        'track',
+        'flex flex-col gap-2',
         element.name,
         element.color,
         element.id,
@@ -64,7 +64,7 @@ class Garage extends Control {
     const counter = new Control(
       this.node,
       'div',
-      'font-extrabold tracking-wider p-3'
+      'font-extrabold text-xl tracking-wider p-1 fo'
     );
     counter.node.textContent = `Garage(${this.carsInGarage})`;
   }
@@ -104,27 +104,19 @@ class Garage extends Control {
   // Проверят какие кнопки пагинации должны быть неактивны
   private isActive(): void {
     if (Number(this.currentPage) === 1) {
-      this.prevButton.node.classList.add(
-        'bg-gray-300',
-        'cursor-default',
-        'pointer-events-none'
-      );
+      this.prevButton.node.classList.add('btn-pressed', 'pointer-events-none');
     }
     if (Number(this.carsInGarage) <= 7) {
-      this.nextButton.node.classList.add('bg-gray-300', 'pointer-events-none');
+      this.nextButton.node.classList.add('btn-pressed', 'pointer-events-none');
     }
     if (Number(this.carsInGarage) > 7) {
       this.nextButton.node.classList.remove(
-        'bg-gray-300',
+        'btn-pressed',
         'pointer-events-none'
       );
     }
     if (+this.currentPage === this.lastPage) {
-      this.nextButton.node.classList.add(
-        'bg-gray-300',
-        'cursor-default',
-        'pointer-events-none'
-      );
+      this.nextButton.node.classList.add('btn-pressed', 'pointer-events-none');
     }
   }
 

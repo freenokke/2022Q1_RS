@@ -20,7 +20,7 @@ class AppView extends Control {
     this.gameScreen = new GameScreen(
       this.node,
       'main',
-      'view__gamescreen w-[100%] bg-red-200 absolute top-[45px] left-0 px-3 hidden',
+      'view__gamescreen w-[100%] absolute top-[45px] left-0 px-3 hidden',
       '',
       controller
     );

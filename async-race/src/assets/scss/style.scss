@@ -1,4 +1,12 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-@import '../../components/view/gameScreen/garage/track/track.scss'
+@import '../../components/view/gameScreen/garage/track/track.scss';
+
+
+body {
+  background: url('../images/background.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  min-height: 100vh;
+};

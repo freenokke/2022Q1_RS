@@ -31,8 +31,16 @@ module.exports = {
             backgroundColor: '#cc1f1a'
           },
         },
+        '.btn-orange': {
+          backgroundColor: 'rgb(252 211 77)',
+          color: '#fff',
+          '&:hover': {
+            backgroundColor: 'rgb(217 119 6)'
+          },
+        },
         '.btn-pressed': {
           backgroundColor: 'rgb(203 213 225)',
+          color: 'rgb(0, 0, 0)',
           boxShadow: '0px 5px 10px 2px rgba(34, 60, 80, 0.2) inset'
         },
       });
