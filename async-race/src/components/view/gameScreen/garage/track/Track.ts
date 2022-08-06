@@ -78,13 +78,13 @@ class Track extends Control {
     this.selectCarButton = new Control(
       null,
       'button',
-      'btn p-1 bg-orange-300',
+      'btn p-1 btn-orange',
       'Select'
     );
     this.removeCarButton = new Control(
       null,
       'button',
-      'btn p-1 bg-orange-300',
+      'btn p-1 btn-orange',
       'Remove'
     );
     this.startEngineButton = new Control(

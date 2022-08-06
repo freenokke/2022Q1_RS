@@ -32,10 +32,10 @@ module.exports = {
           },
         },
         '.btn-orange': {
-          backgroundColor: 'rgb(252 211 77)',
-          color: '#fff',
+          backgroundColor: 'rgb(253 186 116)',
+          color: 'rgb(23 23 23)',
           '&:hover': {
-            backgroundColor: 'rgb(217 119 6)'
+            backgroundColor: 'rgb(251 146 60)'
           },
         },
         '.btn-pressed': {

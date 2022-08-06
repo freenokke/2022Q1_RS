@@ -64,7 +64,7 @@ class Garage extends Control {
     const counter = new Control(
       this.node,
       'div',
-      'font-extrabold text-xl tracking-wider p-1 fo'
+      'font-extrabold text-white w-max text-xl tracking-wider p-1 bg-black bg-opacity-25 rounded-xl p-1'
     );
     counter.node.textContent = `Garage(${this.carsInGarage})`;
   }
@@ -97,6 +97,8 @@ class Garage extends Control {
     this.pagination.node.innerHTML = `
       Page: ${this.currentPage} / ${this.lastPage}
       `;
+    this.pagination.node.className =
+      'font-extrabold text-xl text-white bg-black bg-opacity-25 rounded-xl p-1';
     this.isActive();
     this.createPaginationListeners();
   }
