@@ -46,8 +46,8 @@ class AppController {
     return data;
   }
 
-  public async driveMode(id: number): Promise<Response> {
-    const res = await this.model.driveMode(id);
+  public async driveMode(id: number, signal: AbortSignal): Promise<Response> {
+    const res = await this.model.driveMode(id, signal);
     return res;
   }
 }

@@ -5,6 +5,8 @@ import ICar from '../../../../../types/ICar';
 import IRaceData from '../../../../../types/IRaceData';
 
 class Track extends Control {
+  static Winner: Track = null;
+
   private name: string;
   private color: string;
   private selectCarButton: Control<HTMLElement>;
@@ -15,6 +17,8 @@ class Track extends Control {
   public startEngineButton: Control<HTMLElement>;
   private stopEngineButton: Control<HTMLElement>;
   public animationFrameId: number;
+  public result: Control<HTMLElement>;
+  private abortRequest: AbortController;
 
   constructor(
     parentNode: HTMLElement,
@@ -123,7 +127,7 @@ class Track extends Control {
         this.id,
         'started'
       );
-      this.preparingToDrive(data);
+      this.preparingAndDrive(data);
       this.disableStopEngineButton(false);
       this.disableStartEngineButton(true);
     };
@@ -136,15 +140,29 @@ class Track extends Control {
     };
   }
 
-  public async preparingToDrive(data: IRaceData): Promise<void> {
+  public async preparingAndDrive(
+    data: IRaceData,
+    raceMode: boolean = false
+  ): Promise<void> {
+    Track.Winner = null;
+    this.abortRequest = new AbortController();
     const { velocity, distance } = data;
     const time = distance / velocity;
-    this.drive(time);
-    await this.controller.driveMode(this.id).then((res) => {
-      if (res.status === 500) {
-        cancelAnimationFrame(this.animationFrameId);
-      }
-    });
+    const milSecAtSec = 1000;
+    const seconds = time / milSecAtSec;
+    this.drive(seconds);
+    const res = await this.controller.driveMode(
+      this.id,
+      this.abortRequest.signal
+    );
+    if (res.status === 500) {
+      cancelAnimationFrame(this.animationFrameId);
+    } else if (raceMode && Track.Winner === null) {
+      Track.Winner = this;
+      this.showRaceResult(seconds, true);
+    } else {
+      this.showRaceResult(seconds);
+    }
   }
 
   public drive: (time: number) => void = (time: number) => {
@@ -153,7 +171,7 @@ class Track extends Control {
     let start = 0;
     const from = distance.offsetLeft;
     const to = distance.offsetWidth - car.offsetWidth;
-    const frameCount = (time / 1000) * 60;
+    const frameCount = time * 60;
     const offset = (to - from) / frameCount;
     const tick = () => {
       start += offset;
@@ -166,10 +184,44 @@ class Track extends Control {
     tick();
   };
 
-  public preventDriving() {
+  private showRaceResult(time: number, isWinner: boolean = false) {
+    const dist = this.node.querySelector('.distance') as HTMLElement;
+    if (isWinner) {
+      this.result = new Control(
+        dist,
+        'div',
+        'race-result flex flex-col justify-between items-center h-[90%] absolute left-[50%] translate-x-[-50%]'
+      );
+      this.result.node.insertAdjacentHTML(
+        'beforeend',
+        `<span class='z-50 text-4xl font-extrabold tracking-widest animate-bounce text-white'>WINNER</span>
+        <span class='z-50 text-3xl font-semibold tracking-wider text-white'>${time.toFixed(
+          3
+        )} sec</span>`
+      );
+    } else {
+      this.result = new Control(
+        dist,
+        'div',
+        'race-result flex h-[90%] absolute left-[50%] translate-x-[-50%]'
+      );
+      this.result.node.insertAdjacentHTML(
+        'beforeend',
+        `<span class='z-50 text-3xl font-semibold self-end tracking-wider text-white'>${time.toFixed(
+          3
+        )} sec</span>`
+      );
+    }
+  }
+
+  public async preventDriving() {
     cancelAnimationFrame(this.animationFrameId);
+    this.abortRequest.abort();
     const car = this.node.querySelector('.car') as HTMLElement;
     car.style.transform = `translateX(0px)`;
+    if (this.result) {
+      this.result.destroy();
+    }
   }
 
   public disableStartEngineButton(boolean: boolean): void {
