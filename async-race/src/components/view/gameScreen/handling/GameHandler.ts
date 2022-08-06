@@ -183,15 +183,17 @@ class GameHadler extends Control {
       });
       this.disableRaceButton(true);
       this.disableGenerateButton(true);
+      this.disableCreateAndUpdateButtons(true);
+      this.disableResetButton(false);
       // Заново пробежаться по машинам и запустить анимации в соответствии с полученными данными
       await Promise.allSettled(
         this.GARAGE.displayedCar.map((track, index) => {
           track.disableStartEngineButton(true);
-          track.disableStopEngineButton(false);
-          return track.preparingToDrive(raceDatas[index]);
+          track.disableStopEngineButton(true);
+          track.disableSelectAndRemoveButtons(true);
+          return track.preparingAndDrive(raceDatas[index], true);
         })
       );
-      this.disableResetButton(false);
     };
   }
 
@@ -208,10 +210,12 @@ class GameHadler extends Control {
         track.preventDriving();
         track.disableStartEngineButton(false);
         track.disableStopEngineButton(true);
+        track.disableSelectAndRemoveButtons(false);
       });
       this.disableResetButton(true);
       this.disableRaceButton(false);
       this.disableGenerateButton(false);
+      this.disableCreateAndUpdateButtons(false);
     };
   }
 
@@ -261,6 +265,32 @@ class GameHadler extends Control {
         'btn-pressed'
       );
       this.resetButton.node.classList.add('btn-red');
+    }
+  }
+
+  private disableCreateAndUpdateButtons(boolean: boolean): void {
+    if (boolean) {
+      this.createButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.updateButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.createButton.node.classList.remove('btn-orange');
+      this.updateButton.node.classList.remove('btn-orange');
+    } else {
+      this.updateButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.createButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.updateButton.node.classList.add('btn-orange');
+      this.createButton.node.classList.add('btn-orange');
     }
   }
 }

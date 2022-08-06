@@ -255,6 +255,32 @@ class Track extends Control {
       this.stopEngineButton.node.classList.add('btn-red');
     }
   }
+
+  public disableSelectAndRemoveButtons(boolean: boolean): void {
+    if (boolean) {
+      this.selectCarButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.removeCarButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.selectCarButton.node.classList.remove('btn-orange');
+      this.removeCarButton.node.classList.remove('btn-orange');
+    } else {
+      this.selectCarButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.removeCarButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.selectCarButton.node.classList.add('btn-orange');
+      this.removeCarButton.node.classList.add('btn-orange');
+    }
+  }
 }
 
 export default Track;
