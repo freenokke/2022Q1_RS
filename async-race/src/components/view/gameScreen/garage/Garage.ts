@@ -3,6 +3,7 @@ import ICar from '../../../../types/ICar';
 import Control from '../../../helpers/Control';
 import AppController from '../../../controller/AppController';
 import Track from './track/Track';
+import IWinner from '../../../../types/IWinner';
 
 class Garage extends Control {
   private controller: AppController;
@@ -14,6 +15,7 @@ class Garage extends Control {
   private currentPage: string;
   private lastPage: number;
   public displayedCar: Track[];
+  public rerenderWinners: (winners: IWinner[]) => void;
 
   constructor(
     parentNode: HTMLElement,
@@ -51,7 +53,8 @@ class Garage extends Control {
         element.color,
         element.id,
         this.controller,
-        (carsList) => this.render(carsList)
+        (carsList) => this.render(carsList),
+        (winners) => this.rerenderWinners(winners)
       );
       return track;
     });
@@ -64,7 +67,7 @@ class Garage extends Control {
     const counter = new Control(
       this.node,
       'div',
-      'font-extrabold text-white w-max text-xl tracking-wider p-1 bg-black bg-opacity-25 rounded-xl p-1'
+      'font-extrabold text-white w-max text-xl tracking-wider p-1 bg-black bg-opacity-25 rounded-xl'
     );
     counter.node.textContent = `Garage(${this.carsInGarage})`;
   }

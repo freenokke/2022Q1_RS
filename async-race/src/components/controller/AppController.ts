@@ -1,5 +1,6 @@
 import ICar from '../../types/ICar';
 import IRaceData from '../../types/IRaceData';
+import IWinner from '../../types/IWinner';
 import AppModel from '../model/AppModel';
 
 class AppController {
@@ -49,6 +50,36 @@ class AppController {
   public async driveMode(id: number, signal: AbortSignal): Promise<Response> {
     const res = await this.model.driveMode(id, signal);
     return res;
+  }
+
+  public async createWinner(parameters: IWinner): Promise<void> {
+    await this.model.createWinner(parameters);
+  }
+
+  public async getWinners(page?: number): Promise<IWinner[]> {
+    const res = await this.model.getWinners(page);
+    return res;
+  }
+
+  public async getWinner(id: number): Promise<IWinner> {
+    const res = await this.model.getWinner(id);
+    const winner = await res.json();
+    return winner;
+  }
+
+  public async isFormerWinner(id: number): Promise<boolean> {
+    const winner = await this.model.getWinner(id);
+    if (winner.ok) {
+      return true;
+    }
+    return false;
+  }
+
+  public async updateWinner(
+    id: number,
+    parameters: { wins: number; time: number; color: string; name: string }
+  ): Promise<void> {
+    await this.model.updateWinner(id, parameters);
   }
 }
 

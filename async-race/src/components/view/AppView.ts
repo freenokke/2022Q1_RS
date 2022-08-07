@@ -3,6 +3,7 @@ import AppController from '../controller/AppController';
 import GameScreen from './gameScreen/GameScreen';
 import ScreenToggler from './screenToggler/ScreenToggler';
 import WinnersScreen from './winnerScreen/WinnersScreen';
+import IWinner from '../../types/IWinner';
 
 class AppView extends Control {
   public screenToggler: ScreenToggler;
@@ -17,17 +18,18 @@ class AppView extends Control {
     controller: AppController
   ) {
     super(parentNode, tag, className, content);
+    this.winnerScreen = new WinnersScreen(
+      this.node,
+      'div',
+      'view__winnerScreen w-[100%] absolute top-[45px] left-0 flex justify-center hidden',
+      controller
+    );
     this.gameScreen = new GameScreen(
       this.node,
       'main',
       'view__gamescreen w-[100%] absolute top-[45px] left-0 px-3 hidden',
       '',
       controller
-    );
-    this.winnerScreen = new WinnersScreen(
-      this.node,
-      'div',
-      'view__winnerScreen w-[100%] h-[500px] bg-blue-200 absolute top-[45px] left-0 hidden'
     );
     this.screenToggler = new ScreenToggler(
       parentNode,
@@ -37,6 +39,8 @@ class AppView extends Control {
       this.gameScreen,
       this.winnerScreen
     );
+    this.gameScreen.garage.rerenderWinners = (winners: IWinner[]) =>
+      this.winnerScreen.table.render(winners);
   }
 }
 

@@ -191,7 +191,7 @@ class GameHadler extends Control {
           track.disableStartEngineButton(true);
           track.disableStopEngineButton(true);
           track.disableSelectAndRemoveButtons(true);
-          return track.preparingAndDrive(raceDatas[index], true);
+          return track.preparingForDrive(raceDatas[index], true);
         })
       );
     };

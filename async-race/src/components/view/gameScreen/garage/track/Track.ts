@@ -3,22 +3,24 @@ import '../../../../../assets/images/sprite-car.svg';
 import AppController from '../../../../controller/AppController';
 import ICar from '../../../../../types/ICar';
 import IRaceData from '../../../../../types/IRaceData';
+import IWinner from '../../../../../types/IWinner';
 
 class Track extends Control {
   static Winner: Track = null;
 
+  public id: number;
+  public startEngineButton: Control<HTMLElement>;
+  public animationFrameId: number;
+  public result: Control<HTMLElement>;
+  private stopEngineButton: Control<HTMLElement>;
   private name: string;
   private color: string;
   private selectCarButton: Control<HTMLElement>;
   private removeCarButton: Control<HTMLElement>;
   private controller: AppController;
-  public id: number;
-  private renderGARAGE: (cars: Array<ICar>) => void;
-  public startEngineButton: Control<HTMLElement>;
-  private stopEngineButton: Control<HTMLElement>;
-  public animationFrameId: number;
-  public result: Control<HTMLElement>;
   private abortRequest: AbortController;
+  private renderGARAGE: (cars: Array<ICar>) => void;
+  private rerenderWinners: (winners: IWinner[]) => void;
 
   constructor(
     parentNode: HTMLElement,
@@ -28,10 +30,12 @@ class Track extends Control {
     color: string,
     id: number,
     controller: AppController,
-    renderGarage: (cars: Array<ICar>) => void
+    renderGarage: (cars: Array<ICar>) => void,
+    rerenderWinners: (winners: Array<IWinner>) => void
   ) {
     super(parentNode, tag, className);
     this.renderGARAGE = renderGarage;
+    this.rerenderWinners = rerenderWinners;
     this.controller = controller;
     this.name = name;
     this.color = color;
@@ -127,7 +131,7 @@ class Track extends Control {
         this.id,
         'started'
       );
-      this.preparingAndDrive(data);
+      this.preparingForDrive(data);
       this.disableStopEngineButton(false);
       this.disableStartEngineButton(true);
     };
@@ -140,32 +144,38 @@ class Track extends Control {
     };
   }
 
-  public async preparingAndDrive(
-    data: IRaceData,
-    raceMode: boolean = false
-  ): Promise<void> {
+  public preparingForDrive(data: IRaceData, raceMode: boolean = false): void {
     Track.Winner = null;
     this.abortRequest = new AbortController();
     const { velocity, distance } = data;
     const time = distance / velocity;
     const milSecAtSec = 1000;
     const seconds = time / milSecAtSec;
-    this.drive(seconds);
-    const res = await this.controller.driveMode(
-      this.id,
-      this.abortRequest.signal
-    );
-    if (res.status === 500) {
-      cancelAnimationFrame(this.animationFrameId);
-    } else if (raceMode && Track.Winner === null) {
-      Track.Winner = this;
-      this.showRaceResult(seconds, true);
-    } else {
-      this.showRaceResult(seconds);
+    this.drive(seconds, raceMode);
+  }
+
+  public async drive(seconds: number, raceMode: boolean): Promise<void> {
+    try {
+      this.startAnimation(seconds);
+      const res = await this.controller.driveMode(
+        this.id,
+        this.abortRequest.signal
+      );
+      if (res.status === 500) {
+        cancelAnimationFrame(this.animationFrameId);
+      } else if (raceMode && Track.Winner === null) {
+        Track.Winner = this;
+        this.showRaceResult(seconds, true);
+        this.determineWinner(this, seconds);
+      } else {
+        this.showRaceResult(seconds);
+      }
+    } catch {
+      window.console.warn('Race has been forced to end by User');
     }
   }
 
-  public drive: (time: number) => void = (time: number) => {
+  private startAnimation: (time: number) => void = (time: number) => {
     const distance = this.node.querySelector('.distance') as HTMLElement;
     const car = this.node.querySelector('.car') as HTMLElement;
     let start = 0;
@@ -214,7 +224,7 @@ class Track extends Control {
     }
   }
 
-  public async preventDriving() {
+  public async preventDriving(): Promise<void> {
     cancelAnimationFrame(this.animationFrameId);
     this.abortRequest.abort();
     const car = this.node.querySelector('.car') as HTMLElement;
@@ -222,6 +232,39 @@ class Track extends Control {
     if (this.result) {
       this.result.destroy();
     }
+  }
+
+  public async determineWinner(winner: Track, seconds: number): Promise<void> {
+    const isWinner = await this.controller.isFormerWinner(winner.id);
+    const winnerTime = +seconds.toFixed(3);
+    if (!isWinner) {
+      await this.controller.createWinner({
+        id: winner.id,
+        wins: 1,
+        time: winnerTime,
+        color: winner.color,
+        name: winner.name,
+      });
+    } else {
+      const formerWinner = await this.controller.getWinner(winner.id);
+      const bestTime = +(formerWinner.time < seconds
+        ? formerWinner.time
+        : seconds
+      ).toFixed(3);
+      await this.controller.updateWinner(this.id, {
+        wins: formerWinner.wins + 1,
+        time: bestTime,
+        color: winner.color,
+        name: winner.name,
+      });
+    }
+    this.updateWinnersTable();
+  }
+
+  private async updateWinnersTable(): Promise<void> {
+    const currentWinnerPage = sessionStorage.getItem('currentWinnerPage');
+    const winners = await this.controller.getWinners(Number(currentWinnerPage));
+    this.rerenderWinners(winners);
   }
 
   public disableStartEngineButton(boolean: boolean): void {
