@@ -142,6 +142,23 @@ class Garage extends Control {
       this.render(res);
     };
   }
+
+  public disablePaginationButtons(boolean: boolean): void {
+    if (boolean) {
+      this.prevButton.node.classList.add('pointer-events-none', 'btn-pressed');
+      this.nextButton.node.classList.add('pointer-events-none', 'btn-pressed');
+    } else {
+      this.prevButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.nextButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.isActive();
+    }
+  }
 }
 
 export default Garage;

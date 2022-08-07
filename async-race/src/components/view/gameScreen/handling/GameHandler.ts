@@ -185,6 +185,7 @@ class GameHadler extends Control {
       this.disableGenerateButton(true);
       this.disableCreateAndUpdateButtons(true);
       this.disableResetButton(false);
+      this.GARAGE.disablePaginationButtons(true);
       // Заново пробежаться по машинам и запустить анимации в соответствии с полученными данными
       await Promise.allSettled(
         this.GARAGE.displayedCar.map((track, index) => {
@@ -216,6 +217,7 @@ class GameHadler extends Control {
       this.disableRaceButton(false);
       this.disableGenerateButton(false);
       this.disableCreateAndUpdateButtons(false);
+      this.GARAGE.disablePaginationButtons(false);
     };
   }
 
