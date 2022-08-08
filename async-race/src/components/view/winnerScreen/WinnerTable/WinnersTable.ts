@@ -86,8 +86,8 @@ class WinnersTable extends Control {
       <th class="p-2">№</th>
       <th class="p-2">Car</th>
       <th class="p-2">Name</th>
-      <th class="p-2 cursor-pointer hover:bg-orange-200 bg-opacity-20">Wins</th>
-      <th class="p-2 cursor-pointer hover:bg-orange-200 bg-opacity-20">Best time</th>
+      <th class="p-2 cursor-pointer hover:bg-orange-200 bg-opacity-20">Wins ⇅</th>
+      <th class="p-2 cursor-pointer hover:bg-orange-200 bg-opacity-20">Best time ⇅</th>
     </tr>
   </thead>
   `;

@@ -21,20 +21,20 @@ class AppView extends Control {
     this.winnerScreen = new WinnersScreen(
       this.node,
       'div',
-      'view__winnerScreen w-[100%] absolute top-[45px] left-0 flex justify-center hidden',
+      'view__winnerScreen w-[100%] absolute top-[70px] left-0 flex justify-center hidden',
       controller
     );
     this.gameScreen = new GameScreen(
       this.node,
       'main',
-      'view__gamescreen w-[100%] absolute top-[45px] left-0 px-3 hidden',
+      'view__gamescreen w-[100%] absolute top-[70px] left-0 px-3 hidden',
       '',
       controller
     );
     this.screenToggler = new ScreenToggler(
       parentNode,
       'div',
-      'view__screen-toggler',
+      'view__screen-toggler flex justify-center p-3 gap-3',
       '',
       this.gameScreen,
       this.winnerScreen

@@ -3,6 +3,9 @@
 @tailwind utilities;
 @import '../../components/view/gameScreen/garage/track/track.scss';
 
+html {
+  font-size: 14px;
+}
 
 body {
   background: url('../images/background.jpg');

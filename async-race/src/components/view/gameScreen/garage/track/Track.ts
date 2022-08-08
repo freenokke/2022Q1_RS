@@ -52,11 +52,11 @@ class Track extends Control {
     <div class="flex gap-2">
       <span class='name text-center font-semibold text-white p-1 bg-black bg-opacity-25 rounded-xl'>${this.name}</span>
     </div>
-    <div class="way flex h-[100px] bg-neutral-500 px-2">
+    <div class="way flex h-20 bg-neutral-500 px-2">
       <div class="self-center"></div>
       <div class="distance flex grow items-center justify-start">
         <div class="car z-20">
-          <svg width="165" height="80" class="relative rotate-[-90]" fill="${this.color}">
+          <svg width="135" height="65" class="relative rotate-[-90]" fill="${this.color}">
             <use xlink:href="./assets/images/sprite-car.svg#car"></use>
           </svg>
         </div>
@@ -200,12 +200,12 @@ class Track extends Control {
       this.result = new Control(
         dist,
         'div',
-        'race-result flex flex-col justify-between items-center h-[90%] absolute left-[50%] translate-x-[-50%]'
+        'z-50 race-result flex flex-col justify-between items-center h-[90%] absolute left-[50%] translate-x-[-50%]'
       );
       this.result.node.insertAdjacentHTML(
         'beforeend',
-        `<span class='z-50 text-4xl font-extrabold tracking-widest animate-bounce text-white'>WINNER</span>
-        <span class='z-50 text-3xl font-semibold tracking-wider text-white'>${time.toFixed(
+        `<span class='text-4xl font-extrabold tracking-widest animate-bounce text-white'>WINNER</span>
+        <span class='text-3xl font-semibold tracking-wider text-white'>${time.toFixed(
           3
         )} sec</span>`
       );
@@ -213,11 +213,11 @@ class Track extends Control {
       this.result = new Control(
         dist,
         'div',
-        'race-result flex h-[90%] absolute left-[50%] translate-x-[-50%]'
+        'z-50 race-result flex h-[90%] absolute left-[50%] translate-x-[-50%]'
       );
       this.result.node.insertAdjacentHTML(
         'beforeend',
-        `<span class='z-50 text-3xl font-semibold self-end tracking-wider text-white'>${time.toFixed(
+        `<span class='text-3xl font-semibold self-end tracking-wider text-white'>${time.toFixed(
           3
         )} sec</span>`
       );
