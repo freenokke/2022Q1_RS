@@ -15,6 +15,7 @@ class GameHadler extends Control {
   private resetButton: Control<HTMLElement>;
   private generateCarsButton: Control<HTMLElement>;
   public GARAGE: Garage;
+  public disableViewButtons: (boolean: boolean) => void;
 
   constructor(
     parentNode: HTMLElement,
@@ -163,15 +164,22 @@ class GameHadler extends Control {
 
   private raceButtonListener(): void {
     this.raceButton.node.onclick = async () => {
-      const race: Promise<IRaceData>[] = [];
-      // Пробежаться по машинам и наполненить массив промисами на данные для гонки
-      this.GARAGE.displayedCar.forEach((item) => {
-        const track = item;
-        race.push(this.controller.startStopEngine(track.id, 'started'));
+      this.disableViewButtons(true);
+      this.disableRaceButton(true);
+      this.disableGenerateButton(true);
+      this.disableCreateAndUpdateButtons(true);
+      this.disableResetButton(false);
+      this.GARAGE.disablePaginationButtons(true);
+      this.GARAGE.displayedCar.forEach((track) => {
+        track.disableStartEngineButton(true);
+        track.disableStopEngineButton(true);
+        track.disableSelectAndRemoveButtons(true);
       });
-      // ожидание выполнения всех промисов
+      // Пробежаться по машинам и сделать запрос на started для получения данных для гонки
       const result: PromiseSettledResult<IRaceData>[] = await Promise.allSettled(
-        race
+        this.GARAGE.displayedCar.map((item) => {
+          return this.controller.startStopEngine(item.id, 'started');
+        })
       );
       // Создание и наполнение массива с результатами выполненных промисов
       const raceDatas = result.map((item) => {
@@ -181,17 +189,10 @@ class GameHadler extends Control {
         }
         return res;
       });
-      this.disableRaceButton(true);
-      this.disableGenerateButton(true);
-      this.disableCreateAndUpdateButtons(true);
-      this.disableResetButton(false);
-      this.GARAGE.disablePaginationButtons(true);
+      this.disableViewButtons(false);
       // Заново пробежаться по машинам и запустить анимации в соответствии с полученными данными
       await Promise.allSettled(
         this.GARAGE.displayedCar.map((track, index) => {
-          track.disableStartEngineButton(true);
-          track.disableStopEngineButton(true);
-          track.disableSelectAndRemoveButtons(true);
           return track.preparingForDrive(raceDatas[index], true);
         })
       );
@@ -200,6 +201,7 @@ class GameHadler extends Control {
 
   private resetButtonListener(): void {
     this.resetButton.node.onclick = async () => {
+      this.disableResetButton(true);
       // Ожидание окончания заезда всех машин
       await Promise.allSettled(
         this.GARAGE.displayedCar.map((track) => {
@@ -213,7 +215,6 @@ class GameHadler extends Control {
         track.disableStopEngineButton(true);
         track.disableSelectAndRemoveButtons(false);
       });
-      this.disableResetButton(true);
       this.disableRaceButton(false);
       this.disableGenerateButton(false);
       this.disableCreateAndUpdateButtons(false);

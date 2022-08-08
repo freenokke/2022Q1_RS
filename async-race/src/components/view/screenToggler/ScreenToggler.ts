@@ -45,6 +45,32 @@ class ScreenToggler extends Control {
       localStorage.setItem('screen', 'winners');
     };
   }
+
+  public disableViewsButtons(boolean: boolean) {
+    if (boolean) {
+      this.showGameViewButton.node.classList.remove('btn-red');
+      this.showWinnersViewButton.node.classList.remove('btn-blue');
+      this.showGameViewButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.showWinnersViewButton.node.classList.add(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+    } else {
+      this.showGameViewButton.node.classList.add('btn-red');
+      this.showWinnersViewButton.node.classList.add('btn-blue');
+      this.showGameViewButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+      this.showWinnersViewButton.node.classList.remove(
+        'pointer-events-none',
+        'btn-pressed'
+      );
+    }
+  }
 }
 
 export default ScreenToggler;
