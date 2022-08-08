@@ -26,7 +26,7 @@ class Application extends Control {
 
   public async init(): Promise<void> {
     this.checkActiveScreen();
-    this.startPage = 1;
+    this.sessionPreset();
     const cars = await this.model.getCars(this.startPage);
     this.renderCarsInGarage(cars);
     const winners = await this.model.getWinners();
@@ -34,11 +34,11 @@ class Application extends Control {
   }
 
   private checkActiveScreen(): void {
-    if (localStorage.getItem('screen') === 'winners') {
+    if (sessionStorage.getItem('screen') === 'winners') {
       this.view.winnerScreen.showScreen();
       return;
     }
-    if (localStorage.getItem('screen') === 'game') {
+    if (sessionStorage.getItem('screen') === 'game') {
       this.view.gameScreen.showScreen();
       return;
     }
@@ -56,6 +56,14 @@ class Application extends Control {
     }
     const updatedWinners = await this.model.getWinners(this.startPage);
     this.view.winnerScreen.table.render(updatedWinners);
+  }
+
+  private sessionPreset() {
+    sessionStorage.removeItem('timeSort');
+    sessionStorage.removeItem('timeSortOrder');
+    sessionStorage.removeItem('winsSort');
+    sessionStorage.removeItem('wins');
+    this.startPage = 1;
   }
 }
 

@@ -41,6 +41,9 @@ class AppView extends Control {
     );
     this.gameScreen.garage.rerenderWinners = (winners: IWinner[]) =>
       this.winnerScreen.table.render(winners);
+    this.gameScreen.handler.disableViewButtons = (boolean: boolean) => {
+      this.screenToggler.disableViewsButtons(boolean);
+    };
   }
 }
 

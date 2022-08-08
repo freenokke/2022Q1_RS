@@ -215,7 +215,7 @@ class GameHadler extends Control {
         track.disableStopEngineButton(true);
         track.disableSelectAndRemoveButtons(false);
       });
-      this.disableRaceButton(false);
+      setTimeout(() => this.disableRaceButton(false), 1000);
       this.disableGenerateButton(false);
       this.disableCreateAndUpdateButtons(false);
       this.GARAGE.disablePaginationButtons(false);

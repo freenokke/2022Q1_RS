@@ -61,6 +61,15 @@ class AppController {
     return res;
   }
 
+  public async sortWinners(
+    page: number,
+    sort: string,
+    order: string
+  ): Promise<IWinner[]> {
+    const res = await this.model.getWinners(page, sort, order);
+    return res;
+  }
+
   public async getWinner(id: number): Promise<IWinner> {
     const res = await this.model.getWinner(id);
     const winner = await res.json();
@@ -80,6 +89,10 @@ class AppController {
     parameters: { wins: number; time: number; color: string; name: string }
   ): Promise<void> {
     await this.model.updateWinner(id, parameters);
+  }
+
+  public async deleteWinner(id: number) {
+    await this.model.deleteWinner(id);
   }
 }
 

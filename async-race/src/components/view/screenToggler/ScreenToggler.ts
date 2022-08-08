@@ -36,13 +36,13 @@ class ScreenToggler extends Control {
     this.showGameViewButton.node.onclick = () => {
       this.gameScreen.showScreen();
       this.winnersScreen.hideScreen();
-      localStorage.setItem('screen', 'game');
+      sessionStorage.setItem('screen', 'game');
     };
 
     this.showWinnersViewButton.node.onclick = () => {
       this.gameScreen.hideScreen();
       this.winnersScreen.showScreen();
-      localStorage.setItem('screen', 'winners');
+      sessionStorage.setItem('screen', 'winners');
     };
   }
 

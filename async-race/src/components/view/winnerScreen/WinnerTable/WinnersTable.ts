@@ -11,7 +11,11 @@ class WinnersTable extends Control {
   private prevButton: Control<HTMLElement>;
   private nextButton: Control<HTMLElement>;
   private pagination: Control<HTMLElement>;
-  controller: AppController;
+  public controller: AppController;
+  private timeSortOrder: string;
+  private winsSortOrder: string;
+  private winsColumn: Control<HTMLElement>;
+  private timeColumn: Control<HTMLElement>;
 
   constructor(parentNode: HTMLElement, tag: string, className: string) {
     super(parentNode, tag, className);
@@ -26,8 +30,12 @@ class WinnersTable extends Control {
     this.currentPage = sessionStorage.getItem('currentWinnerPage');
     this.allWinners = sessionStorage.getItem('totalWinnersCount');
     this.lastPage = Math.ceil(Number(this.allWinners) / this.limitOnPage);
-    let num = 1;
-
+    let num: number;
+    if (Number(this.currentPage) === 1) {
+      num = 1;
+    } else {
+      num = Number(`${+this.currentPage - 1}1`);
+    }
     this.showWinnersCount();
 
     this.displayedWinners = winners.map((winner) => {
@@ -51,8 +59,8 @@ class WinnersTable extends Control {
 
     if (this.displayedWinners.length !== 0) {
       this.showTable(this.displayedWinners);
+      this.drawWinnersPagination();
     }
-    this.drawWinnersPagination();
   }
 
   private showWinnersCount(): void {
@@ -86,11 +94,21 @@ class WinnersTable extends Control {
       <th class="p-2">№</th>
       <th class="p-2">Car</th>
       <th class="p-2">Name</th>
-      <th class="p-2 cursor-pointer hover:bg-orange-200 bg-opacity-20">Wins ⇅</th>
-      <th class="p-2 cursor-pointer hover:bg-orange-200 bg-opacity-20">Best time ⇅</th>
     </tr>
   </thead>
   `;
+    this.winsColumn = new Control(
+      table.node.firstElementChild.firstElementChild as HTMLElement,
+      'th',
+      'p-2 cursor-pointer hover:bg-orange-200',
+      'Wins'
+    );
+    this.timeColumn = new Control(
+      table.node.firstElementChild.firstElementChild as HTMLElement,
+      'th',
+      'p-2 cursor-pointer hover:bg-orange-200',
+      'Best time'
+    );
     const tbody = new Control(
       this.node,
       'tbody',
@@ -98,6 +116,8 @@ class WinnersTable extends Control {
     );
     tbody.node.append(...winnersToShow);
     table.node.append(tbody.node);
+
+    this.createListenersForTable();
   }
 
   private drawWinnersPagination(): void {
@@ -130,7 +150,8 @@ class WinnersTable extends Control {
     this.pagination.node.className =
       'font-extrabold text-xl text-white bg-black bg-opacity-25 rounded-xl p-1';
     this.isActive();
-    this.createPaginationListeners();
+    this.prevButtonListener();
+    this.nextButtonListener();
   }
 
   // Проверят какие кнопки пагинации должны быть неактивны
@@ -153,20 +174,138 @@ class WinnersTable extends Control {
   }
 
   // Навешивает обработчики кликов на кнопки пагинации
-  private createPaginationListeners(): void {
+  private prevButtonListener(): void {
+    this.prevButton.node.onclick = async () => {
+      const prevPage = +this.currentPage - 1;
+
+      let winners: IWinner[];
+      if (sessionStorage.getItem('timeSort') !== null) {
+        winners = await this.controller.sortWinners(
+          prevPage,
+          'time',
+          sessionStorage.getItem('timeSortOrder')
+        );
+      } else if (sessionStorage.getItem('winsSort') !== null) {
+        winners = await this.controller.sortWinners(
+          prevPage,
+          'wins',
+          sessionStorage.getItem('winsSortOrder')
+        );
+      } else {
+        winners = await this.controller.getWinners(prevPage);
+      }
+      this.currentPage = prevPage.toString();
+      sessionStorage.setItem('currentWinnerPage', this.currentPage);
+      this.render(winners);
+    };
+  }
+
+  private nextButtonListener() {
     this.nextButton.node.onclick = async () => {
       const nextPage = +this.currentPage + 1;
-      const winners = await this.controller.getWinners(nextPage);
+
+      let winners: IWinner[];
+      if (sessionStorage.getItem('timeSort') !== null) {
+        winners = await this.controller.sortWinners(
+          nextPage,
+          'time',
+          sessionStorage.getItem('timeSortOrder')
+        );
+      } else if (sessionStorage.getItem('winsSort') !== null) {
+        winners = await this.controller.sortWinners(
+          nextPage,
+          'wins',
+          sessionStorage.getItem('winsSortOrder')
+        );
+      } else {
+        winners = await this.controller.getWinners(nextPage);
+      }
       this.currentPage = nextPage.toString();
       sessionStorage.setItem('currentWinnerPage', this.currentPage);
       this.render(winners);
     };
-    this.prevButton.node.onclick = async () => {
-      const prevPage = +this.currentPage - 1;
-      const winners = await this.controller.getWinners(prevPage);
-      this.currentPage = prevPage.toString();
-      sessionStorage.setItem('currentWinnerPage', this.currentPage);
-      this.render(winners);
+  }
+
+  private createListenersForTable() {
+    this.sortingByTime();
+    this.sortingByWins();
+  }
+
+  private sortingByTime() {
+    this.timeColumn.node.onclick = async () => {
+      sessionStorage.setItem('timeSort', 'true');
+      if (!this.timeSortOrder) {
+        this.timeSortOrder = 'asc';
+        sessionStorage.setItem('timeSortOrder', this.timeSortOrder);
+        const winners = await this.controller.sortWinners(
+          +sessionStorage.getItem('currentWinnerPage'),
+          'time',
+          this.timeSortOrder
+        );
+        this.render(winners);
+        this.timeColumn.node.textContent = 'Best time ↑';
+        this.timeColumn.node.classList.add('bg-gray-200');
+      } else if (this.timeSortOrder === 'asc') {
+        this.timeSortOrder = 'desc';
+        sessionStorage.setItem('timeSortOrder', this.timeSortOrder);
+        const winners = await this.controller.sortWinners(
+          +sessionStorage.getItem('currentWinnerPage'),
+          'time',
+          this.timeSortOrder
+        );
+        this.render(winners);
+        this.timeColumn.node.textContent = 'Best time ↓';
+        this.timeColumn.node.classList.add('bg-gray-200');
+      } else {
+        this.timeSortOrder = null;
+        sessionStorage.removeItem('timeSortOrder');
+        sessionStorage.removeItem('timeSort');
+        const winners = await this.controller.getWinners(
+          +sessionStorage.getItem('currentWinnerPage')
+        );
+        this.render(winners);
+        this.timeColumn.node.textContent = 'Best time';
+        this.timeColumn.node.classList.remove('bg-gray-200');
+      }
+    };
+  }
+
+  private sortingByWins() {
+    this.winsColumn.node.onclick = async () => {
+      sessionStorage.setItem('winsSort', 'true');
+      if (!this.winsSortOrder) {
+        this.winsSortOrder = 'asc';
+        sessionStorage.setItem('winsSortOrder', this.winsSortOrder);
+        const winners = await this.controller.sortWinners(
+          +sessionStorage.getItem('currentWinnerPage'),
+          'wins',
+          this.winsSortOrder
+        );
+        this.render(winners);
+        this.winsColumn.node.textContent = 'Wins ↑';
+        this.winsColumn.node.classList.add('bg-gray-200');
+      } else if (this.winsSortOrder === 'asc') {
+        this.winsSortOrder = 'desc';
+        sessionStorage.setItem('winsSortOrder', this.winsSortOrder);
+        const winners = await this.controller.sortWinners(
+          +sessionStorage.getItem('currentWinnerPage'),
+          'wins',
+          this.winsSortOrder
+        );
+        this.render(winners);
+        this.winsColumn.node.textContent = 'Wins ↓';
+        this.winsColumn.node.classList.add('bg-gray-200');
+      } else {
+        this.winsSortOrder = null;
+        sessionStorage.removeItem('winsSortOrder');
+        sessionStorage.removeItem('winsSort');
+        const winners = await this.controller.getWinners(
+          +sessionStorage.getItem('currentWinnerPage')
+        );
+        this.render(winners);
+        this.winsColumn.node.textContent = 'Wins';
+        this.winsColumn.node.classList.remove('bg-gray-200');
+      }
     };
   }
 }

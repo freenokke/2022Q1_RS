@@ -4,7 +4,7 @@ import ScreenRouter from '../ViewRouter';
 import AppController from '../../controller/AppController';
 
 class GameScreen extends ScreenRouter {
-  private handler: GameHadler;
+  public handler: GameHadler;
   public garage: Garage;
 
   constructor(

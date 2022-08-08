@@ -121,6 +121,8 @@ class Track extends Control {
     this.removeCarButton.node.onclick = async () => {
       const cars = await this.controller.deleteCar(this.id);
       this.renderGARAGE(cars);
+      await this.controller.deleteWinner(this.id);
+      this.updateWinnersTable();
     };
   }
 
@@ -171,7 +173,7 @@ class Track extends Control {
         this.showRaceResult(seconds);
       }
     } catch {
-      window.console.warn('Race has been forced to end by User');
+      window.console.warn('Race has forcibly been ended by User');
     }
   }
 

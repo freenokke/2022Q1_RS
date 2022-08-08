@@ -146,13 +146,21 @@ class AppModel {
     });
   }
 
-  public async getWinners(page?: number): Promise<IWinner[]> {
+  public async getWinners(
+    page?: number,
+    sort?: string,
+    order?: string
+  ): Promise<IWinner[]> {
     let res: Response;
-    if (page) {
+    if (page && !sort && !order) {
       res = await fetch(
         `${this.domain}/${Path.WINNERS}/?_limit=${this.limitWinnersOnPage}/&_page=${page}`
       );
       sessionStorage.setItem('currentWinnerPage', page.toString());
+    } else if (sort && order) {
+      res = await fetch(
+        `${this.domain}/${Path.WINNERS}/?_limit=${this.limitWinnersOnPage}/&_page=${page}&_sort=${sort}&_order=${order}`
+      );
     } else {
       res = await fetch(
         `${this.domain}/${Path.WINNERS}/?_limit=${this.limitWinnersOnPage}`
