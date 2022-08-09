@@ -16,9 +16,9 @@ class WinnersScreen extends ScreenRouter {
     this.table = new WinnersTable(
       this.node,
       'div',
-      'flex flex-col items-center'
+      'flex flex-col items-center',
+      controller
     );
-    this.table.controller = controller;
   }
 }
 

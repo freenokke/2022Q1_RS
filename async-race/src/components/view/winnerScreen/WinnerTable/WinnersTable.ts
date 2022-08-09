@@ -11,14 +11,18 @@ class WinnersTable extends Control {
   private prevButton: Control<HTMLElement>;
   private nextButton: Control<HTMLElement>;
   private pagination: Control<HTMLElement>;
-  public controller: AppController;
+  private controller: AppController;
   private timeSortOrder: string;
   private winsSortOrder: string;
-  private winsColumn: Control<HTMLElement>;
-  private timeColumn: Control<HTMLElement>;
 
-  constructor(parentNode: HTMLElement, tag: string, className: string) {
+  constructor(
+    parentNode: HTMLElement,
+    tag: string,
+    className: string,
+    controller: AppController
+  ) {
     super(parentNode, tag, className);
+    this.controller = controller;
     this.limitOnPage = 10;
   }
 
@@ -94,21 +98,11 @@ class WinnersTable extends Control {
       <th class="p-2">№</th>
       <th class="p-2">Car</th>
       <th class="p-2">Name</th>
+      <th class="wins p-2 cursor-pointer hover:bg-orange-200">Wins</th>
+      <th class="time p-2 cursor-pointer hover:bg-orange-200">Best time</th>
     </tr>
   </thead>
   `;
-    this.winsColumn = new Control(
-      table.node.firstElementChild.firstElementChild as HTMLElement,
-      'th',
-      'p-2 cursor-pointer hover:bg-orange-200',
-      'Wins'
-    );
-    this.timeColumn = new Control(
-      table.node.firstElementChild.firstElementChild as HTMLElement,
-      'th',
-      'p-2 cursor-pointer hover:bg-orange-200',
-      'Best time'
-    );
     const tbody = new Control(
       this.node,
       'tbody',
@@ -197,10 +191,11 @@ class WinnersTable extends Control {
       this.currentPage = prevPage.toString();
       sessionStorage.setItem('currentWinnerPage', this.currentPage);
       this.render(winners);
+      this.checkActiveSort();
     };
   }
 
-  private nextButtonListener() {
+  private nextButtonListener(): void {
     this.nextButton.node.onclick = async () => {
       const nextPage = +this.currentPage + 1;
 
@@ -223,16 +218,19 @@ class WinnersTable extends Control {
       this.currentPage = nextPage.toString();
       sessionStorage.setItem('currentWinnerPage', this.currentPage);
       this.render(winners);
+      this.checkActiveSort();
     };
   }
 
-  private createListenersForTable() {
+  private createListenersForTable(): void {
     this.sortingByTime();
     this.sortingByWins();
   }
 
-  private sortingByTime() {
-    this.timeColumn.node.onclick = async () => {
+  private sortingByTime(): void {
+    const timeColumn = this.node.querySelector('.time') as HTMLElement;
+    timeColumn.onclick = async () => {
+      sessionStorage.removeItem('winsSort');
       sessionStorage.setItem('timeSort', 'true');
       if (!this.timeSortOrder) {
         this.timeSortOrder = 'asc';
@@ -243,8 +241,7 @@ class WinnersTable extends Control {
           this.timeSortOrder
         );
         this.render(winners);
-        this.timeColumn.node.textContent = 'Best time ↑';
-        this.timeColumn.node.classList.add('bg-gray-200');
+        this.checkActiveSort();
       } else if (this.timeSortOrder === 'asc') {
         this.timeSortOrder = 'desc';
         sessionStorage.setItem('timeSortOrder', this.timeSortOrder);
@@ -254,8 +251,7 @@ class WinnersTable extends Control {
           this.timeSortOrder
         );
         this.render(winners);
-        this.timeColumn.node.textContent = 'Best time ↓';
-        this.timeColumn.node.classList.add('bg-gray-200');
+        this.checkActiveSort();
       } else {
         this.timeSortOrder = null;
         sessionStorage.removeItem('timeSortOrder');
@@ -264,14 +260,15 @@ class WinnersTable extends Control {
           +sessionStorage.getItem('currentWinnerPage')
         );
         this.render(winners);
-        this.timeColumn.node.textContent = 'Best time';
-        this.timeColumn.node.classList.remove('bg-gray-200');
+        this.checkActiveSort();
       }
     };
   }
 
-  private sortingByWins() {
-    this.winsColumn.node.onclick = async () => {
+  private sortingByWins(): void {
+    const winsColumn = this.node.querySelector('.wins') as HTMLElement;
+    winsColumn.onclick = async () => {
+      sessionStorage.removeItem('timeSort');
       sessionStorage.setItem('winsSort', 'true');
       if (!this.winsSortOrder) {
         this.winsSortOrder = 'asc';
@@ -282,8 +279,7 @@ class WinnersTable extends Control {
           this.winsSortOrder
         );
         this.render(winners);
-        this.winsColumn.node.textContent = 'Wins ↑';
-        this.winsColumn.node.classList.add('bg-gray-200');
+        this.checkActiveSort();
       } else if (this.winsSortOrder === 'asc') {
         this.winsSortOrder = 'desc';
         sessionStorage.setItem('winsSortOrder', this.winsSortOrder);
@@ -293,8 +289,7 @@ class WinnersTable extends Control {
           this.winsSortOrder
         );
         this.render(winners);
-        this.winsColumn.node.textContent = 'Wins ↓';
-        this.winsColumn.node.classList.add('bg-gray-200');
+        this.checkActiveSort();
       } else {
         this.winsSortOrder = null;
         sessionStorage.removeItem('winsSortOrder');
@@ -303,10 +298,40 @@ class WinnersTable extends Control {
           +sessionStorage.getItem('currentWinnerPage')
         );
         this.render(winners);
-        this.winsColumn.node.textContent = 'Wins';
-        this.winsColumn.node.classList.remove('bg-gray-200');
+        this.checkActiveSort();
       }
     };
+  }
+
+  private checkActiveSort(): void {
+    const winsColumn = this.node.querySelector('.wins') as HTMLElement;
+    const timeColumn = this.node.querySelector('.time') as HTMLElement;
+
+    if (sessionStorage.getItem('winsSort') !== null) {
+      if (sessionStorage.getItem('winsSortOrder') === 'asc') {
+        winsColumn.textContent = 'Wins ↑';
+        winsColumn.classList.add('bg-gray-200');
+      } else {
+        winsColumn.textContent = 'Wins ↓';
+        winsColumn.classList.add('bg-gray-200');
+      }
+    } else {
+      winsColumn.textContent = 'Wins';
+      winsColumn.classList.remove('bg-gray-200');
+    }
+
+    if (sessionStorage.getItem('timeSort') !== null) {
+      if (sessionStorage.getItem('timeSortOrder') === 'asc') {
+        timeColumn.textContent = 'Best time ↑';
+        timeColumn.classList.add('bg-gray-200');
+      } else {
+        timeColumn.textContent = 'Best time ↓';
+        timeColumn.classList.add('bg-gray-200');
+      }
+    } else {
+      timeColumn.textContent = 'Best time';
+      timeColumn.classList.remove('bg-gray-200');
+    }
   }
 }
 
