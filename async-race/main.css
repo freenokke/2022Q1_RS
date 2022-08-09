@@ -722,7 +722,7 @@ video {
 }.text-white {
   --tw-text-opacity: 1;
   color: rgba(255, 255, 255, var(--tw-text-opacity));
-}.distance{position:relative}.distance::after{content:"";position:absolute;left:0;top:47%;width:100%;border-bottom-color:#fff;border-bottom-style:dashed;z-index:10;border-bottom-width:3px}html{font-size:14px}body{background:url(assets/images/background.jpg);background-repeat:no-repeat;background-size:cover;min-height:100vh;background-attachment:fixed}.hover\:bg-orange-200:hover {
+}.distance{position:relative}.distance::after{content:"";position:absolute;left:0;top:47%;width:100%;border-bottom-color:#fff;border-bottom-style:dashed;z-index:10;border-bottom-width:3px}html{font-size:14px}body{background:url(assets/images/background_compressed.jpg);background-repeat:no-repeat;background-size:cover;min-height:100vh;background-attachment:fixed}.hover\:bg-orange-200:hover {
   --tw-bg-opacity: 1;
   background-color: rgba(254, 215, 170, var(--tw-bg-opacity));
 }
