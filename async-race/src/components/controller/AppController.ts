@@ -91,7 +91,7 @@ class AppController {
     await this.model.updateWinner(id, parameters);
   }
 
-  public async deleteWinner(id: number) {
+  public async deleteWinner(id: number): Promise<void> {
     await this.model.deleteWinner(id);
   }
 }

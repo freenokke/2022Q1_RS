@@ -36,7 +36,7 @@ class GameHadler extends Control {
     this.handleButtons();
   }
 
-  private carUpdatingFiled() {
+  private carUpdatingFiled(): void {
     const updateCarField = new Control(
       this.node,
       'div',

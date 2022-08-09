@@ -43,7 +43,7 @@ class Garage extends Control {
     this.lastPage = Math.ceil(Number(this.carsInGarage) / this.limitOnPage);
 
     this.showCarsInGarage();
-
+    // создание машин, параллельно выводя их сразу на экран
     this.displayedCar = cars.map((element) => {
       const track = new Track(
         this.node,
@@ -142,7 +142,7 @@ class Garage extends Control {
       this.render(res);
     };
   }
-
+  // метод используется в классе GameHandler для отключения кнопок во время гонки
   public disablePaginationButtons(boolean: boolean): void {
     if (boolean) {
       this.prevButton.node.classList.add('pointer-events-none', 'btn-pressed');

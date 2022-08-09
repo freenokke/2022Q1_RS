@@ -58,7 +58,7 @@ class Application extends Control {
     this.view.winnerScreen.table.render(updatedWinners);
   }
 
-  private sessionPreset() {
+  private sessionPreset(): void {
     sessionStorage.removeItem('timeSort');
     sessionStorage.removeItem('timeSortOrder');
     sessionStorage.removeItem('winsSort');

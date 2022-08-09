@@ -46,7 +46,7 @@ class Track extends Control {
     this.controlCarListeners();
     this.controlEngineListeners();
   }
-
+  // отрисовка всего трека, с кнопками и машиной
   private draw(): void {
     this.node.innerHTML = `
     <div class="flex gap-2">
@@ -145,7 +145,7 @@ class Track extends Control {
       this.disableStartEngineButton(false);
     };
   }
-
+  // Расчет времени заезда, обнуление победителя
   public preparingForDrive(data: IRaceData, raceMode: boolean = false): void {
     Track.Winner = null;
     this.abortRequest = new AbortController();
@@ -155,8 +155,8 @@ class Track extends Control {
     const seconds = time / milSecAtSec;
     this.drive(seconds, raceMode);
   }
-
-  public async drive(seconds: number, raceMode: boolean): Promise<void> {
+  // запуск анимации и обработка поломавшихся / доехавших машин
+  private async drive(seconds: number, raceMode: boolean): Promise<void> {
     try {
       this.startAnimation(seconds);
       const res = await this.controller.driveMode(
@@ -195,7 +195,7 @@ class Track extends Control {
 
     tick();
   };
-
+  // выводит блок с результатами гонки
   private showRaceResult(time: number, isWinner: boolean = false) {
     const dist = this.node.querySelector('.distance') as HTMLElement;
     if (isWinner) {
@@ -225,7 +225,7 @@ class Track extends Control {
       );
     }
   }
-
+  // отменяет анимацию и запрос при принудительной остановке пользователем
   public async preventDriving(): Promise<void> {
     cancelAnimationFrame(this.animationFrameId);
     this.abortRequest.abort();
@@ -235,8 +235,8 @@ class Track extends Control {
       this.result.destroy();
     }
   }
-
-  public async determineWinner(winner: Track, seconds: number): Promise<void> {
+  // Определяет победителя и заносит его в таблицу
+  private async determineWinner(winner: Track, seconds: number): Promise<void> {
     const isWinner = await this.controller.isFormerWinner(winner.id);
     const winnerTime = +seconds.toFixed(3);
     if (!isWinner) {
@@ -268,7 +268,7 @@ class Track extends Control {
     const winners = await this.controller.getWinners(Number(currentWinnerPage));
     this.rerenderWinners(winners);
   }
-
+  // методы дизейбла кнопок, используются также в классе GameHandler
   public disableStartEngineButton(boolean: boolean): void {
     if (boolean) {
       this.startEngineButton.node.classList.add(
