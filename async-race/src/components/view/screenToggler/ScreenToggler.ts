@@ -7,6 +7,9 @@ class ScreenToggler extends Control {
   private showWinnersViewButton: Control<HTMLElement>;
   private winnersScreen: WinnersScreen;
   private gameScreen: GameScreen;
+  private gameState: HTMLElement;
+  private winnerState: HTMLElement;
+  private appViewNode: HTMLElement;
 
   constructor(
     parentNode: HTMLElement,
@@ -14,9 +17,11 @@ class ScreenToggler extends Control {
     className: string,
     content: string,
     gameScreen: GameScreen,
-    winnersScreen: WinnersScreen
+    winnersScreen: WinnersScreen,
+    appView: HTMLElement
   ) {
     super(parentNode, tag, className, content);
+    this.appViewNode = appView;
     this.showGameViewButton = new Control(
       this.node,
       'button',
@@ -29,19 +34,20 @@ class ScreenToggler extends Control {
       'btn btn-blue',
       'Winners'
     );
-
     this.gameScreen = gameScreen;
     this.winnersScreen = winnersScreen;
-
     this.showGameViewButton.node.onclick = () => {
-      this.gameScreen.showScreen();
-      this.winnersScreen.hideScreen();
+      this.gameState = this.gameScreen.node;
+      this.winnerState = this.winnersScreen.node;
+      this.appViewNode.innerHTML = '';
+      this.appViewNode.append(this.gameState);
       sessionStorage.setItem('screen', 'game');
     };
-
     this.showWinnersViewButton.node.onclick = () => {
-      this.gameScreen.hideScreen();
-      this.winnersScreen.showScreen();
+      this.gameState = this.gameScreen.node;
+      this.winnerState = this.winnersScreen.node;
+      this.appViewNode.innerHTML = '';
+      this.appViewNode.append(this.winnerState);
       sessionStorage.setItem('screen', 'winners');
     };
   }

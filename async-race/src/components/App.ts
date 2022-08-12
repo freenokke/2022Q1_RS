@@ -35,14 +35,14 @@ class Application extends Control {
 
   private checkActiveScreen(): void {
     if (sessionStorage.getItem('screen') === 'winners') {
-      this.view.winnerScreen.showScreen();
+      this.view.node.append(this.view.winnerScreen.node);
       return;
     }
     if (sessionStorage.getItem('screen') === 'game') {
-      this.view.gameScreen.showScreen();
+      this.view.node.append(this.view.gameScreen.node);
       return;
     }
-    this.view.gameScreen.showScreen();
+    this.view.node.append(this.view.gameScreen.node);
   }
 
   private async renderCarsInGarage(cars: Array<ICar>): Promise<void> {
