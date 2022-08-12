@@ -1,8 +1,8 @@
 import AppController from '../../controller/AppController';
-import ScreenRouter from '../ViewRouter';
+import Control from '../../helpers/Control';
 import WinnersTable from './WinnerTable/WinnersTable';
 
-class WinnersScreen extends ScreenRouter {
+class WinnersScreen extends Control {
   public table: WinnersTable;
 
   constructor(

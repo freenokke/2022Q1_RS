@@ -1,9 +1,9 @@
 import GameHadler from './handling/GameHandler';
 import Garage from './garage/Garage';
-import ScreenRouter from '../ViewRouter';
 import AppController from '../../controller/AppController';
+import Control from '../../helpers/Control';
 
-class GameScreen extends ScreenRouter {
+class GameScreen extends Control {
   public handler: GameHadler;
   public garage: Garage;
 
