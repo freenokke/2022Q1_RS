@@ -1,4 +1,4 @@
-# Deploy: **[https://async-race-freenokke.netlify.app](https://online-store-wheels.netlify.app)**
+# Deploy: **https://online-store-wheels.netlify.app**
 
 # Информация о проекте
 Проект основного курса JavaScript/Front-end 2022Q1
