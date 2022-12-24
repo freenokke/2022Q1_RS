@@ -1,4 +1,5 @@
-# Deploy: **https://async-race-freenokke.netlify.app**
+# Deploy: 
+* **https://async-race-freenokke.netlify.app**
 При запуске приложения часть контента может быть отображена не сразу, т.к. есть задержка от сервера при первом запуске.
 
 # Информация о проекте
