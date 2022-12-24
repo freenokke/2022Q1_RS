@@ -11,7 +11,7 @@
 
 # Что использовалось
 * TypeScript, ES6, классы
-* Tailwind CSS
+* [Tailwind CSS](https://tailwindcss.com/)
 * [Materialize CSS](https://materializecss.com/)
 * [Nouislider](https://refreshless.com/nouislider/)
 * Eslint
